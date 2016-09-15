@@ -21,3 +21,6 @@ std::string User::getLogin(){
     return m_login;
 }
 
+std::string User::saveToFile(){
+    return m_login+m_password+".";
+}

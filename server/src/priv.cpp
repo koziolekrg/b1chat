@@ -20,8 +20,7 @@ bool Priv::IAddNewGroup(std::string a_title, int16_t a_client){
 bool Priv::IAddNewClientToGroup(std::string a_title, int16_t a_client){
     for(auto group : m_groupClients){
         if(a_title.compare(group->IGetTitle()) == 0){
-            group->IAddClient(a_client);
-            return true;
+            return group->IAddClient(a_client);
         }
     }
     return false;
@@ -33,6 +32,8 @@ std::vector <int16_t> Priv::IGetClients(std::string a_title){
             return group->IGetClientsList();
         }
     }
+    std::cout<<"Group incorrect"<<std::endl;
+
     std::vector <int16_t> temp;
     return temp;
 }

@@ -45,7 +45,7 @@ Client::Client(std::string a_hostAddress, int a_port)
                     exit(1);
                 }
 
-                std::cout<<("Enter message:");
+                //std::cout<<("Enter message:");
             }
         }
 

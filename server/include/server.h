@@ -11,6 +11,7 @@
 #include <fstream>
 #include <algorithm>
 #include <vector>
+#include <list>
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <error.h>
@@ -58,7 +59,8 @@ private:
     std::vector <User*> m_setUsers; // set of logins data
     std::fstream m_dataFile;
     Priv m_private;
-    std::vector <Login*> m_setLogins;
+    std::list <Login*> m_setLogins;
+    bool m_isAvailable;
 
 };
 

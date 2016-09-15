@@ -4,11 +4,11 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/pako/b1communicator/main.cpp" "/home/pako/b1communicator/bin/CMakeFiles/b1comm.dir/main.cpp.o"
-  "/home/pako/b1communicator/src/group.cpp" "/home/pako/b1communicator/bin/CMakeFiles/b1comm.dir/src/group.cpp.o"
-  "/home/pako/b1communicator/src/priv.cpp" "/home/pako/b1communicator/bin/CMakeFiles/b1comm.dir/src/priv.cpp.o"
-  "/home/pako/b1communicator/src/server.cpp" "/home/pako/b1communicator/bin/CMakeFiles/b1comm.dir/src/server.cpp.o"
-  "/home/pako/b1communicator/src/user.cpp" "/home/pako/b1communicator/bin/CMakeFiles/b1comm.dir/src/user.cpp.o"
+  "/home/pako/b1communicator/server/main.cpp" "/home/pako/b1communicator/server/bin/CMakeFiles/b1comm.dir/main.cpp.o"
+  "/home/pako/b1communicator/server/src/group.cpp" "/home/pako/b1communicator/server/bin/CMakeFiles/b1comm.dir/src/group.cpp.o"
+  "/home/pako/b1communicator/server/src/priv.cpp" "/home/pako/b1communicator/server/bin/CMakeFiles/b1comm.dir/src/priv.cpp.o"
+  "/home/pako/b1communicator/server/src/server.cpp" "/home/pako/b1communicator/server/bin/CMakeFiles/b1comm.dir/src/server.cpp.o"
+  "/home/pako/b1communicator/server/src/user.cpp" "/home/pako/b1communicator/server/bin/CMakeFiles/b1comm.dir/src/user.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

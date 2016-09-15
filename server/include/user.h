@@ -16,6 +16,7 @@ public:
     ~User();
     bool checkLog(std::string a_login, std::string a_password);
     std::string getLogin();
+    std::string saveToFile();
 private:
     std::string m_login;
     std::string m_password;

@@ -13,23 +13,32 @@ Server::Server(int16_t a_port)
     }
     else
         std::cout<<"No file found, creating new one"<<std::endl;
+
     m_tv.tv_sec = 5;
     m_tv.tv_usec = 0;
 
-    if(!setSocket(a_port))
+    if(!setSocket(a_port)) // Socket reserving
         exit(1);
 
-    if(bindPort(a_port))
+    if(bindPort(a_port)) // binding port
         IStartListening(a_port);
     else
         exit(1);
 }
 
 Server::~Server(){
-    m_dataFile.close();
+    std::string save;
+    for(auto user : m_setUsers){
+        save = save + user->saveToFile();
+    }
+    m_dataFile<<save;
+
+    m_dataFile.close(); // close file and the end
+
+    std::cout<<"Exit";
 }
 
-std::string Server::descriptorToLogin(int a_client){
+std::string Server::descriptorToLogin(int a_client){ // get login from number
     for(auto login : m_setLogins){
         if(login->getFd() == a_client)
             return login->getLogin();
@@ -37,7 +46,7 @@ std::string Server::descriptorToLogin(int a_client){
     return "empty";
 }
 
-int Server::loginToDescriptor(std::string a_client){
+int Server::loginToDescriptor(std::string a_client){ // get number from login
     for(auto login : m_setLogins){
         if(a_client.compare(login->getLogin()) == 0)
             return login->getFd();
@@ -45,7 +54,7 @@ int Server::loginToDescriptor(std::string a_client){
     return 0;
 }
 
-bool Server::readFile(){
+bool Server::readFile(){  // read users from file
     int16_t i = 0; std::string temp;
     std::string login, password;
 
@@ -76,7 +85,7 @@ bool Server::setSocket(int16_t a_port){
 
         m_serverSocket.sin_family = AF_INET;
         m_serverSocket.sin_addr.s_addr = htonl (INADDR_ANY);
-        m_serverSocket.sin_port = htons (m_port);
+        m_serverSocket.sin_port = htons (a_port);
         return true;
     }
 }
@@ -157,6 +166,7 @@ bool Server::ISendMessage(std::string a_message, int16_t a_client){
 }
 
 void Server::IIncommingConnection(){
+
     for(auto fd: m_setClients)
     {
         fflush (stdout);
@@ -168,80 +178,122 @@ void Server::IIncommingConnection(){
 
             std::string msg = m_buffer;
             std::vector <std::string> v_msg;
+            std::vector <int16_t> test;
 
             switch(m_buffer[0])
             {
-            case '0':
+            case '0': // log in to exist account
+                std::cout<<"Case - 0"<<std::endl;
                 boost::split(v_msg, msg, boost::is_punct());
                 for(auto user : m_setUsers){
                     if(user->checkLog(v_msg[1],v_msg[2])){
+
+                        std::cout<<"accept"<<std::endl;
+
                         msg = "accept";
                         m_setLogins.push_back(new Login(fd,v_msg[1]));
                         break;
                     }
                     else
-                        msg = "refuse";
+                        std::cout<<"accept"<<std::endl;
+                    msg = "refuse";
                 }
                 ISendMessage(msg,fd);
                 break;
 
-            case '1': // create account
+            case '1': // create new account request
+                std::cout<<"Case - 1"<<std::endl;
+
+                m_isAvailable = true;
                 boost::split(v_msg, msg, boost::is_punct());
                 for(auto user : m_setUsers){
                     if(v_msg[1].compare(user->getLogin())==0){
                         msg = "1.refuse";
                         ISendMessage(msg, fd);
+                        m_isAvailable = false;
                     }
                 }
-                msg = "1.accept";
-                ISendMessage(msg, fd);
-                m_setUsers.push_back(new User(v_msg[1],v_msg[2]));
-                m_setLogins.push_back(new Login(fd,v_msg[1]));
+                if(m_isAvailable){
+                    msg = "1.accept";
+                    ISendMessage(msg, fd);
+                    m_setUsers.push_back(new User(v_msg[1],v_msg[2]));
+                    m_setLogins.push_back(new Login(fd,v_msg[1]));
+                }
                 break;
 
-            case '2':
-                msg = "2.message\n";
+            case '2': // broadcast message
+                boost::split(v_msg, msg, boost::is_punct());
+                msg = v_msg[1];
                 ISendMessage(msg, 0);
                 break;
 
-            case '3':
+            case '3': // add new group
                 boost::split(v_msg, msg, boost::is_punct());
-                if(m_private.IAddNewGroup(v_msg[1],std::stoi(v_msg[2]))){
-                    msg = "3.accept\n";
-                    ISendMessage(msg, fd);
+                for(auto t_fd: m_setClients){
+                    if(t_fd == stoi(v_msg[2])){
+                        if(m_private.IAddNewGroup(v_msg[1],std::stoi(v_msg[2]))){
+                            msg = "3.accept\n";
+                            ISendMessage(msg, fd);
+                        }
+                        else{
+                            msg = "3.refuse\n";
+                            ISendMessage(msg, fd);
+                        }
+                    }
+                    else{
+                        msg = "3.refuse\n";
+                        ISendMessage(msg, fd);
+                    }
                 }
-                else{
-                    msg = "3.refuse\n";
-                    ISendMessage(msg, fd);
+
+                break;
+
+            case '4': // add new client to group
+                boost::split(v_msg, msg, boost::is_punct());
+                for(auto t_fd: m_setClients){
+                    if(t_fd == stoi(v_msg[2])){
+                        if(m_private.IAddNewClientToGroup(v_msg[1],std::stoi(v_msg[2]))){
+                            msg = "4.accept\n";
+                            ISendMessage(msg, fd);
+                        }
+                        else{
+                            msg = "4.refuse\n";
+                            ISendMessage(msg, fd);
+                        }
+                    }
                 }
                 break;
 
-            case '4':
-                boost::split(v_msg, msg, boost::is_punct());
-                if(m_private.IAddNewClientToGroup(v_msg[1],std::stoi(v_msg[2]))){
-                    msg = "4.accept\n";
-                    ISendMessage(msg, fd);
-                }
-                else{
-                    msg = "4.refuse\n";
-                    ISendMessage(msg, fd);
-                }
-                break;
-
-            case '5':
+            case '5': // send message to group
                 boost::split(v_msg, msg, boost::is_punct());
                 for(auto fd : m_private.IGetClients(v_msg[1]))
                     ISendMessage(v_msg[2], fd);
                 break;
 
-            case '6':
-                msg="";
+            case '6': // send client list
                 boost::split(v_msg, msg, boost::is_punct());
+                msg="";
                 for(auto t_fd : m_private.IGetClients(v_msg[1]))
                     msg = msg + descriptorToLogin(t_fd) + ".";
                 ISendMessage(msg, fd);
                 break;
 
+            case '7': // logout
+                msg="";
+                for(auto login : m_setLogins){
+                    if(fd == login->getFd()){
+                        std::cout<<"Login:"<<login->getLogin()<<" Fd:"<<login->getFd()<<std::endl;
+                        //m_setLogins.remove(login);
+                        msg="7.accept";
+                    }
+                }
+                ISendMessage(msg, fd);
+                //close(fd);
+                break;
+
+            case '9': // send client list
+                exit(1);
+                break;
             }
         }
     }

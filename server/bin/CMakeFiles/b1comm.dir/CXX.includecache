@@ -65,6 +65,8 @@ algorithm
 -
 vector
 -
+list
+-
 netinet/in.h
 -
 sys/socket.h
@@ -114,25 +116,25 @@ vector
 string
 -
 
-/home/pako/b1communicator/main.cpp
+/home/pako/b1communicator/server/main.cpp
 iostream
 -
 server.h
-/home/pako/b1communicator/server.h
+/home/pako/b1communicator/server/server.h
 
-/home/pako/b1communicator/src/group.cpp
+/home/pako/b1communicator/server/src/group.cpp
 group.h
-/home/pako/b1communicator/src/group.h
+/home/pako/b1communicator/server/src/group.h
 
-/home/pako/b1communicator/src/priv.cpp
+/home/pako/b1communicator/server/src/priv.cpp
 priv.h
-/home/pako/b1communicator/src/priv.h
+/home/pako/b1communicator/server/src/priv.h
 
-/home/pako/b1communicator/src/server.cpp
+/home/pako/b1communicator/server/src/server.cpp
 server.h
-/home/pako/b1communicator/src/server.h
+/home/pako/b1communicator/server/src/server.h
 
-/home/pako/b1communicator/src/user.cpp
+/home/pako/b1communicator/server/src/user.cpp
 user.h
-/home/pako/b1communicator/src/user.h
+/home/pako/b1communicator/server/src/user.h
 
