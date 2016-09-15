@@ -1,11 +1,13 @@
 #include <iostream>
-#include "server.h"
+#include <stdlib.h>
+#include "client.h"
+
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {
-    Server * server = new Server(atoi(argv[1]));
+    Client * client = new Client(argv[1], atoi(argv[2]));
 
     return 0;
 }

@@ -1,0 +1,3 @@
+/home/pako/b1communicator/client/bin/CMakeFiles/edit_cache.dir
+/home/pako/b1communicator/client/bin/CMakeFiles/rebuild_cache.dir
+/home/pako/b1communicator/client/bin/CMakeFiles/b1comm.dir
