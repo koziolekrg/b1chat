@@ -8,7 +8,7 @@ Server::Server(int16_t a_port)
     m_dataFile.open("users.data");
     if(m_dataFile.is_open()){
         std::cout<<"Found file with data"<<std::endl;
-        if(readFile())
+        if(IReadFile())
             std::cout<<"Data has been loaded to the server"<<std::endl;
     }
     else
@@ -17,10 +17,10 @@ Server::Server(int16_t a_port)
     m_tv.tv_sec = 5;
     m_tv.tv_usec = 0;
 
-    if(!setSocket(a_port)) // Socket reserving
+    if(!ISetSocket(a_port)) // Socket reserving
         exit(1);
 
-    if(bindPort(a_port)) // binding port
+    if(IBindPort()) // binding port
         IStartListening(a_port);
     else
         exit(1);
@@ -38,7 +38,7 @@ Server::~Server(){
     std::cout<<"Exit";
 }
 
-std::string Server::descriptorToLogin(int a_client){ // get login from number
+std::string Server::IDescriptorToLogin(int a_client){ // get login from number
     for(auto login : m_setLogins){
         if(login->getFd() == a_client)
             return login->getLogin();
@@ -46,7 +46,7 @@ std::string Server::descriptorToLogin(int a_client){ // get login from number
     return "empty";
 }
 
-int Server::loginToDescriptor(std::string a_client){ // get number from login
+int Server::ILoginToDescriptor(std::string a_client){ // get number from login
     for(auto login : m_setLogins){
         if(a_client.compare(login->getLogin()) == 0)
             return login->getFd();
@@ -54,7 +54,7 @@ int Server::loginToDescriptor(std::string a_client){ // get number from login
     return 0;
 }
 
-bool Server::readFile(){  // read users from file
+bool Server::IReadFile(){  // read users from file
     int16_t i = 0; std::string temp;
     std::string login, password;
 
@@ -71,7 +71,7 @@ bool Server::readFile(){  // read users from file
     return true;
 }
 
-bool Server::setSocket(int16_t a_port){
+bool Server::ISetSocket(int16_t a_port){
     if ((m_sd = socket (AF_INET, SOCK_STREAM, 0)) == -1)
     {
         perror ("[server] socket() Error.\n");
@@ -90,7 +90,7 @@ bool Server::setSocket(int16_t a_port){
     }
 }
 
-bool Server::bindPort(int16_t a_port){
+bool Server::IBindPort(){
     if (bind (m_sd, (struct sockaddr *) &m_serverSocket, sizeof (struct sockaddr)) == -1)
     {
         perror ("[server] bind() Error.\n");
@@ -178,7 +178,6 @@ void Server::IIncommingConnection(){
 
             std::string msg = m_buffer;
             std::vector <std::string> v_msg;
-            std::vector <int16_t> test;
 
             switch(m_buffer[0])
             {
@@ -187,16 +186,12 @@ void Server::IIncommingConnection(){
                 boost::split(v_msg, msg, boost::is_punct());
                 for(auto user : m_setUsers){
                     if(user->checkLog(v_msg[1],v_msg[2])){
-
-                        std::cout<<"accept"<<std::endl;
-
-                        msg = "accept";
+                        msg = "0.accept";
                         m_setLogins.push_back(new Login(fd,v_msg[1]));
                         break;
                     }
                     else
-                        std::cout<<"accept"<<std::endl;
-                    msg = "refuse";
+                        msg = "0.refuse";
                 }
                 ISendMessage(msg,fd);
                 break;
@@ -232,16 +227,16 @@ void Server::IIncommingConnection(){
                 for(auto t_fd: m_setClients){
                     if(t_fd == stoi(v_msg[2])){
                         if(m_private.IAddNewGroup(v_msg[1],std::stoi(v_msg[2]))){
-                            msg = "3.accept\n";
+                            msg = "3.accept";
                             ISendMessage(msg, fd);
                         }
                         else{
-                            msg = "3.refuse\n";
+                            msg = "3.refuse";
                             ISendMessage(msg, fd);
                         }
                     }
                     else{
-                        msg = "3.refuse\n";
+                        msg = "3.refuse";
                         ISendMessage(msg, fd);
                     }
                 }
@@ -253,11 +248,11 @@ void Server::IIncommingConnection(){
                 for(auto t_fd: m_setClients){
                     if(t_fd == stoi(v_msg[2])){
                         if(m_private.IAddNewClientToGroup(v_msg[1],std::stoi(v_msg[2]))){
-                            msg = "4.accept\n";
+                            msg = "4.accept";
                             ISendMessage(msg, fd);
                         }
                         else{
-                            msg = "4.refuse\n";
+                            msg = "4.refuse";
                             ISendMessage(msg, fd);
                         }
                     }
@@ -274,7 +269,7 @@ void Server::IIncommingConnection(){
                 boost::split(v_msg, msg, boost::is_punct());
                 msg="";
                 for(auto t_fd : m_private.IGetClients(v_msg[1]))
-                    msg = msg + descriptorToLogin(t_fd) + ".";
+                    msg = msg + IDescriptorToLogin(t_fd) + ".";
                 ISendMessage(msg, fd);
                 break;
 

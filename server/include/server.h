@@ -39,11 +39,11 @@ public:
     bool IStartListening(int16_t a_port) override;
     bool ISendMessage(std::string a_message, int16_t a_client) override;
     void IIncommingConnection() override;
-    bool setSocket(int16_t a_port);
-    bool bindPort(int16_t a_port);
-    bool readFile();
-    std::string descriptorToLogin(int a_client);
-    int loginToDescriptor(std::string a_client);
+    bool ISetSocket(int16_t a_port);
+    bool IBindPort();
+    bool IReadFile();
+    std::string IDescriptorToLogin(int a_client);
+    int ILoginToDescriptor(std::string a_client);
 
 private:
     int16_t m_port;

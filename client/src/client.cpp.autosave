@@ -62,6 +62,7 @@ Client::Client(std::string a_hostAddress, int a_port)
             while(!m_isLogIn){
 
                 std::cin>>m_message;
+                std::cin>>m_message;
                 if(send(m_sock, m_message, strlen(m_message) + 1, 0) < 0)
                 {
                     std::cout<<"Sending error";

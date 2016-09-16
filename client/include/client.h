@@ -27,12 +27,14 @@ public:
     int find_network_newline(char * message, int inbuf);
 
 private:
-    int sock;
-    struct sockaddr_in server;
-    char message[256] , server_reply[256];
-    int inbuf;
-    int room;
-    char *after;
+    int m_sock;
+    struct sockaddr_in m_server;
+    char m_message[256] , m_server_reply[256];
+    int m_inbuf;
+    int m_room;
+    char *m_after;
+    bool m_isLogIn;
+    int m_menu;
 };
 
 #endif // CLIENT_H
