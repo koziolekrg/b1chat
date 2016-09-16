@@ -6,6 +6,7 @@
 #include "iserver.h"
 #include "priv.h"
 #include "user.h"
+#include "login.h"
 #include <string.h>
 #include <iostream>
 #include <fstream>
@@ -19,17 +20,6 @@
 #include <unistd.h>
 #include <sys/time.h>
 #include <boost/algorithm/string.hpp>
-
-class Login
-{
-private:
-    int16_t fd;
-    std::string login;
-public:
-    Login(int16_t a_fd, std::string a_login):fd(a_fd), login(a_login){}
-    int16_t getFd(){return fd;}
-    std::string getLogin(){return login;}
-};
 
 class Server : public IServer
 {

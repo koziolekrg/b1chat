@@ -25,6 +25,8 @@ public:
     ~Client();
     int buffer_message(char * message);
     int find_network_newline(char * message, int inbuf);
+    bool logIn(fd_set a_r_set);
+    bool receiving(fd_set a_r_set);
 
 private:
     int m_sock;

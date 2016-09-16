@@ -29,7 +29,7 @@ Server::Server(int16_t a_port)
 Server::~Server(){
     std::string save;
     for(auto user : m_setUsers){
-        save = save + user->saveToFile();
+        save = save + user->ISaveToFile();
     }
     m_dataFile<<save;
 
@@ -40,16 +40,16 @@ Server::~Server(){
 
 std::string Server::IDescriptorToLogin(int a_client){ // get login from number
     for(auto login : m_setLogins){
-        if(login->getFd() == a_client)
-            return login->getLogin();
+        if(login->IGetFd() == a_client)
+            return login->IGetLogin();
     }
     return "empty";
 }
 
 int Server::ILoginToDescriptor(std::string a_client){ // get number from login
     for(auto login : m_setLogins){
-        if(a_client.compare(login->getLogin()) == 0)
-            return login->getFd();
+        if(a_client.compare(login->IGetLogin()) == 0)
+            return login->IGetFd();
     }
     return 0;
 }
@@ -185,7 +185,7 @@ void Server::IIncommingConnection(){
                 std::cout<<"Case - 0"<<std::endl;
                 boost::split(v_msg, msg, boost::is_punct());
                 for(auto user : m_setUsers){
-                    if(user->checkLog(v_msg[1],v_msg[2])){
+                    if(user->ICheckLog(v_msg[1],v_msg[2])){
                         msg = "0.accept";
                         m_setLogins.push_back(new Login(fd,v_msg[1]));
                         break;
@@ -202,7 +202,7 @@ void Server::IIncommingConnection(){
                 m_isAvailable = true;
                 boost::split(v_msg, msg, boost::is_punct());
                 for(auto user : m_setUsers){
-                    if(v_msg[1].compare(user->getLogin())==0){
+                    if(v_msg[1].compare(user->IGetLogin())==0){
                         msg = "1.refuse";
                         ISendMessage(msg, fd);
                         m_isAvailable = false;
@@ -276,8 +276,8 @@ void Server::IIncommingConnection(){
             case '7': // logout
                 msg="";
                 for(auto login : m_setLogins){
-                    if(fd == login->getFd()){
-                        std::cout<<"Login:"<<login->getLogin()<<" Fd:"<<login->getFd()<<std::endl;
+                    if(fd == login->IGetFd()){
+                        std::cout<<"Login:"<<login->IGetLogin()<<" Fd:"<<login->IGetFd()<<std::endl;
                         //m_setLogins.remove(login);
                         msg="7.accept";
                     }

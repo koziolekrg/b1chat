@@ -9,7 +9,7 @@ User::~User(){
 
 }
 
-bool User::checkLog(std::string a_login, std::string a_password){
+bool User::ICheckLog(std::string a_login, std::string a_password){
     if(m_password.compare(a_password) == 0 && m_login.compare(a_login) == 0)
         return true;
     else{
@@ -17,10 +17,10 @@ bool User::checkLog(std::string a_login, std::string a_password){
     }
 }
 
-std::string User::getLogin(){
+std::string User::IGetLogin(){
     return m_login;
 }
 
-std::string User::saveToFile(){
+std::string User::ISaveToFile(){
     return m_login+m_password+".";
 }

@@ -31,60 +31,14 @@ Client::Client(std::string a_hostAddress, int a_port)
 
 
     while(1){
-
         r_set = all_set;
         //check to see if we can read from STDIN or sock
         select(maxfd, &r_set, NULL, NULL, &tv);
 
-        if(FD_ISSET(STDIN_FILENO, &r_set)){
+        while(!m_isLogIn)
+            m_isLogIn = logIn(r_set);
 
-
-            if(buffer_message(m_message) == COMPLETE){
-                if(send(m_sock, m_message, strlen(m_message) + 1, 0) < 0)
-                {
-                    std::cout<<"Sending error";
-                    exit(1);
-                }
-
-                //std::cout<<("Enter message:");
-            }
-        }
-
-        if(FD_ISSET(m_sock, &r_set)){
-            //Receive a reply from the server
-            if( recv(m_sock , m_server_reply , 256 , 0) < 0)
-            {
-                std::cout<<"Recv failed";
-                break;
-            }
-
-
-            while(!m_isLogIn){
-
-                std::cin>>m_message;
-                if(send(m_sock, m_message, strlen(m_message) + 1, 0) < 0)
-                {
-                    std::cout<<"Sending error";
-                    exit(1);
-                }
-
-                if( recv(m_sock , m_server_reply , 256 , 0) < 0)
-                {
-                    std::cout<<"Recv failed";
-                    break;
-                }
-                if(strcmp(m_server_reply,"0.accept") == 0 || strcmp(m_server_reply,"1.accept") == 0){
-                    std::cout<<"Login success";
-                    m_isLogIn=true;
-                }
-                else
-                    std::cout<<"Wrong login or password";
-            }
-
-            std::cout<<"\nServer Reply:"<<m_server_reply<<std::endl;
-
-
-        }
+        receiving(r_set);
     }
 
     close(m_sock);
@@ -94,12 +48,68 @@ Client::~Client(){
 
 }
 
+bool Client::logIn(fd_set a_r_set){
+
+    std::string login, password;
+
+    std::cout<<"Enter login:";
+    std::cin>>login;
+
+    std::cout<<"Enter login:";
+    std::cin>>password;
+
+    login = "0."+login+"."+password+".";
+
+    send(m_sock, login.c_str(), strlen(login.c_str()) + 1, 0);
+
+    recv(m_sock , m_server_reply , 256 , 0);
+
+    std::cout<<m_server_reply;
+
+    if(strcmp(m_server_reply,"0.accept") == 0 || strcmp(m_server_reply,"1.accept") == 0){
+        std::cout<<"Login success";
+        return true;
+    }
+    else{
+        std::cout<<"\nWrong login or password\n";
+        return false;
+    }
+
+}
+
+bool Client::receiving(fd_set a_r_set){
+
+    if(FD_ISSET(STDIN_FILENO, &a_r_set)){
+        if(buffer_message(m_message) == COMPLETE){
+            if(send(m_sock, m_message, strlen(m_message) + 1, 0) < 0)
+            {
+                std::cout<<"Sending error";
+                exit(1);
+            }
+        }
+    }
+
+    if(FD_ISSET(m_sock, &a_r_set)){
+        //Receive a reply from the server
+        if( recv(m_sock , m_server_reply , 256 , 0) < 0)
+        {
+            std::cout<<"Recv failed";
+        }
+    }
+}
+
 int Client::buffer_message(char * a_message){
 
-    std::cout<<"1 - Send broadcast\n2 - Create group\n3 - Add client to group\n4 - Send MSG to group\n5 - Get online clients\n 6 - Logout\n";
+    std::cout<<"\n1 - Send broadcast\n2 - Create group\n3 - Add client to group\n4 - Send MSG to group\n5 - Get online clients\n6 - Logout\n";
 
     int bytes_read = read(STDIN_FILENO, m_after, 256 - m_inbuf);
+    //std::cout<<"test1- "<<m_after;
+
+    /*bytes_read = read(STDIN_FILENO, m_after, 256 - m_inbuf);
+    std::cout<<"test2- "<<m_after;*/
     short flag = -1; // indicates if returned_data has been set
+
+
     m_inbuf += bytes_read;
     int where; // location of network newline
 
@@ -128,7 +138,7 @@ int Client::find_network_newline(char * a_message, int a_bytes_inbuf){
     int i;
     for(i = 0; i<m_inbuf; i++){
         if( *(a_message + i) == '\n')
-        return i;
+            return i;
     }
     return -1;
 }
