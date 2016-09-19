@@ -3,12 +3,15 @@
 
 CMakeFiles/b1comm.dir/main.cpp.o
  .././include/group.h
+ .././include/login.h
  .././include/priv.h
  .././include/server.h
  .././include/user.h
  .././interface/igroup.h
+ .././interface/ilogin.h
  .././interface/ipriv.h
  .././interface/iserver.h
+ .././interface/iuser.h
  /home/pako/b1communicator/server/main.cpp
 CMakeFiles/b1comm.dir/src/group.cpp.o
  .././include/group.h
@@ -22,13 +25,17 @@ CMakeFiles/b1comm.dir/src/priv.cpp.o
  /home/pako/b1communicator/server/src/priv.cpp
 CMakeFiles/b1comm.dir/src/server.cpp.o
  .././include/group.h
+ .././include/login.h
  .././include/priv.h
  .././include/server.h
  .././include/user.h
  .././interface/igroup.h
+ .././interface/ilogin.h
  .././interface/ipriv.h
  .././interface/iserver.h
+ .././interface/iuser.h
  /home/pako/b1communicator/server/src/server.cpp
 CMakeFiles/b1comm.dir/src/user.cpp.o
  .././include/user.h
+ .././interface/iuser.h
  /home/pako/b1communicator/server/src/user.cpp

@@ -26,6 +26,26 @@ sys/time.h
 vector
 -
 
+.././include/login.h
+ilogin.h
+-
+string.h
+-
+iostream
+-
+sys/socket.h
+-
+error.h
+-
+stdio.h
+-
+unistd.h
+-
+sys/time.h
+-
+vector
+-
+
 .././include/priv.h
 ipriv.h
 .././include/ipriv.h
@@ -55,6 +75,8 @@ priv.h
 .././include/priv.h
 user.h
 .././include/user.h
+login.h
+.././include/login.h
 string.h
 -
 iostream
@@ -83,6 +105,8 @@ boost/algorithm/string.hpp
 -
 
 .././include/user.h
+iuser.h
+.././include/iuser.h
 string.h
 -
 iostream
@@ -106,6 +130,12 @@ string
 vector
 -
 
+.././interface/ilogin.h
+string
+-
+vector
+-
+
 .././interface/ipriv.h
 string
 -
@@ -114,6 +144,12 @@ vector
 
 .././interface/iserver.h
 string
+-
+
+.././interface/iuser.h
+string
+-
+vector
 -
 
 /home/pako/b1communicator/server/main.cpp

@@ -37,6 +37,8 @@ private:
     char *m_after;
     bool m_isLogIn;
     int m_menu;
+    std::string m_sMessage;
+    int m_counter;
 };
 
 #endif // CLIENT_H

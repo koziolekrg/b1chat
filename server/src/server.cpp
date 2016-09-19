@@ -5,6 +5,7 @@
 Server::Server(int16_t a_port)
     :m_port(a_port){
 
+    m_setLogins.push_back(new Login(99, " "));
     m_dataFile.open("users.data");
     if(m_dataFile.is_open()){
         std::cout<<"Found file with data"<<std::endl;
@@ -158,9 +159,11 @@ bool Server::ISendMessage(std::string a_message, int16_t a_client){
     if(a_client == 0){
         for(auto fd: m_setClients){
             write (fd, a_message.c_str(), sizeof(a_message.c_str()));
+            std::cout<<"Frame size: "<<sizeof(a_message.c_str());
         }
     } else {
         write (a_client, a_message.c_str(), sizeof(a_message.c_str()));
+        std::cout<<"Sended:"<<a_message;
     }
 
 }
@@ -182,17 +185,23 @@ void Server::IIncommingConnection(){
             switch(m_buffer[0])
             {
             case '0': // log in to exist account
-                std::cout<<"Case - 0"<<std::endl;
                 boost::split(v_msg, msg, boost::is_punct());
+                msg = "0.refuse";
+
                 for(auto user : m_setUsers){
                     if(user->ICheckLog(v_msg[1],v_msg[2])){
                         msg = "0.accept";
-                        m_setLogins.push_back(new Login(fd,v_msg[1]));
-                        break;
+                        for(auto login : m_setLogins){
+                            if(v_msg[1].compare(login->IGetLogin()) == 0){
+                                msg = "0.refuse";
+                            }
+                        }
                     }
-                    else
-                        msg = "0.refuse";
                 }
+
+                if(msg.compare("0.accept") == 0)
+                    m_setLogins.push_back(new Login(fd, v_msg[1]));
+
                 ISendMessage(msg,fd);
                 break;
 
@@ -218,7 +227,7 @@ void Server::IIncommingConnection(){
 
             case '2': // broadcast message
                 boost::split(v_msg, msg, boost::is_punct());
-                msg = v_msg[1];
+                msg = IDescriptorToLogin(fd)+":"+v_msg[1];
                 ISendMessage(msg, 0);
                 break;
 
@@ -267,10 +276,17 @@ void Server::IIncommingConnection(){
 
             case '6': // send client list
                 boost::split(v_msg, msg, boost::is_punct());
-                msg="";
-                for(auto t_fd : m_private.IGetClients(v_msg[1]))
-                    msg = msg + IDescriptorToLogin(t_fd) + ".";
-                ISendMessage(msg, fd);
+                msg="6.";
+                if(v_msg[1].compare("all") == 0){
+                    for(auto t_fd : m_setLogins)
+                        msg = msg + t_fd->IGetLogin() + ".";
+                    ISendMessage(msg, fd);
+                }
+                else{
+                    for(auto t_fd : m_private.IGetClients(v_msg[1]))
+                        msg = msg + IDescriptorToLogin(t_fd) + ".";
+                    ISendMessage(msg, fd);
+                }
                 break;
 
             case '7': // logout
