@@ -1,7 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/b1comm.dir/main.cpp.o"
   "CMakeFiles/b1comm.dir/src/client.cpp.o"
-  "CMakeFiles/b1comm.dir/src/receive.cpp.o"
   "b1comm.pdb"
   "b1comm"
 )

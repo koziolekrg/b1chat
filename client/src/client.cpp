@@ -38,8 +38,8 @@ Client::Client(std::string a_hostAddress, int a_port)
         //check to see if we can read from STDIN or sock
         select(maxfd, &r_set, NULL, NULL, &tv);
 
-        while(!m_isLogIn)
-            m_isLogIn = logIn(r_set);
+        //while(!m_isLogIn)
+        //    m_isLogIn = logIn(r_set);
 
         receiving(r_set);
 
@@ -95,7 +95,7 @@ bool Client::receiving(fd_set a_r_set){
                 return true;
             }
 
-            std::cout<<"\n1 - Send broadcast\n2 - Create group\n3 - Add client to group\n4 - Send MSG to group\n5 - Get online clients\n6 - Logout\n";
+            //std::cout<<"\n1 - Send broadcast\n2 - Create group\n3 - Add client to group\n4 - Send MSG to group\n5 - Get online clients\n6 - Logout\n";
         }
     }
 

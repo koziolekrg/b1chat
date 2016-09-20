@@ -6,7 +6,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/pako/b1communicator/client_test/main.cpp" "/home/pako/b1communicator/client_test/bin/CMakeFiles/b1comm.dir/main.cpp.o"
   "/home/pako/b1communicator/client_test/src/client.cpp" "/home/pako/b1communicator/client_test/bin/CMakeFiles/b1comm.dir/src/client.cpp.o"
-  "/home/pako/b1communicator/client_test/src/receive.cpp" "/home/pako/b1communicator/client_test/bin/CMakeFiles/b1comm.dir/src/receive.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

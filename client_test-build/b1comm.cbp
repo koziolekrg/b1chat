@@ -93,16 +93,10 @@
       <Unit filename="/home/pako/b1communicator/client_test/include/client.h">
          <Option target="b1comm"/>
       </Unit>
-      <Unit filename="/home/pako/b1communicator/client_test/include/receive.h">
-         <Option target="b1comm"/>
-      </Unit>
       <Unit filename="/home/pako/b1communicator/client_test/main.cpp">
          <Option target="b1comm"/>
       </Unit>
       <Unit filename="/home/pako/b1communicator/client_test/src/client.cpp">
-         <Option target="b1comm"/>
-      </Unit>
-      <Unit filename="/home/pako/b1communicator/client_test/src/receive.cpp">
          <Option target="b1comm"/>
       </Unit>
       <Unit filename="/home/pako/b1communicator/client_test/CMakeLists.txt">
