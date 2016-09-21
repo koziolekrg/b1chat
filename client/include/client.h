@@ -15,6 +15,7 @@
 #include <thread>
 #include <arpa/inet.h> //inet_addr
 #include <mutex>
+#include <boost/algorithm/string.hpp>
 #include "iclient.h"
 
 #define COMPLETE 0
@@ -29,6 +30,7 @@ public:
     void ISend_data();
     void IReceive_data();
     void IMainMenu(int a_state);
+    bool ISend(std::string a_msg);
 
 private:
     int sock;

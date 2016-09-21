@@ -179,7 +179,6 @@ void Client::IReceive_data()
             std::cout<<"["<<v_msg[1]<<"]"<<v_msg[2]<<std::endl;
         }
         if(v_msg[0] == "6"){
-            std::cout<<"LOG: "<<reply;
             boost::split(v_msg, reply, boost::is_punct());
             for(int i=1; i<v_msg.size()-1; i++){
                 if(v_msg[i].length() > 1)

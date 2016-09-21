@@ -35,6 +35,8 @@ arpa/inet.h
 -
 mutex
 -
+boost/algorithm/string.hpp
+-
 iclient.h
 .././include/iclient.h
 
@@ -44,7 +46,7 @@ string
 vector
 -
 
-/home/pako/b1communicator/client_test/main.cpp
+/home/pako/b1chat/client/main.cpp
 iostream
 -
 stdio.h
@@ -64,9 +66,9 @@ thread
 unistd.h
 -
 client.h
-/home/pako/b1communicator/client_test/client.h
+/home/pako/b1chat/client/client.h
 
-/home/pako/b1communicator/client_test/src/client.cpp
+/home/pako/b1chat/client/src/client.cpp
 client.h
-/home/pako/b1communicator/client_test/src/client.h
+/home/pako/b1chat/client/src/client.h
 

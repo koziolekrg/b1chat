@@ -158,12 +158,11 @@ bool Server::IStartListening(int16_t a_port){
 bool Server::ISendMessage(std::string a_message, int16_t a_client){
     if(a_client == 0){
         for(auto fd: m_setClients){
-            write (fd, a_message.c_str(), sizeof(a_message.c_str()));
-            std::cout<<"Frame size: "<<sizeof(a_message.c_str());
+            write (fd, a_message.c_str(), strlen(a_message.c_str()));
         }
     } else {
-        write (a_client, a_message.c_str(), sizeof(a_message.c_str()));
-        std::cout<<"Sended:"<<a_message;
+        write (a_client, a_message.c_str(), strlen(a_message.c_str()));
+        std::cout<<"Sended:"<<a_message<<" size["<<strlen(a_message.c_str())<<"]\n";
     }
 
 }
@@ -176,49 +175,47 @@ void Server::IIncommingConnection(){
 
         if (FD_ISSET (fd, &m_readfds))
         {
-            std::cout<<read (fd, m_buffer, sizeof (m_buffer))<<std::endl;
+            read (fd, m_buffer, sizeof (m_buffer));
             std::cout<<"[client-"<<fd<<"]: "<< m_buffer<<std::endl;
 
             std::string msg = m_buffer;
             std::vector <std::string> v_msg;
-
+            int a_fd;
             switch(m_buffer[0])
             {
             case '0': // log in to exist account
                 boost::split(v_msg, msg, boost::is_punct());
-                msg = "0.refuse";
+                msg = "0.refuse. ";
 
                 for(auto user : m_setUsers){
                     if(user->ICheckLog(v_msg[1],v_msg[2])){
-                        msg = "0.accept";
+                        msg = "0.accept. ";
                         for(auto login : m_setLogins){
                             if(v_msg[1].compare(login->IGetLogin()) == 0){
-                                msg = "0.refuse";
+                                msg = "0.refuse. ";
                             }
                         }
                     }
                 }
 
-                if(msg.compare("0.accept") == 0)
+                if(msg.compare("0.accept. ") == 0)
                     m_setLogins.push_back(new Login(fd, v_msg[1]));
 
                 ISendMessage(msg,fd);
                 break;
 
             case '1': // create new account request
-                std::cout<<"Case - 1"<<std::endl;
-
                 m_isAvailable = true;
                 boost::split(v_msg, msg, boost::is_punct());
                 for(auto user : m_setUsers){
                     if(v_msg[1].compare(user->IGetLogin())==0){
-                        msg = "1.refuse";
+                        msg = "1.refuse. ";
                         ISendMessage(msg, fd);
                         m_isAvailable = false;
                     }
                 }
                 if(m_isAvailable){
-                    msg = "1.accept";
+                    msg = "1.accept. ";
                     ISendMessage(msg, fd);
                     m_setUsers.push_back(new User(v_msg[1],v_msg[2]));
                     m_setLogins.push_back(new Login(fd,v_msg[1]));
@@ -227,36 +224,29 @@ void Server::IIncommingConnection(){
 
             case '2': // broadcast message
                 boost::split(v_msg, msg, boost::is_punct());
-                msg = IDescriptorToLogin(fd)+":"+v_msg[1];
+                msg = "2."+IDescriptorToLogin(fd)+"."+v_msg[1]+" . ";
                 ISendMessage(msg, 0);
                 break;
 
             case '3': // add new group
                 boost::split(v_msg, msg, boost::is_punct());
-                for(auto t_fd: m_setClients){
-                    if(t_fd == stoi(v_msg[2])){
-                        if(m_private.IAddNewGroup(v_msg[1],std::stoi(v_msg[2]))){
-                            msg = "3.accept";
-                            ISendMessage(msg, fd);
-                        }
-                        else{
-                            msg = "3.refuse";
-                            ISendMessage(msg, fd);
-                        }
-                    }
-                    else{
-                        msg = "3.refuse";
-                        ISendMessage(msg, fd);
-                    }
+                if(m_private.IAddNewGroup(v_msg[1],fd)){
+                    msg = "3.accept. ";
+                    ISendMessage(msg, fd);
+                }
+                else{
+                    msg = "3.refuse. ";
+                    ISendMessage(msg, fd);
                 }
 
                 break;
 
             case '4': // add new client to group
                 boost::split(v_msg, msg, boost::is_punct());
+                a_fd = ILoginToDescriptor(v_msg[2]);
                 for(auto t_fd: m_setClients){
-                    if(t_fd == stoi(v_msg[2])){
-                        if(m_private.IAddNewClientToGroup(v_msg[1],std::stoi(v_msg[2]))){
+                    if(t_fd == a_fd){
+                        if(m_private.IAddNewClientToGroup(v_msg[1],a_fd)){
                             msg = "4.accept";
                             ISendMessage(msg, fd);
                         }
@@ -280,11 +270,13 @@ void Server::IIncommingConnection(){
                 if(v_msg[1].compare("all") == 0){
                     for(auto t_fd : m_setLogins)
                         msg = msg + t_fd->IGetLogin() + ".";
+                    std::cout<<"Lista all: "<<msg;
                     ISendMessage(msg, fd);
                 }
                 else{
                     for(auto t_fd : m_private.IGetClients(v_msg[1]))
                         msg = msg + IDescriptorToLogin(t_fd) + ".";
+                    std::cout<<"Lista group: "<<msg;
                     ISendMessage(msg, fd);
                 }
                 break;

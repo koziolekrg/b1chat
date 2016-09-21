@@ -4,8 +4,8 @@
 CMakeFiles/b1comm.dir/main.cpp.o
  .././include/client.h
  .././interface/iclient.h
- /home/pako/b1communicator/client_test/main.cpp
+ /home/pako/b1chat/client/main.cpp
 CMakeFiles/b1comm.dir/src/client.cpp.o
  .././include/client.h
  .././interface/iclient.h
- /home/pako/b1communicator/client_test/src/client.cpp
+ /home/pako/b1chat/client/src/client.cpp

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pako/b1communicator/client_test
+CMAKE_SOURCE_DIR = /home/pako/b1chat/client
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pako/b1communicator/client_test/bin
+CMAKE_BINARY_DIR = /home/pako/b1chat/client/bin
 
 # Include any dependencies generated for this target.
 include CMakeFiles/b1comm.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/b1comm.dir/flags.make
 
 CMakeFiles/b1comm.dir/main.cpp.o: CMakeFiles/b1comm.dir/flags.make
 CMakeFiles/b1comm.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pako/b1communicator/client_test/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/b1comm.dir/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/b1comm.dir/main.cpp.o -c /home/pako/b1communicator/client_test/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pako/b1chat/client/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/b1comm.dir/main.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/b1comm.dir/main.cpp.o -c /home/pako/b1chat/client/main.cpp
 
 CMakeFiles/b1comm.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/b1comm.dir/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pako/b1communicator/client_test/main.cpp > CMakeFiles/b1comm.dir/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pako/b1chat/client/main.cpp > CMakeFiles/b1comm.dir/main.cpp.i
 
 CMakeFiles/b1comm.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/b1comm.dir/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pako/b1communicator/client_test/main.cpp -o CMakeFiles/b1comm.dir/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pako/b1chat/client/main.cpp -o CMakeFiles/b1comm.dir/main.cpp.s
 
 CMakeFiles/b1comm.dir/main.cpp.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/b1comm.dir/main.cpp.o.provides.build: CMakeFiles/b1comm.dir/main.cpp.
 
 CMakeFiles/b1comm.dir/src/client.cpp.o: CMakeFiles/b1comm.dir/flags.make
 CMakeFiles/b1comm.dir/src/client.cpp.o: ../src/client.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pako/b1communicator/client_test/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/b1comm.dir/src/client.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/b1comm.dir/src/client.cpp.o -c /home/pako/b1communicator/client_test/src/client.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pako/b1chat/client/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/b1comm.dir/src/client.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/b1comm.dir/src/client.cpp.o -c /home/pako/b1chat/client/src/client.cpp
 
 CMakeFiles/b1comm.dir/src/client.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/b1comm.dir/src/client.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pako/b1communicator/client_test/src/client.cpp > CMakeFiles/b1comm.dir/src/client.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pako/b1chat/client/src/client.cpp > CMakeFiles/b1comm.dir/src/client.cpp.i
 
 CMakeFiles/b1comm.dir/src/client.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/b1comm.dir/src/client.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pako/b1communicator/client_test/src/client.cpp -o CMakeFiles/b1comm.dir/src/client.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pako/b1chat/client/src/client.cpp -o CMakeFiles/b1comm.dir/src/client.cpp.s
 
 CMakeFiles/b1comm.dir/src/client.cpp.o.requires:
 
@@ -117,7 +117,7 @@ b1comm: CMakeFiles/b1comm.dir/main.cpp.o
 b1comm: CMakeFiles/b1comm.dir/src/client.cpp.o
 b1comm: CMakeFiles/b1comm.dir/build.make
 b1comm: CMakeFiles/b1comm.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pako/b1communicator/client_test/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable b1comm"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pako/b1chat/client/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable b1comm"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/b1comm.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -135,6 +135,6 @@ CMakeFiles/b1comm.dir/clean:
 .PHONY : CMakeFiles/b1comm.dir/clean
 
 CMakeFiles/b1comm.dir/depend:
-	cd /home/pako/b1communicator/client_test/bin && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pako/b1communicator/client_test /home/pako/b1communicator/client_test /home/pako/b1communicator/client_test/bin /home/pako/b1communicator/client_test/bin /home/pako/b1communicator/client_test/bin/CMakeFiles/b1comm.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/pako/b1chat/client/bin && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pako/b1chat/client /home/pako/b1chat/client /home/pako/b1chat/client/bin /home/pako/b1chat/client/bin /home/pako/b1chat/client/bin/CMakeFiles/b1comm.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/b1comm.dir/depend
 
