@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pako/b1communicator/client
+CMAKE_SOURCE_DIR = /home/pako/b1communicator/client_test
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pako/b1communicator/client/bin
+CMAKE_BINARY_DIR = /home/pako/b1communicator/client_test/bin
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pako/b1communicator/client/bin/CMakeFiles /home/pako/b1communicator/client/bin/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pako/b1communicator/client_test/bin/CMakeFiles /home/pako/b1communicator/client_test/bin/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pako/b1communicator/client/bin/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pako/b1communicator/client_test/bin/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -177,33 +177,6 @@ src/client.cpp.s:
 	$(MAKE) -f CMakeFiles/b1comm.dir/build.make CMakeFiles/b1comm.dir/src/client.cpp.s
 .PHONY : src/client.cpp.s
 
-src/receive.o: src/receive.cpp.o
-
-.PHONY : src/receive.o
-
-# target to build an object file
-src/receive.cpp.o:
-	$(MAKE) -f CMakeFiles/b1comm.dir/build.make CMakeFiles/b1comm.dir/src/receive.cpp.o
-.PHONY : src/receive.cpp.o
-
-src/receive.i: src/receive.cpp.i
-
-.PHONY : src/receive.i
-
-# target to preprocess a source file
-src/receive.cpp.i:
-	$(MAKE) -f CMakeFiles/b1comm.dir/build.make CMakeFiles/b1comm.dir/src/receive.cpp.i
-.PHONY : src/receive.cpp.i
-
-src/receive.s: src/receive.cpp.s
-
-.PHONY : src/receive.s
-
-# target to generate assembly for a file
-src/receive.cpp.s:
-	$(MAKE) -f CMakeFiles/b1comm.dir/build.make CMakeFiles/b1comm.dir/src/receive.cpp.s
-.PHONY : src/receive.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -219,9 +192,6 @@ help:
 	@echo "... src/client.o"
 	@echo "... src/client.i"
 	@echo "... src/client.s"
-	@echo "... src/receive.o"
-	@echo "... src/receive.i"
-	@echo "... src/receive.s"
 .PHONY : help
 
 

@@ -3,10 +3,9 @@
 
 CMakeFiles/b1comm.dir/main.cpp.o
  .././include/client.h
- /home/pako/b1communicator/client/main.cpp
+ .././interface/iclient.h
+ /home/pako/b1communicator/client_test/main.cpp
 CMakeFiles/b1comm.dir/src/client.cpp.o
  .././include/client.h
- /home/pako/b1communicator/client/src/client.cpp
-CMakeFiles/b1comm.dir/src/receive.cpp.o
- .././include/receive.h
- /home/pako/b1communicator/client/src/receive.cpp
+ .././interface/iclient.h
+ /home/pako/b1communicator/client_test/src/client.cpp

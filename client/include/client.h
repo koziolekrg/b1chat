@@ -14,31 +14,30 @@
 #include <netdb.h>
 #include <thread>
 #include <arpa/inet.h> //inet_addr
+#include <mutex>
+#include "iclient.h"
 
 #define COMPLETE 0
 #define BUF_SIZE 256
 
-class Client
+class Client : public IClient
 {
 public:
-    Client(std::string a_hostAddress, int a_port);
+    Client();
     ~Client();
-    int buffer_message(char * message);
-    int find_network_newline(char * message, int inbuf);
-    bool logIn(fd_set a_r_set);
-    bool receiving(fd_set a_r_set);
+    void IConnect(std::string, int);
+    void ISend_data();
+    void IReceive_data();
+    void IMainMenu(int a_state);
 
 private:
-    int m_sock;
-    struct sockaddr_in m_server;
-    char m_message[256] , m_server_reply[256];
-    int m_inbuf;
-    int m_room;
-    char *m_after;
-    bool m_isLogIn;
-    int m_menu;
-    std::string m_sMessage;
-    int m_counter;
+    int sock;
+    std::string address;
+    int port;
+    struct sockaddr_in server;
+    bool isLoggedIn;
 };
+
+
 
 #endif // CLIENT_H

@@ -1,158 +1,203 @@
 #include "client.h"
-Client::Client(std::string a_hostAddress, int a_port)
+Client::Client()
 {
-    m_counter =0;
-    m_isLogIn = 0;
-    m_sock = socket(AF_INET , SOCK_STREAM , 0);
-    if (m_sock == -1)
-    {
-        printf("Could not create socket");
-    }
+    sock = -1;
+    port = 0;
+    address = "";
+    isLoggedIn = false;
 
-    m_server.sin_addr.s_addr = inet_addr(a_hostAddress.c_str());
-    m_server.sin_family = AF_INET;
-    m_server.sin_port = htons(a_port);
-
-    if (connect(m_sock , (struct sockaddr *)&m_server , sizeof(m_server)) < 0){
-        perror("connect failed. Error");
-        exit(1);
-    }
-
-    puts("Connected\n");
-
-    fd_set all_set, r_set;
-    int maxfd = m_sock + 1;
-    FD_ZERO(&all_set);
-    FD_SET(STDIN_FILENO, &all_set); FD_SET(m_sock, &all_set);
-    r_set = all_set;
-    struct timeval tv; tv.tv_sec = 2; tv.tv_usec = 0;
-
-    //set the initial position of after
-    m_after = m_message;
-
-    puts("Connecting to server..");
-
-    for(;;){
-
-        r_set = all_set;
-        //check to see if we can read from STDIN or sock
-        select(maxfd, &r_set, NULL, NULL, &tv);
-
-        //while(!m_isLogIn)
-        //    m_isLogIn = logIn(r_set);
-
-        receiving(r_set);
-
-    }
-
-    close(m_sock);
 }
 
 Client::~Client(){
 
 }
 
-bool Client::logIn(fd_set a_r_set){
+void Client::IConnect(std::string address , int port)
+{
+    if(sock == -1)
+    {
+        //Create socket
+        sock = socket(AF_INET , SOCK_STREAM , 0);
+        if (sock == -1)
+        {
+            perror("Could not create socket");
+        }
 
-    std::string login, password, state;
-
-    std::cout<<"0 - LOGIN\n1 - CREATE ACCOUNT: ";
-    std::cin>>state;
-
-    std::cout<<"Enter login: ";
-    std::cin>>login;
-
-    std::cout<<"Enter login: ";
-    std::cin>>password;
-
-    login = state+"."+login+"."+password+".";
-
-    send(m_sock, login.c_str(), strlen(login.c_str()) + 1, 0);
-
-    recv(m_sock , m_server_reply , 256 , 0);
-
-
-    if(strcmp(m_server_reply,"0.accept") == 0 || strcmp(m_server_reply,"1.accept") == 0){
-        std::cout<<"Login success";
-        return true;
+        std::cout<<"Socket created\n";
     }
-    else{
-        std::cout<<"\nWrong login or password\n";
-        return false;
-    }
+    else    {   /* OK , nothing */  }
 
-}
+    //setup address structure
+    if(inet_addr(address.c_str()) == -1)
+    {
+        struct hostent *he;
+        struct in_addr **addr_list;
 
-bool Client::receiving(fd_set a_r_set){
+        //resolve the hostname, its not an ip address
+        if ( (he = gethostbyname( address.c_str() ) ) == NULL)
+        {
+            //gethostbyname failed
+            herror("gethostbyname");
+            std::cout<<"Failed to resolve hostname\n";
+        }
 
-    if(FD_ISSET(STDIN_FILENO, &a_r_set)){
+        //Cast the h_addr_list to in_addr , since h_addr_list also has the ip address in long format only
+        addr_list = (struct in_addr **) he->h_addr_list;
 
-        if(buffer_message(m_message) == COMPLETE){
-            //Send some data
-            if(send(m_sock, m_message, strlen(m_message) + 1, 0) < 0)//NOTE: we have to do strlen(message) + 1 because we MUST include '\0'
-            {
-                puts("Send failed");
-                return true;
-            }
+        for(int i = 0; addr_list[i] != NULL; i++)
+        {
+            //strcpy(ip , inet_ntoa(*addr_list[i]) );
+            server.sin_addr = *addr_list[i];
 
-            //std::cout<<"\n1 - Send broadcast\n2 - Create group\n3 - Add client to group\n4 - Send MSG to group\n5 - Get online clients\n6 - Logout\n";
+            std::cout<<address<<" resolved to "<<inet_ntoa(*addr_list[i])<<std::endl;
+
+            break;
         }
     }
 
-    if(FD_ISSET(m_sock, &a_r_set)){
-        //Receive a reply from the server
-        if( recv(m_sock , m_server_reply , 256 , 0) < 0)
+    //plain ip address
+    else
+    {
+        server.sin_addr.s_addr = inet_addr( address.c_str() );
+    }
+
+    server.sin_family = AF_INET;
+    server.sin_port = htons( port );
+
+    //Connect to remote server
+    if (connect(sock , (struct sockaddr *)&server , sizeof(server)) < 0)
+    {
+        perror("connect failed. Error");
+    }
+
+    std::cout<<"Connected\n";
+
+}
+
+void Client::ISend_data()
+{
+    std::string data;
+    std::string menu;
+    int state;
+    while(1){
+        data = "";
+
+        std::cout<<"LOG:"<<isLoggedIn;
+
+        if(isLoggedIn == false){
+            std::cout<<"0 - LOGIN\n1 - CREATE ACCOUNT :";
+            std::cin>>menu; data = menu+".";
+
+            std::cout<<"Login:";
+            std::cin>>menu; data = data + menu+".";
+
+            std::cout<<"Password:";
+            std::cin>>menu; data = data + menu+".";
+
+            if( send(sock , data.c_str() , strlen( data.c_str() ) , 0) < 0)
+            {
+                perror("Send failed : ");
+            }
+            sleep(3);
+        }
+        else{
+
+            std::cout<<"\n1 - Send broadcast\n2 - Create group\n3 - Add client to group\n4 - Send MSG to group\n5 - Get online clients\n6 - Logout\n";
+            std::cin>>state;
+            IMainMenu(state);
+        }
+    }
+}
+
+void Client::IReceive_data()
+{
+    int size=512;
+    char buffer[size];
+    std::string reply;
+
+    //Receive a reply from the server
+    while(1){
+        if( recv(sock , buffer , sizeof(buffer) , 0) < 0)
         {
             puts("recv failed");
-            return true;
         }
 
-        printf("\nServer Reply: %s\n", m_server_reply);
-        m_server_reply[0]='\0';
-
+        reply = buffer;
+        if(reply.compare("0.accept")==0 || reply.compare("1.accept")==0){
+            isLoggedIn = true;
+            std::cout<<"Connected to the server success"<<std::endl;
+        }
+        if(reply.compare("0.refuse")==0 || reply.compare("1.refuse")==0){
+            isLoggedIn = false;
+            std::cout<<"Connection refuse"<<std::endl;
+        }
     }
-
 }
 
-int Client::buffer_message(char * a_message){
+void Client::IMainMenu(int a_state){
+    std::string menu="";
+    std::string data="";
 
+    switch(a_state){
+    case 1:
+        std::cout<<"Type message to send:";
+        std::cin>>menu; data = "2."+menu+".";
+        if( send(sock , data.c_str() , strlen( data.c_str() ) , 0) < 0)
+        {
+            perror("Send failed : ");
+        }
+        break;
 
-    short flag = -1; // indicates if returned_data has been set
-    int where; // location of network newline
-    char * null_c = {'\0'};
+    case 2:
+        std::cout<<"Type group name:";
+        std::cin>>menu; data = "3."+menu+".";
+        if( send(sock , data.c_str() , strlen( data.c_str() ) , 0) < 0)
+        {
+            perror("Send failed : ");
+        }
+        break;
 
+    case 3:
+        std::cout<<"Type group name:";
+        std::cin>>menu; data = "4."+menu+".";
+        std::cout<<"Type user name you want to add:";
+        std::cin>>menu; data = data + menu+".";
+        if( send(sock , data.c_str() , strlen( data.c_str() ) , 0) < 0)
+        {
+            perror("Send failed : ");
+        }
+        break;
 
-    int bytes_read = read(STDIN_FILENO, m_after, 256 - m_inbuf);
+    case 4:
+        std::cout<<"Type group name:";
+        std::cin>>menu; data = "5."+menu+".";
+        std::cout<<"Type message to send:";
+        std::cin>>menu; data = data + menu+".";
+        if( send(sock , data.c_str() , strlen( data.c_str() ) , 0) < 0)
+        {
+            perror("Send failed : ");
+        }
+        break;
 
-    m_inbuf += bytes_read;
+    case 5:
+        std::cout<<"all - list all users\ngroup name - list of group users:";
+        std::cin>>menu; data = "6."+menu+".";
+        std::cout<<"Type message to send:";
+        std::cin>>menu; data = data + menu+".";
+        if( send(sock , data.c_str() , strlen( data.c_str() ) , 0) < 0)
+        {
+            perror("Send failed : ");
+        }
+        break;
 
-    // call findeol, store result in where
-    where = find_network_newline(a_message, m_inbuf);
-    if (where >= 0) {
-
-        // place a null terminator at the end of the string
-        memcpy(a_message + where, &null_c, 1);
-
-        // update inbuf and remove the full line from the clients's buffer
-        memmove(a_message, a_message + where + 1, m_inbuf - (where + 1));
-        m_inbuf -= (where+1);
-        flag = 0;
+    case 6:
+        std::cout<<"Confirm password to logout";
+        std::cin>>menu; data = "7."+menu+".";
+        if( send(sock , data.c_str() , strlen( data.c_str() ) , 0) < 0)
+        {
+            perror("Send failed : ");
+        }
+        break;
     }
-
-    //update room and after, in preparation for the next read
-    m_room = sizeof(m_message) - m_inbuf;
-    m_after = m_message + m_inbuf;
-
-    return flag;
-
-
 }
 
-int Client::find_network_newline(char * a_message, int a_bytes_inbuf){
-    int i;
-    for(i = 0; i<m_inbuf; i++){
-        if( *(a_message + i) == '\n')
-            return i;
-    }
-    return -1;
-}

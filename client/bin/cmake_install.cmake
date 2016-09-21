@@ -1,4 +1,4 @@
-# Install script for directory: /home/pako/b1communicator/client
+# Install script for directory: /home/pako/b1communicator/client_test
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/pako/b1communicator/client/bin/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/pako/b1communicator/client_test/bin/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

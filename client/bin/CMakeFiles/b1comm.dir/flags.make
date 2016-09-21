@@ -6,5 +6,5 @@ CXX_FLAGS =  -std=c++0x
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/pako/b1communicator/client/../include -I/home/pako/b1communicator/client/./include -I/home/pako/b1communicator/client/./interface 
+CXX_INCLUDES = -I/home/pako/b1communicator/client_test/../include -I/home/pako/b1communicator/client_test/./include -I/home/pako/b1communicator/client_test/./interface 
 
