@@ -260,8 +260,10 @@ void Server::IIncommingConnection(){
 
             case '5': // send message to group
                 boost::split(v_msg, msg, boost::is_punct());
-                for(auto fd : m_private.IGetClients(v_msg[1]))
-                    ISendMessage(v_msg[2], fd);
+                for(auto t_fd : m_private.IGetClients(v_msg[1])){
+                    msg = "5."+IDescriptorToLogin(fd)+"."+v_msg[2]+'.';
+                    ISendMessage(msg, t_fd);
+                }
                 break;
 
             case '6': // send client list

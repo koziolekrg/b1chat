@@ -80,7 +80,6 @@ bool Client::ISend(std::string a_msg){
         perror("Send failed : ");
         return false;
     }
-    std::cout<<"Send: "<<a_msg;
     return true;
 }
 
@@ -106,7 +105,7 @@ void Client::ISend_data()
             {
                 perror("Send failed : ");
             }
-            sleep(3);
+            sleep(1);
         }
         else{
 
@@ -179,7 +178,6 @@ void Client::IReceive_data()
             std::cout<<"["<<v_msg[1]<<"]"<<v_msg[2]<<std::endl;
         }
         if(v_msg[0] == "6"){
-            std::cout<<"LOG: "<<reply;
             boost::split(v_msg, reply, boost::is_punct());
             for(int i=1; i<v_msg.size()-1; i++){
                 if(v_msg[i].length() > 1)
@@ -245,6 +243,10 @@ void Client::IMainMenu(int a_state){
         std::cout<<"Confirm password to logout";
         std::cin>>menu; data = "7."+menu+".";
         ISend(data);
+        break;
+    case 9:
+        std::cout<<"EXIT";
+        ISend("9");
         break;
     }
 }
