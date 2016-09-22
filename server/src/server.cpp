@@ -15,6 +15,8 @@ Server::Server(int16_t a_port)
     else
         std::cout<<"No file found, creating new one"<<std::endl;
 
+    m_dataFile.close();
+
     m_tv.tv_sec = 5;
     m_tv.tv_usec = 0;
 
@@ -29,14 +31,19 @@ Server::Server(int16_t a_port)
 
 Server::~Server(){
     std::string save;
-    for(auto user : m_setUsers){
-        save = save + user->ISaveToFile();
+    m_dataFile.open("users.data", std::ios::out);
+    if(m_dataFile.is_open()){
+        for(auto user : m_setUsers){
+            save = save + user->ISaveToFile();
+        }
+        std::cout<<"Save: "<<save;
+        m_dataFile<<save;
+        m_dataFile.close();
     }
-    m_dataFile<<save;
-
     m_dataFile.close(); // close file and the end
 
     std::cout<<"Exit";
+
 }
 
 std::string Server::IDescriptorToLogin(int a_client){ // get login from number
@@ -66,6 +73,7 @@ bool Server::IReadFile(){  // read users from file
         if(i==2){
             password = temp;
             m_setUsers.push_back(new User(login, password));
+            std::cout<<"Client: "<<login<<":"<<password<<std::endl;
             i=0;
         }
     }
@@ -296,7 +304,19 @@ void Server::IIncommingConnection(){
                 //close(fd);
                 break;
 
-            case '9': // send client list
+            case '9': // exit
+                std::string save;
+                m_dataFile.open("users.data", std::ios::out);
+                if(m_dataFile.is_open()){
+                    for(auto user : m_setUsers){
+                        save = save + user->ISaveToFile();
+                    }
+                    std::cout<<"Save: "<<save;
+                    m_dataFile<<save;
+                    m_dataFile.close();
+                }
+                m_dataFile.close(); // close file and the end
+                std::cout<<"Exit";
                 exit(1);
                 break;
             }

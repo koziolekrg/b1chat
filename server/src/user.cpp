@@ -23,5 +23,5 @@ std::string User::IGetLogin(){
 }
 
 std::string User::ISaveToFile(){
-    return m_login+m_password+".";
+    return m_login+"-"+m_password+"-";
 }

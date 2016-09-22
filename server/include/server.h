@@ -21,6 +21,8 @@
 #include <sys/time.h>
 #include <boost/algorithm/string.hpp>
 
+/*! Main class responsible for handling connection requests */
+
 class Server : public IServer
 {
 public:

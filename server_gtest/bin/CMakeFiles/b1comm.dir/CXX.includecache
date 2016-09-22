@@ -114,7 +114,7 @@ vector
 string
 -
 
-/home/pako/b1communicator_gtest/main.cpp
+/home/pako/b1chat/server_gtest/main.cpp
 stdio.h
 -
 sys/types.h
@@ -128,23 +128,23 @@ netdb.h
 iostream
 -
 server.h
-/home/pako/b1communicator_gtest/server.h
+/home/pako/b1chat/server_gtest/server.h
 gtest/gtest.h
 -
 
-/home/pako/b1communicator_gtest/src/group.cpp
+/home/pako/b1chat/server_gtest/src/group.cpp
 group.h
-/home/pako/b1communicator_gtest/src/group.h
+/home/pako/b1chat/server_gtest/src/group.h
 
-/home/pako/b1communicator_gtest/src/priv.cpp
+/home/pako/b1chat/server_gtest/src/priv.cpp
 priv.h
-/home/pako/b1communicator_gtest/src/priv.h
+/home/pako/b1chat/server_gtest/src/priv.h
 
-/home/pako/b1communicator_gtest/src/server.cpp
+/home/pako/b1chat/server_gtest/src/server.cpp
 server.h
-/home/pako/b1communicator_gtest/src/server.h
+/home/pako/b1chat/server_gtest/src/server.h
 
-/home/pako/b1communicator_gtest/src/user.cpp
+/home/pako/b1chat/server_gtest/src/user.cpp
 user.h
-/home/pako/b1communicator_gtest/src/user.h
+/home/pako/b1chat/server_gtest/src/user.h
 
