@@ -22,12 +22,23 @@
 class Login : ILogin
 {
 public:
-    /// Create Login with descriptor and login
+    /**
+     * @brief Login create Login with descriptor and login
+     * @param a_fd socket descriptor as int
+     * @param a_login login of client as string
+     */
     Login(int16_t a_fd, std::string a_login):fd(a_fd), login(a_login){}
     ~Login();
-    /// Methor return login
+    /**
+     * @brief IGetLogin return login of client
+     * @return login as string
+     */
     std::string IGetLogin(){return login;}
-    /// Method return descriptor
+    /// Method return
+    /**
+     * @brief IGetFd return socket descriptor of client
+     * @return descriptor as int
+     */
     int16_t IGetFd(){return fd;}
 
 private:

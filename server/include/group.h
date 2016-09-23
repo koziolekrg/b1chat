@@ -27,14 +27,28 @@
 class Group : public IGroup
 {
 public:
-    /// Create an Group with title and client descriptor
+    /**
+     * @brief Group create an Group with title and client descriptor
+     * @param a_title group title as string
+     * @param a_client descriptor as int
+     */
     Group(std::string a_title, int16_t a_client);
     ~Group();
-    /// Method return name of group
+    /**
+     * @brief IGetTitle return name of group
+     * @return group name as string
+     */
     std::string IGetTitle() override;
-    /// Method allows to add new client to vector
+    /**
+     * @brief IAddClient allows to add new client to vector
+     * @param a_client client socket as int
+     * @return true or false
+     */
     bool IAddClient(int16_t a_client) override;
-    /// Method return vector with descriptors
+    /**
+     * @brief IGetClientsList return vector with descriptors
+     * @return vector of ints
+     */
     std::vector <int16_t> IGetClientsList() override;
 
 private:

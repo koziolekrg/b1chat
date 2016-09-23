@@ -23,14 +23,29 @@
 class User : public IUser
 {
 public:
-    /// Create new User with login and password
+    /**
+     * @brief User
+     * @param a_login string with login
+     * @param a_password string with password
+     */
     User(std::string a_login, std::string a_password);
     ~User();
-    /// Method checking is login and password correct
+    /**
+     * @brief ICheckLog Check if login and password are correct
+     * @param a_login string with login
+     * @param a_password string with password
+     * @return true or false
+     */
     bool ICheckLog(std::string a_login, std::string a_password);
-    /// Method return login
+    /**
+     * @brief IGetLogin return login
+     * @return login as string
+     */
     std::string IGetLogin();
-    /// Method returnin login and password for saving it to file
+    /**
+     * @brief ISaveToFile returning string with login and password for saving file
+     * @return lagin and password as string
+     */
     std::string ISaveToFile();
 private:
     std::string m_login; ///< login

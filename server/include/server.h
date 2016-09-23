@@ -32,24 +32,56 @@
 class Server : public IServer
 {
 public:
-    /// Create an Server with selected port number
+    /**
+     * @brief Server create an Server with selected port number
+     * @param a_port define port number
+     */
     Server(int16_t a_port);
     ~Server();
-    /// Method starting listetning on port for clients messages
+    /**
+     * @brief IStartListening starting listetning on port for clients messages
+     * @param a_port int port number
+     * @return true or false
+     */
     bool IStartListening(int16_t a_port) override;
-    /// Methods allows to sending messages
+    /**
+    * @brief ISendMessage allows to sending messages
+    * @param a_message message to send as string
+    * @param a_client socket descriptor as int
+    * @return true or false
+    */
     bool ISendMessage(std::string a_message, int16_t a_client) override;
-    /// Method with loop in wich messages are handling
+    /**
+     * @brief IIncommingConnection loop handling incomming events from socket
+     */
     void IIncommingConnection() override;
-    /// Method responsible for setting port number
+    /**
+     * @brief ISetSocket responsible for setting port number
+     * @param a_port int port number
+     * @return true or false
+     */
     bool ISetSocket(int16_t a_port);
-    /// Method binding addres and port if it's allow
+    /**
+     * @brief IBindPort binding addres and port if it's available
+     * @return true or false
+     */
     bool IBindPort();
-    /// Method read data of existing clients from file
-    bool IReadFile();
-    /// Method convert client descriptor to his login
+    /**
+     * @brief IReadFile read data of existing clients from file
+     * @return true of false
+     */
+    bool IReadFile(); 
+    /**
+     * @brief IDescriptorToLogin convert client descriptor to his login
+     * @param a_client socket descriptor of client as int
+     * @return client login as string
+     */
     std::string IDescriptorToLogin(int a_client);
-    /// Method covert client login to his descriptor
+    /**
+     * @brief ILoginToDescriptor covert client login to his descriptor
+     * @param a_client client login as string
+     * @return socket descriptor of client as int
+     */
     int ILoginToDescriptor(std::string a_client);
 
 private:
