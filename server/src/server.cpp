@@ -134,6 +134,7 @@ bool Server::IStartListening(int16_t a_port){
             perror ("[server] select() Error.\n");
             exit(1);
         }
+
         if (FD_ISSET (m_sd, &m_readfds))
         {
             m_len = sizeof (m_clientSocket);
@@ -183,7 +184,9 @@ void Server::IIncommingConnection(){
 
         if (FD_ISSET (fd, &m_readfds))
         {
-            read (fd, m_buffer, sizeof (m_buffer));
+            read(fd, m_buffer, sizeof (m_buffer));
+
+
             std::cout<<"[client-"<<fd<<"]: "<< m_buffer<<std::endl;
 
             std::string msg = m_buffer;
@@ -191,7 +194,7 @@ void Server::IIncommingConnection(){
             int a_fd;
             switch(m_buffer[0])
             {
-            case '0': // log in to exist account
+            case '0': // log in to exist account boost::is_any_of("|");
                 boost::split(v_msg, msg, boost::is_punct());
                 msg = "0.refuse. ";
 

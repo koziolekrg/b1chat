@@ -1,0 +1,38 @@
+\hypertarget{classGroup}{}\section{Group Class Reference}
+\label{classGroup}\index{Group@{Group}}
+
+
+{\ttfamily \#include $<$group.\+h$>$}
+
+
+
+Inheritance diagram for Group\+:
+% FIG 0
+
+
+Collaboration diagram for Group\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classGroup_ad554b7c0286fbbb1c9253af51af145d9}{Group} (std\+::string a\+\_\+title, int16\+\_\+t a\+\_\+client)\hypertarget{classGroup_ad554b7c0286fbbb1c9253af51af145d9}{}\label{classGroup_ad554b7c0286fbbb1c9253af51af145d9}
+
+\begin{DoxyCompactList}\small\item\em Create an \hyperlink{classGroup}{Group} with title and client descriptor. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classGroup_adc53f6f17b195b93510be6d200d3ab26}{I\+Get\+Title} () override\hypertarget{classGroup_adc53f6f17b195b93510be6d200d3ab26}{}\label{classGroup_adc53f6f17b195b93510be6d200d3ab26}
+
+\begin{DoxyCompactList}\small\item\em Method return name of group. \end{DoxyCompactList}\item 
+bool \hyperlink{classGroup_a8805bd2c7e33bb16cd452f0f3f9e1295}{I\+Add\+Client} (int16\+\_\+t a\+\_\+client) override\hypertarget{classGroup_a8805bd2c7e33bb16cd452f0f3f9e1295}{}\label{classGroup_a8805bd2c7e33bb16cd452f0f3f9e1295}
+
+\begin{DoxyCompactList}\small\item\em Method allows to add new client to vector. \end{DoxyCompactList}\item 
+std\+::vector$<$ int16\+\_\+t $>$ \hyperlink{classGroup_a5c4108d78f9eceb5583d24de756f4cc7}{I\+Get\+Clients\+List} () override\hypertarget{classGroup_a5c4108d78f9eceb5583d24de756f4cc7}{}\label{classGroup_a5c4108d78f9eceb5583d24de756f4cc7}
+
+\begin{DoxyCompactList}\small\item\em Method return vector with descriptors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class keeps name of group as string and vector of socket descriptors as ints. Constructor gets title of group and descriptor of user who is requesting for create. Class allows to return title, add another client to vector and return vector with all descriptors. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/group.\+h\item 
+src/group.\+cpp\end{DoxyCompactItemize}

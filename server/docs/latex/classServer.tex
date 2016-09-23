@@ -1,0 +1,53 @@
+\hypertarget{classServer}{}\section{Server Class Reference}
+\label{classServer}\index{Server@{Server}}
+
+
+{\ttfamily \#include $<$server.\+h$>$}
+
+
+
+Inheritance diagram for Server\+:
+% FIG 0
+
+
+Collaboration diagram for Server\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classServer_aa8e412812671a005a6c530f8510db931}{Server} (int16\+\_\+t a\+\_\+port)\hypertarget{classServer_aa8e412812671a005a6c530f8510db931}{}\label{classServer_aa8e412812671a005a6c530f8510db931}
+
+\begin{DoxyCompactList}\small\item\em Create an \hyperlink{classServer}{Server} with selected port number. \end{DoxyCompactList}\item 
+bool \hyperlink{classServer_a15eef69cccd5dba122a76f63b13e1733}{I\+Start\+Listening} (int16\+\_\+t a\+\_\+port) override\hypertarget{classServer_a15eef69cccd5dba122a76f63b13e1733}{}\label{classServer_a15eef69cccd5dba122a76f63b13e1733}
+
+\begin{DoxyCompactList}\small\item\em Method starting listetning on port for clients messages. \end{DoxyCompactList}\item 
+bool \hyperlink{classServer_a7f43c5c286c0a64624a803fcf2f3c85a}{I\+Send\+Message} (std\+::string a\+\_\+message, int16\+\_\+t a\+\_\+client) override\hypertarget{classServer_a7f43c5c286c0a64624a803fcf2f3c85a}{}\label{classServer_a7f43c5c286c0a64624a803fcf2f3c85a}
+
+\begin{DoxyCompactList}\small\item\em Methods allows to sending messages. \end{DoxyCompactList}\item 
+void \hyperlink{classServer_a404070676bda1e2582cd6b467e73b6a2}{I\+Incomming\+Connection} () override\hypertarget{classServer_a404070676bda1e2582cd6b467e73b6a2}{}\label{classServer_a404070676bda1e2582cd6b467e73b6a2}
+
+\begin{DoxyCompactList}\small\item\em Method with loop in wich messages are handling. \end{DoxyCompactList}\item 
+bool \hyperlink{classServer_a80089a729a3664bf580c27ae5a86d691}{I\+Set\+Socket} (int16\+\_\+t a\+\_\+port)\hypertarget{classServer_a80089a729a3664bf580c27ae5a86d691}{}\label{classServer_a80089a729a3664bf580c27ae5a86d691}
+
+\begin{DoxyCompactList}\small\item\em Method responsible for setting port number. \end{DoxyCompactList}\item 
+bool \hyperlink{classServer_a4d95b9a38864072084277bb84421475e}{I\+Bind\+Port} ()\hypertarget{classServer_a4d95b9a38864072084277bb84421475e}{}\label{classServer_a4d95b9a38864072084277bb84421475e}
+
+\begin{DoxyCompactList}\small\item\em Method binding addres and port if it\textquotesingle{}s allow. \end{DoxyCompactList}\item 
+bool \hyperlink{classServer_a38db28c597e4759fba3dc831462ba3f3}{I\+Read\+File} ()\hypertarget{classServer_a38db28c597e4759fba3dc831462ba3f3}{}\label{classServer_a38db28c597e4759fba3dc831462ba3f3}
+
+\begin{DoxyCompactList}\small\item\em Method read data of existing clients from file. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classServer_ac3697709d2f04345928e0ee2ec2b71d0}{I\+Descriptor\+To\+Login} (int a\+\_\+client)\hypertarget{classServer_ac3697709d2f04345928e0ee2ec2b71d0}{}\label{classServer_ac3697709d2f04345928e0ee2ec2b71d0}
+
+\begin{DoxyCompactList}\small\item\em Method convert client descriptor to his login. \end{DoxyCompactList}\item 
+int \hyperlink{classServer_a1e9fccb595bba3c40bf11485e369eae4}{I\+Login\+To\+Descriptor} (std\+::string a\+\_\+client)\hypertarget{classServer_a1e9fccb595bba3c40bf11485e369eae4}{}\label{classServer_a1e9fccb595bba3c40bf11485e369eae4}
+
+\begin{DoxyCompactList}\small\item\em Method covert client login to his descriptor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class is responsible for handling all connection events. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/server.\+h\item 
+src/server.\+cpp\end{DoxyCompactItemize}
