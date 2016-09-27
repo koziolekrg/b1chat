@@ -10,12 +10,14 @@ User::~User(){
 }
 
 bool User::ICheckLog(std::string a_login, std::string a_password){
+    bool retVal = true;
     if(m_password.compare(a_password) == 0 && m_login.compare(a_login) == 0){
-        return true;
+        retVal = true;
     }
     else{
-        return false;
+        retVal = false;
     }
+    return retVal;
 }
 
 std::string User::IGetLogin(){

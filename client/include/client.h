@@ -26,9 +26,11 @@
 #include <arpa/inet.h> //inet_addr
 #include <boost/algorithm/string.hpp>
 #include "iclient.h"
+#include <mutex>
 
 #define COMPLETE 0
 #define BUF_SIZE 256
+
 
 class Client : public IClient
 {
@@ -68,6 +70,7 @@ public:
     bool ISend(std::string a_msg) override;
 
 private:
+    std::mutex mutexLog;
     int m_sock; ///< socket descriptor
     sockaddr_in m_server; ///<
     bool m_isLoggedIn; ///< variable checking is user already log in

@@ -11,15 +11,24 @@
 
 int main(int argc , char *argv[])
 {
-    Client client;//*client = new Client();
+    if(argc<3){
+        std::cout<<"Type [IP address] and [port number]  as parameters";
+        exit(1);
+    }
 
-    client.IConnect("127.0.0.1" , 8888);
+    //Client client;
+    //client.IConnect(argv[1], atoi(argv[2]));
+
+    Client *client = new Client();
+    client->IConnect(argv[1], atoi(argv[2]));
 
     std::thread s(&Client::ILogin, client);
     std::thread r(&Client::IReceive, client);
 
     s.join();
     r.join();
+
+
 
 
     return 0;

@@ -2,8 +2,8 @@
 #include "server.h"
 #define MAX_CLIENTS 10
 
-enum menuState { LOG_IN = 48 , CREATE_ACCOUNT, BROADCAST, CREATE_GROUP, ADD_USER_TO_GROUP,MESSAGE_TO_GROUP, USERS_LIST, LOGOUT, EXIT};
-enum fileState { LOGIN = 1 , PASSWORD = 2 };
+enum menuState { LOG_IN = 49 , CREATE_ACCOUNT, BROADCAST, CREATE_GROUP, ADD_USER_TO_GROUP,MESSAGE_TO_GROUP, USERS_LIST, LOGOUT, EXIT};
+enum fileState { LOGIN, PASSWORD };
 
 Server::Server(){
 
@@ -88,10 +88,9 @@ void Server::IReadFile(){  // read users from file
 
     while(std::getline(m_dataFile,temp,'-')){
         i++;
-        if(i == LOGIN){
+        if(i== LOGIN)
             login = temp;
-        }
-        if(i == PASSWORD){
+        if(i== PASSWORD){
             password = temp;
             m_setUsers.push_back(new User(login, password));
             std::cout<<"Client: "<<login<<":"<<password<<std::endl;
@@ -208,6 +207,7 @@ void Server::IStartListening(int16_t a_port){
 
 bool Server::ISendMessage(std::string a_message, int16_t a_client){
    bool retVal = false;
+   //std::cout<<"SENT:"<<a_message;
     if(a_client == 0){
         for(auto fd: m_setClients){
             if(write(fd, a_message.c_str(), strlen(a_message.c_str()))<0){
@@ -257,13 +257,17 @@ void Server::IHandleMessage(std::string a_buffer, int16_t a_client){
 
     std::string msg = a_buffer;
     std::vector <std::string> v_msg;
+    //menuState state = 1;//static_cast<int>(a_buffer[0]);
     int menu = a_buffer[0];
+    std::cout<<"STATE:"<<menu;
+
     switch(menu)
     {
     case LOG_IN: /// log in to exist account boost::is_any_of("|");
+
         boost::split(v_msg, msg, boost::is_any_of("~"));
         msg = "0~refuse~ ";
-        std::cout<<"LOGIN "<<"[0]:"<<v_msg[0]<<" [1]:"<<v_msg[1]<<" [2]:"<<v_msg[2];
+
         for(auto user : m_setUsers){
             if(user->ICheckLog(v_msg[1],v_msg[2])){
                 msg = "0~accept~ ";
@@ -284,7 +288,6 @@ void Server::IHandleMessage(std::string a_buffer, int16_t a_client){
     case CREATE_ACCOUNT: /// create new account request
         m_isAvailable = true;
         boost::split(v_msg, msg, boost::is_punct());
-        std::cout<<"CREATE "<<"[0]:"<<v_msg[0]<<" [1]:"<<v_msg[1]<<" [2]:"<<v_msg[2];
         for(auto user : m_setUsers){
             if(v_msg[1].compare(user->IGetLogin())==0){
                 msg = "1~refuse~ ";
@@ -375,7 +378,6 @@ void Server::IHandleMessage(std::string a_buffer, int16_t a_client){
         break;
 
     case EXIT: // exit
-        std::cout<<"Exit";
         std::string save;
         m_dataFile.open("users.data", std::ios::out);
         if(m_dataFile.is_open()){
@@ -387,7 +389,7 @@ void Server::IHandleMessage(std::string a_buffer, int16_t a_client){
             m_dataFile.close();
         }
         m_dataFile.close(); // close file and the end
-
+        std::cout<<"Exit";
         exit(1);
         break;
     }

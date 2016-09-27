@@ -49,7 +49,7 @@ public:
      * @param a_port int port number
      * @return true or false
      */
-    bool IStartListening(int16_t a_port) override;
+    void IStartListening(int16_t a_port) override;
     /**
     * @brief ISendMessage allows to sending messages
     * @param a_message message to send as string
@@ -82,7 +82,7 @@ public:
      * @brief IReadFile read data of existing clients from file
      * @return true of false
      */
-    bool IReadFile(); 
+    void IReadFile();
     /**
      * @brief ISaveFile save all data to file
      * @return true of false
@@ -115,7 +115,7 @@ private:
     std::fstream m_dataFile;
     Priv m_private; ///< object responsible for keeping groups vector
     std::list <ILogin*> m_setLogins; ///< list of online clients
-    bool m_isAvailable; ///< flag 
+    bool m_isAvailable; ///< flag
 
 };
 // end of class Server

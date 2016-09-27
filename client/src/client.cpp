@@ -73,13 +73,14 @@ void Client::IConnect(std::string a_address, int a_port)
 }
 
 bool Client::ISend(std::string a_msg){
+    bool retVal = true;
     if( send(m_sock , a_msg.c_str() , strlen( a_msg.c_str() ) , 0) < 0)
     {
         perror("Send failed : ");
-        return false;
+        retVal = false;
     }
     std::cout<<"[Client]"<<a_msg<<std::endl;
-    return true;
+    return retVal;
 }
 
 void Client::ILogin()
@@ -90,7 +91,7 @@ void Client::ILogin()
     while(1){
         data = "";
 
-        if(m_isLoggedIn == false){
+        if(false == m_isLoggedIn){
             std::cout<<"0 - LOGIN\n1 - CREATE ACCOUNT :";
             std::cin>>menu; data = menu+"~";
 
@@ -129,7 +130,7 @@ void Client::IReceive()
 
         if( recv(m_sock , buffer , sizeof(buffer) , 0) < 0)
         {
-           // puts("recv failed");
+            puts("recv failed");
         }
 
         reply = buffer;
@@ -138,11 +139,11 @@ void Client::IReceive()
 
         if(v_msg[0] == "0" || v_msg[0] == "1"){
             if(v_msg[1].compare("accept") == 0){
-                m_isLoggedIn = true;
+                mutexLog.lock(); m_isLoggedIn = true; mutexLog.unlock();
                 std::cout<<"[Server] Connected to the server success"<<std::endl;
             }
             if(v_msg[1].compare("refuse") == 0){
-                m_isLoggedIn = false;
+                mutexLog.lock(); m_isLoggedIn = false; mutexLog.unlock();
                 std::cout<<"[Server] Connection refused"<<std::endl;
             }
         }
@@ -152,11 +153,9 @@ void Client::IReceive()
 
         if(v_msg[0] == "3"){
             if(v_msg[1].compare("accept") == 0){
-                m_isLoggedIn = true;
                 std::cout<<"[Server] Group created"<<std::endl;
             }
             if(v_msg[1].compare("refuse") == 0){
-                m_isLoggedIn = false;
                 std::cout<<"[Server] Group didn't' create"<<std::endl;
             }
         }
@@ -240,9 +239,9 @@ void Client::IMainMenu(int a_state){
         std::cin>>menu; data = "7~"+menu+"~";
         ISend(data);
         break;
-    case 9:
+    case 8:
         std::cout<<"EXIT";
-        ISend("9");
+        ISend("8~");
         break;
     }
 }

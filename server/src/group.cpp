@@ -15,12 +15,13 @@ std::string Group::IGetTitle(){
 }
 
 bool Group::IAddClient(int16_t a_client){
+    bool retVal = true;
     for(auto client : m_clients){
         if(client == a_client)
-            return false;
+            retVal = false;
     }
     m_clients.push_back(a_client);
-    return true;
+    return retVal;
 }
 
 std::vector <int16_t> Group::IGetClientsList(){
