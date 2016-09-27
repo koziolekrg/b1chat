@@ -36,8 +36,14 @@ public:
      * @brief Server create an Server with selected port number
      * @param a_port define port number
      */
-    Server(int16_t a_port);
+    Server();
     ~Server();
+    /**
+     * @brief IInitConnection
+     * @param a_port
+     * @return
+     */
+    bool IInitConnection(int16_t a_port);
     /**
      * @brief IStartListening starting listetning on port for clients messages
      * @param a_port int port number
@@ -52,9 +58,15 @@ public:
     */
     bool ISendMessage(std::string a_message, int16_t a_client) override;
     /**
-     * @brief IIncommingConnection loop handling incomming events from socket
+     * @brief IIncommingConnection get incomming connection
      */
     void IIncommingConnection() override;
+    /**
+     * @brief IHandleMessage handle received message
+     * @param a_buffer income message
+     * @param a_client socket of client who sent message
+     */
+    void IHandleMessage(std::string a_buffer, int16_t a_client);
     /**
      * @brief ISetSocket responsible for setting port number
      * @param a_port int port number
@@ -72,6 +84,11 @@ public:
      */
     bool IReadFile(); 
     /**
+     * @brief ISaveFile save all data to file
+     * @return true of false
+     */
+    bool ISaveFile();
+    /**
      * @brief IDescriptorToLogin convert client descriptor to his login
      * @param a_client socket descriptor of client as int
      * @return client login as string
@@ -85,20 +102,19 @@ public:
     int ILoginToDescriptor(std::string a_client);
 
 private:
-    int16_t m_port; ///< port number
     char m_buffer[100]; ///< buffer for messages
-    struct sockaddr_in m_serverSocket, m_clientSocket;
+    sockaddr_in m_serverSocket, m_clientSocket;
     fd_set m_readfds,m_actfds; ///< set of connected descriptors
     int16_t m_sd; ///< server descriptor
     int16_t m_nfds; ///< number of file descriptors
     int16_t m_client; ///< client descriptor
     socklen_t m_len; 
-    struct timeval m_tv;
+    timeval m_tv;
     std::vector <int16_t> m_setClients; ///< vector of clients descriptors
-    std::vector <User*> m_setUsers; ///< vector of logins and password
+    std::vector <IUser*> m_setUsers; ///< vector of logins and password //////<
     std::fstream m_dataFile;
     Priv m_private; ///< object responsible for keeping groups vector
-    std::list <Login*> m_setLogins; ///< list of online clients
+    std::list <ILogin*> m_setLogins; ///< list of online clients
     bool m_isAvailable; ///< flag 
 
 };

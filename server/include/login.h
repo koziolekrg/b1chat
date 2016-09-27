@@ -9,7 +9,7 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
-#include <ilogin.h>
+#include "ilogin.h"
 #include <string.h>
 #include <iostream>
 #include <sys/socket.h>
@@ -19,7 +19,7 @@
 #include <sys/time.h>
 #include <vector>
 
-class Login : ILogin
+class Login : public ILogin
 {
 public:
     /**
@@ -27,19 +27,18 @@ public:
      * @param a_fd socket descriptor as int
      * @param a_login login of client as string
      */
-    Login(int16_t a_fd, std::string a_login):fd(a_fd), login(a_login){}
+    Login(int16_t a_fd, std::string a_login);
     ~Login();
     /**
      * @brief IGetLogin return login of client
      * @return login as string
      */
-    std::string IGetLogin(){return login;}
-    /// Method return
+    std::string IGetLogin() override;
     /**
      * @brief IGetFd return socket descriptor of client
      * @return descriptor as int
      */
-    int16_t IGetFd(){return fd;}
+    int16_t IGetFd()override;
 
 private:
     int16_t fd; ///< socket descriptor

@@ -13,6 +13,7 @@ set(sources
 	"src/user.cpp"
 	"src/group.cpp"
 	"src/priv.cpp"
+        "src/login.cpp"
 )
 
 include_directories("../include/" "./include/" "./interface")

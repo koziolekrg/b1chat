@@ -2,62 +2,78 @@
 #include "server.h"
 #define MAX_CLIENTS 10
 
-Server::Server(int16_t a_port)
-    :m_port(a_port){
+Server::Server(){
 
     m_setLogins.push_back(new Login(99, " "));
     m_dataFile.open("users.data");
-    if(m_dataFile.is_open()){
-        std::cout<<"Found file with data"<<std::endl;
-        if(IReadFile())
-            std::cout<<"Data has been loaded to the server"<<std::endl;
-    }
-    else
-        std::cout<<"No file found, creating new one"<<std::endl;
-
-    m_dataFile.close();
-
+    m_sd = 0;
+    m_nfds = 0;
+    m_client = 0;
+    m_len = 0;
     m_tv.tv_sec = 5;
     m_tv.tv_usec = 0;
-
-    if(!ISetSocket(a_port)) // Socket reserving
-        exit(1);
-
-    if(IBindPort()) // binding port
-        IStartListening(a_port);
-    else
-        exit(1);
+    m_isAvailable = false;
 }
 
 Server::~Server(){
-    std::string save;
-    m_dataFile.open("users.data", std::ios::out);
-    if(m_dataFile.is_open()){
-        for(auto user : m_setUsers){
-            save = save + user->ISaveToFile();
-        }
-        std::cout<<"Save: "<<save;
-        m_dataFile<<save;
-        m_dataFile.close();
-    }
-    m_dataFile.close(); // close file and the end
 
     std::cout<<"Exit";
+    ISaveFile();
 
+    for(auto object : m_setUsers)
+        delete object;
+
+    for(auto object : m_setLogins)
+        delete object;
+
+}
+
+bool Server::IInitConnection(int16_t a_port){
+
+    bool retVal = false;
+
+    if(m_dataFile.is_open()){
+        std::cout<<"Found file with data"<<std::endl;
+        if(IReadFile()){
+            std::cout<<"Data has been loaded to the server"<<std::endl;
+        }
+    }
+    else{
+        std::cout<<"No file found, creating new one"<<std::endl;
+    }
+
+    m_dataFile.close();
+
+    retVal = ISetSocket(a_port); /// Socket reserving
+
+    if(!retVal){
+        exit(1);
+    }
+
+    retVal = IBindPort(); // binding port
+
+    if(retVal){
+        IStartListening(a_port);
+    }
+    else{
+        exit(1);
+    }
 }
 
 std::string Server::IDescriptorToLogin(int a_client){ // get login from number
     for(auto login : m_setLogins){
-        if(login->IGetFd() == a_client)
+        if(login->IGetFd() == a_client){
             return login->IGetLogin();
+        }
     }
-    return "empty";
+    return "unknown";
 }
 
 int Server::ILoginToDescriptor(std::string a_client){ // get number from login
     for(auto login : m_setLogins){
-        if(a_client.compare(login->IGetLogin()) == 0)
+        if(a_client.compare(login->IGetLogin()) == 0){
             return login->IGetFd();
+        }
     }
     return 0;
 }
@@ -80,6 +96,22 @@ bool Server::IReadFile(){  // read users from file
     return true;
 }
 
+bool Server::ISaveFile(){
+    std::string save;
+    m_dataFile.open("users.data", std::ios::out);
+    if(m_dataFile.is_open()){
+        for(auto user : m_setUsers){
+            save = save + user->ISaveToFile();
+        }
+        std::cout<<"Save: "<<save;
+        m_dataFile<<save;
+        m_dataFile.close();
+        return true;
+    }
+    m_dataFile.close(); /// close file and the end
+    return false;
+}
+
 bool Server::ISetSocket(int16_t a_port){
     if ((m_sd = socket (AF_INET, SOCK_STREAM, 0)) == -1)
     {
@@ -88,7 +120,7 @@ bool Server::ISetSocket(int16_t a_port){
     }
     else
     {
-        setsockopt(m_sd, SOL_SOCKET, SO_REUSEADDR,&m_tv,sizeof(struct timeval));
+        setsockopt(m_sd, SOL_SOCKET, SO_REUSEADDR,&m_tv,sizeof(timeval));
 
         bzero (&m_serverSocket, sizeof (m_serverSocket));
 
@@ -100,7 +132,7 @@ bool Server::ISetSocket(int16_t a_port){
 }
 
 bool Server::IBindPort(){
-    if (bind (m_sd, (struct sockaddr *) &m_serverSocket, sizeof (struct sockaddr)) == -1)
+    if (bind (m_sd, (sockaddr *) &m_serverSocket, sizeof (sockaddr)) == -1)
     {
         perror ("[server] bind() Error.\n");
         return false;
@@ -122,7 +154,7 @@ bool Server::IStartListening(int16_t a_port){
 
     m_nfds = m_sd;
 
-    std::cout<<"[server] Wait at port["<<m_port<<"]"<<std::endl;
+    std::cout<<"[server] Wait at port["<<a_port<<"]"<<std::endl;
     fflush (stdout);
 
     while (1)
@@ -140,7 +172,7 @@ bool Server::IStartListening(int16_t a_port){
             m_len = sizeof (m_clientSocket);
             bzero (&m_clientSocket, sizeof (m_clientSocket));
 
-            m_client = accept (m_sd, (struct sockaddr *) &m_clientSocket, &m_len);
+            m_client = accept (m_sd, (sockaddr *) &m_clientSocket, &m_len);
 
             if (m_client < 0)
             {
@@ -173,157 +205,165 @@ bool Server::ISendMessage(std::string a_message, int16_t a_client){
         write (a_client, a_message.c_str(), strlen(a_message.c_str()));
         std::cout<<"Sended:"<<a_message<<" size["<<strlen(a_message.c_str())<<"]\n";
     }
-
+    return true;
 }
 
 void Server::IIncommingConnection(){
 
-    for(auto fd: m_setClients)
+    int status=0;
+
+    for(int i=0; i<m_setClients.size(); i++)
     {
         fflush (stdout);
 
-        if (FD_ISSET (fd, &m_readfds))
+        if (FD_ISSET (m_setClients[i], &m_readfds))
         {
-            read(fd, m_buffer, sizeof (m_buffer));
+            status = read(m_setClients[i], m_buffer, sizeof (m_buffer));
 
+            std::cout<<"Client status["<<status<<"]  "<<std::endl;
 
-            std::cout<<"[client-"<<fd<<"]: "<< m_buffer<<std::endl;
+            std::cout<<"[client-"<<m_setClients[i]<<"]: "<< m_buffer<<std::endl;
+        }
 
-            std::string msg = m_buffer;
-            std::vector <std::string> v_msg;
-            int a_fd;
-            switch(m_buffer[0])
-            {
-            case '0': // log in to exist account boost::is_any_of("|");
-                boost::split(v_msg, msg, boost::is_punct());
-                msg = "0.refuse. ";
+        IHandleMessage(m_buffer, m_setClients[i]);
 
-                for(auto user : m_setUsers){
-                    if(user->ICheckLog(v_msg[1],v_msg[2])){
-                        msg = "0.accept. ";
-                        for(auto login : m_setLogins){
-                            if(v_msg[1].compare(login->IGetLogin()) == 0){
-                                msg = "0.refuse. ";
-                            }
-                        }
-                    }
-                }
+    }
+}
 
-                if(msg.compare("0.accept. ") == 0)
-                    m_setLogins.push_back(new Login(fd, v_msg[1]));
+void Server::IHandleMessage(std::string a_buffer, int16_t a_client){
 
-                ISendMessage(msg,fd);
-                break;
+    std::string msg = "";
+    std::vector <std::string> v_msg;
 
-            case '1': // create new account request
-                m_isAvailable = true;
-                boost::split(v_msg, msg, boost::is_punct());
-                for(auto user : m_setUsers){
-                    if(v_msg[1].compare(user->IGetLogin())==0){
-                        msg = "1.refuse. ";
-                        ISendMessage(msg, fd);
-                        m_isAvailable = false;
-                    }
-                }
-                if(m_isAvailable){
-                    msg = "1.accept. ";
-                    ISendMessage(msg, fd);
-                    m_setUsers.push_back(new User(v_msg[1],v_msg[2]));
-                    m_setLogins.push_back(new Login(fd,v_msg[1]));
-                }
-                break;
+    switch(a_buffer[0])
+    {
+    case '0': /// log in to exist account boost::is_any_of("|");
+        boost::split(v_msg, msg, boost::is_any_of("~"));
+        msg = "0~refuse~ ";
 
-            case '2': // broadcast message
-                boost::split(v_msg, msg, boost::is_punct());
-                msg = "2."+IDescriptorToLogin(fd)+"."+v_msg[1]+" . ";
-                ISendMessage(msg, 0);
-                break;
-
-            case '3': // add new group
-                boost::split(v_msg, msg, boost::is_punct());
-                if(m_private.IAddNewGroup(v_msg[1],fd)){
-                    msg = "3.accept. ";
-                    ISendMessage(msg, fd);
-                }
-                else{
-                    msg = "3.refuse. ";
-                    ISendMessage(msg, fd);
-                }
-
-                break;
-
-            case '4': // add new client to group
-                boost::split(v_msg, msg, boost::is_punct());
-                a_fd = ILoginToDescriptor(v_msg[2]);
-                for(auto t_fd: m_setClients){
-                    if(t_fd == a_fd){
-                        if(m_private.IAddNewClientToGroup(v_msg[1],a_fd)){
-                            msg = "4.accept";
-                            ISendMessage(msg, fd);
-                        }
-                        else{
-                            msg = "4.refuse";
-                            ISendMessage(msg, fd);
-                        }
-                    }
-                }
-                break;
-
-            case '5': // send message to group
-                boost::split(v_msg, msg, boost::is_punct());
-                for(auto t_fd : m_private.IGetClients(v_msg[1])){
-                    msg = "5."+IDescriptorToLogin(fd)+"."+v_msg[2]+'.';
-                    ISendMessage(msg, t_fd);
-                }
-                break;
-
-            case '6': // send client list
-                boost::split(v_msg, msg, boost::is_punct());
-                msg="6.";
-                if(v_msg[1].compare("all") == 0){
-                    for(auto t_fd : m_setLogins)
-                        msg = msg + t_fd->IGetLogin() + ".";
-                    std::cout<<"Lista all: "<<msg;
-                    ISendMessage(msg, fd);
-                }
-                else{
-                    for(auto t_fd : m_private.IGetClients(v_msg[1]))
-                        msg = msg + IDescriptorToLogin(t_fd) + ".";
-                    std::cout<<"Lista group: "<<msg;
-                    ISendMessage(msg, fd);
-                }
-                break;
-
-            case '7': // logout
-                msg="";
+        for(auto user : m_setUsers){
+            if(user->ICheckLog(v_msg[1],v_msg[2])){
+                msg = "0~accept~ ";
                 for(auto login : m_setLogins){
-                    if(fd == login->IGetFd()){
-                        std::cout<<"Login:"<<login->IGetLogin()<<" Fd:"<<login->IGetFd()<<std::endl;
-                        //m_setLogins.remove(login);
-                        msg="7.accept";
+                    if(v_msg[1].compare(login->IGetLogin()) == 0){
+                        msg = "0~refuse~ ";
                     }
                 }
-                ISendMessage(msg, fd);
-                //close(fd);
-                break;
-
-            case '9': // exit
-                std::string save;
-                m_dataFile.open("users.data", std::ios::out);
-                if(m_dataFile.is_open()){
-                    for(auto user : m_setUsers){
-                        save = save + user->ISaveToFile();
-                    }
-                    std::cout<<"Save: "<<save;
-                    m_dataFile<<save;
-                    m_dataFile.close();
-                }
-                m_dataFile.close(); // close file and the end
-                std::cout<<"Exit";
-                exit(1);
-                break;
             }
         }
+
+        if(msg.compare("0~accept~ ") == 0)
+            m_setLogins.push_back(new Login(a_client, v_msg[1]));
+
+        ISendMessage(msg,a_client);
+        break;
+
+    case '1': /// create new account request
+        m_isAvailable = true;
+        boost::split(v_msg, msg, boost::is_punct());
+        for(auto user : m_setUsers){
+            if(v_msg[1].compare(user->IGetLogin())==0){
+                msg = "1~refuse~ ";
+                ISendMessage(msg, a_client);
+                m_isAvailable = false;
+            }
+        }
+        if(m_isAvailable){
+            msg = "1~accept~ ";
+            ISendMessage(msg, a_client);
+            m_setUsers.push_back(new User(v_msg[1],v_msg[2]));
+            m_setLogins.push_back(new Login(a_client,v_msg[1]));
+        }
+        break;
+
+    case '2': /// broadcast message
+        boost::split(v_msg, msg, boost::is_punct());
+        msg = "2~"+IDescriptorToLogin(a_client)+"~"+v_msg[1]+" ~ ";
+        ISendMessage(msg, 0);
+        break;
+
+    case '3': /// add new group
+        boost::split(v_msg, msg, boost::is_punct());
+        if(m_private.IAddNewGroup(v_msg[1],a_client)){
+            msg = "3~accept~ ";
+            ISendMessage(msg, a_client);
+        }
+        else{
+            msg = "3~refuse~ ";
+            ISendMessage(msg, a_client);
+        }
+
+        break;
+
+    case '4': /// add new client to group
+        boost::split(v_msg, msg, boost::is_punct());
+        for(auto t_fd: m_setClients){
+            if(t_fd == ILoginToDescriptor(v_msg[2])){
+                if(m_private.IAddNewClientToGroup(v_msg[1],ILoginToDescriptor(v_msg[2]))){
+                    msg = "4~accept";
+                    ISendMessage(msg, a_client);
+                }
+                else{
+                    msg = "4~refuse";
+                    ISendMessage(msg, a_client);
+                }
+            }
+        }
+        break;
+
+    case '5': /// send message to group
+        boost::split(v_msg, msg, boost::is_punct());
+        for(auto t_fd : m_private.IGetClients(v_msg[1])){
+            msg = "5~"+IDescriptorToLogin(a_client)+"."+v_msg[2]+'~';
+            ISendMessage(msg, t_fd);
+        }
+        break;
+
+    case '6': /// send client list
+        boost::split(v_msg, msg, boost::is_punct());
+        msg="6~";
+        if(v_msg[1].compare("all") == 0){
+            for(auto t_fd : m_setLogins)
+                msg = msg + t_fd->IGetLogin() + "~";
+            std::cout<<"Lista all: "<<msg;
+            ISendMessage(msg, a_client);
+        }
+        else{
+            for(auto t_fd : m_private.IGetClients(v_msg[1]))
+                msg = msg + IDescriptorToLogin(t_fd) + "~";
+            std::cout<<"Lista group: "<<msg;
+            ISendMessage(msg, a_client);
+        }
+        break;
+
+    case '7': /// logout
+        msg="";
+        for(auto login : m_setLogins){
+            if(a_client == login->IGetFd()){
+                std::cout<<"Login:"<<login->IGetLogin()<<" Fd:"<<login->IGetFd()<<std::endl;
+                m_setLogins.remove(login);
+                msg="7~accept";
+            }
+        }
+        ISendMessage(msg, a_client);
+        //close(fd);
+        break;
+
+    case '9': // exit
+        std::string save;
+        m_dataFile.open("users.data", std::ios::out);
+        if(m_dataFile.is_open()){
+            for(auto user : m_setUsers){
+                save = save + user->ISaveToFile();
+            }
+            std::cout<<"Save: "<<save;
+            m_dataFile<<save;
+            m_dataFile.close();
+        }
+        m_dataFile.close(); // close file and the end
+        std::cout<<"Exit";
+        exit(1);
+        break;
     }
 }
 

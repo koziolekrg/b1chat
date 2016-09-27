@@ -1,0 +1,4 @@
+*.txt.user
+client/bin
+server/bin
+server_gtest/bin

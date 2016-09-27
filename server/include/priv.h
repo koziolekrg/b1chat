@@ -27,7 +27,7 @@ public:
      * @brief Priv
      */
     Priv();
-    ~Priv();
+    virtual ~Priv();
     /**
      * @brief IAddNewGroup create new group with title and fecriptor and add it to the vector
      * @param a_title string with group title

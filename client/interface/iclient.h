@@ -7,9 +7,11 @@
 class IClient
 {
 public:
-    virtual void IConnect(std::string a_addres, int a_port){}
-    virtual void ISend_data(){}
-    virtual void IReceive_data(){}
+    virtual void IConnect(std::string a_addres, int a_port) = 0 ;
+    virtual void ILogin() = 0 ;
+    virtual void IReceive() = 0 ;
+    virtual void IMainMenu(int a_state) = 0 ;
+    virtual bool ISend(std::string a_msg) = 0 ;
 };
 
 #endif // IGROUP_H

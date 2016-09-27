@@ -7,8 +7,8 @@
 class ILogin
 {
 public:
-    virtual int16_t IGetFd(){}
-    virtual std::string IGetLogin(){}
+    virtual int16_t IGetFd() = 0 ;
+    virtual std::string IGetLogin() = 0 ;
 };
 
 #endif // ILOGIN_H

@@ -11,12 +11,12 @@
 
 int main(int argc , char *argv[])
 {
-    Client *client = new Client();
+    Client client;//*client = new Client();
 
-    client->IConnect("localhost" , 8888);
+    client.IConnect("127.0.0.1" , 8888);
 
-    std::thread s(&Client::ISend_data, client);
-    std::thread r(&Client::IReceive_data, client);
+    std::thread s(&Client::ILogin, client);
+    std::thread r(&Client::IReceive, client);
 
     s.join();
     r.join();
