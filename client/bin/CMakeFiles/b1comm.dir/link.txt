@@ -1,1 +1,0 @@
-/usr/bin/c++    -std=c++0x   CMakeFiles/b1comm.dir/main.cpp.o CMakeFiles/b1comm.dir/src/client.cpp.o  -o b1comm -rdynamic -lpthread 

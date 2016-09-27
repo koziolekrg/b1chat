@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/b1comm.dir/main.cpp.o CMakeFiles/b1comm.dir/src/server.cpp.o CMakeFiles/b1comm.dir/src/user.cpp.o CMakeFiles/b1comm.dir/src/group.cpp.o CMakeFiles/b1comm.dir/src/priv.cpp.o  -o b1comm -rdynamic 
