@@ -1,0 +1,106 @@
+\hypertarget{classGroup}{}\section{Group Class Reference}
+\label{classGroup}\index{Group@{Group}}
+
+
+{\ttfamily \#include $<$group.\+h$>$}
+
+
+
+Inheritance diagram for Group\+:
+% FIG 0
+
+
+Collaboration diagram for Group\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classGroup_ad554b7c0286fbbb1c9253af51af145d9}{Group} (std\+::string a\+\_\+title, int16\+\_\+t a\+\_\+client)
+\begin{DoxyCompactList}\small\item\em \hyperlink{classGroup}{Group} create an \hyperlink{classGroup}{Group} with title and client descriptor. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classGroup_adc53f6f17b195b93510be6d200d3ab26}{I\+Get\+Title} () override
+\begin{DoxyCompactList}\small\item\em I\+Get\+Title return name of group. \end{DoxyCompactList}\item 
+bool \hyperlink{classGroup_a8805bd2c7e33bb16cd452f0f3f9e1295}{I\+Add\+Client} (int16\+\_\+t a\+\_\+client) override
+\begin{DoxyCompactList}\small\item\em I\+Add\+Client allows to add new client to vector. \end{DoxyCompactList}\item 
+std\+::vector$<$ int16\+\_\+t $>$ \hyperlink{classGroup_a5c4108d78f9eceb5583d24de756f4cc7}{I\+Get\+Clients\+List} () override
+\begin{DoxyCompactList}\small\item\em I\+Get\+Clients\+List return vector with descriptors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class keeps name of group as string and vector of socket descriptors as ints. Constructor gets title of group and descriptor of user who is requesting for create. Class allows to return title, add another client to vector and return vector with all descriptors. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Group@{Group}!Group@{Group}}
+\index{Group@{Group}!Group@{Group}}
+\subsubsection[{\texorpdfstring{Group(std\+::string a\+\_\+title, int16\+\_\+t a\+\_\+client)}{Group(std::string a_title, int16_t a_client)}}]{\setlength{\rightskip}{0pt plus 5cm}Group\+::\+Group (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{a\+\_\+title, }
+\item[{int16\+\_\+t}]{a\+\_\+client}
+\end{DoxyParamCaption}
+)}\hypertarget{classGroup_ad554b7c0286fbbb1c9253af51af145d9}{}\label{classGroup_ad554b7c0286fbbb1c9253af51af145d9}
+
+
+\hyperlink{classGroup}{Group} create an \hyperlink{classGroup}{Group} with title and client descriptor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+title} & group title as string \\
+\hline
+{\em a\+\_\+client} & descriptor as int \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Group@{Group}!I\+Add\+Client@{I\+Add\+Client}}
+\index{I\+Add\+Client@{I\+Add\+Client}!Group@{Group}}
+\subsubsection[{\texorpdfstring{I\+Add\+Client(int16\+\_\+t a\+\_\+client) override}{IAddClient(int16_t a_client) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Group\+::\+I\+Add\+Client (
+\begin{DoxyParamCaption}
+\item[{int16\+\_\+t}]{a\+\_\+client}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\hypertarget{classGroup_a8805bd2c7e33bb16cd452f0f3f9e1295}{}\label{classGroup_a8805bd2c7e33bb16cd452f0f3f9e1295}
+
+
+I\+Add\+Client allows to add new client to vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+client} & client socket as int \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true or false 
+\end{DoxyReturn}
+\index{Group@{Group}!I\+Get\+Clients\+List@{I\+Get\+Clients\+List}}
+\index{I\+Get\+Clients\+List@{I\+Get\+Clients\+List}!Group@{Group}}
+\subsubsection[{\texorpdfstring{I\+Get\+Clients\+List() override}{IGetClientsList() override}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ int16\+\_\+t $>$ Group\+::\+I\+Get\+Clients\+List (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\hypertarget{classGroup_a5c4108d78f9eceb5583d24de756f4cc7}{}\label{classGroup_a5c4108d78f9eceb5583d24de756f4cc7}
+
+
+I\+Get\+Clients\+List return vector with descriptors. 
+
+\begin{DoxyReturn}{Returns}
+vector of ints 
+\end{DoxyReturn}
+\index{Group@{Group}!I\+Get\+Title@{I\+Get\+Title}}
+\index{I\+Get\+Title@{I\+Get\+Title}!Group@{Group}}
+\subsubsection[{\texorpdfstring{I\+Get\+Title() override}{IGetTitle() override}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Group\+::\+I\+Get\+Title (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\hypertarget{classGroup_adc53f6f17b195b93510be6d200d3ab26}{}\label{classGroup_adc53f6f17b195b93510be6d200d3ab26}
+
+
+I\+Get\+Title return name of group. 
+
+\begin{DoxyReturn}{Returns}
+group name as string 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/group.\+h\item 
+src/group.\+cpp\end{DoxyCompactItemize}
