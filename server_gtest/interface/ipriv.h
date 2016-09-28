@@ -7,9 +7,9 @@
 class IPriv
 {
 public:
-    virtual bool IAddNewGroup(std::string title, int16_t client){}
-    virtual bool IAddNewClientToGroup(std::string title, int16_t client){}
-    virtual std::vector <int16_t> IGetClients(std::string a_title){}
+    virtual bool IAddNewGroup(std::string title, int16_t client) = 0 ;
+    virtual bool IAddNewClientToGroup(std::string title, int16_t client) = 0 ;
+    virtual std::vector <int16_t> IGetClients(std::string a_title) = 0 ;
 
 };
 

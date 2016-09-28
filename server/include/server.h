@@ -100,6 +100,10 @@ public:
      */
     int ILoginToDescriptor(std::string a_client);
 
+    std::string LoginToServer(std::string a_login, std::string a_password, int ac_client);
+
+    std::string CreateAccount(std::string a_login, std::string a_password, int ac_client);
+
     void Exit(int signum);
 
 private:

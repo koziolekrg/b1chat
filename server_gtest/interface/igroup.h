@@ -7,9 +7,9 @@
 class IGroup
 {
 public:
-    virtual std::string IGetTitle(){}
-    virtual bool IAddClient(int16_t a_client){}
-    virtual std::vector <int16_t> IGetClientsList(){}
+    virtual std::string IGetTitle() = 0 ;
+    virtual bool IAddClient(int16_t a_client) = 0 ;
+    virtual std::vector <int16_t> IGetClientsList() = 0 ;
 };
 
 #endif // IGROUP_H

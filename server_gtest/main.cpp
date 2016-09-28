@@ -8,16 +8,6 @@
 #include <gtest/gtest.h>
 #define PORT 8888
 
-TEST(login, loginCorrect){
-    User *user = new User("test1", "test2");
-    ASSERT_EQ(true, user->checkLog("test1", "test2"));
-}
-
-TEST(login, loginIncorrect){
-    User *user = new User("test1", "test2");
-    ASSERT_EQ(false, user->checkLog("test1", "test1"));
-}
-
 TEST(group, groupTitle){
     Group *group = new Group("Test", 1);
     ASSERT_EQ("Test", group->IGetTitle());
@@ -76,8 +66,41 @@ TEST(privGroup, incorrectAddNewClientGroup){
     ASSERT_EQ(false, priv.IAddNewClientToGroup("G2", 3));
 }
 
+TEST(account, succesfulCreate){
+    Server *server = new Server();
+    ASSERT_EQ("1~accept~ ",server->CreateAccount("pawel","haslo",1));
+}
 
+TEST(account, failureCreate){
+    Server *server = new Server();
+    server->CreateAccount("pawel","haslo",1);
+    ASSERT_EQ("1~refuse~ ",server->CreateAccount("pawel","haslo",1));
+}
 
+TEST(account, logoutAndSuccesfulLogin){
+    int16_t temp =1;
+    Server *server = new Server();
+    server->CreateAccount("pawel","haslo",1);
+    server->Logout(temp);
+    ASSERT_EQ("0~accept~ ", server->LoginToServer("pawel","haslo",1));
+}
+
+TEST(account, failureLogin){
+    Server *server = new Server();
+    ASSERT_EQ("0~refuse~ ", server->LoginToServer("pawel","haslo",1));
+}
+
+TEST(file, savefile){
+    Server *server = new Server();
+    server->CreateAccount("pawel","haslo",1);
+    ASSERT_EQ(true,server->ISaveFile());
+}
+
+TEST(file, readfile){
+    Server *server = new Server();
+    server->IReadFile();
+    ASSERT_EQ("0~accept~ ", server->LoginToServer("pawel","haslo",1));
+}
 
 
 int main(int argc, char *argv[])
