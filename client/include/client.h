@@ -69,6 +69,8 @@ public:
      */
     bool ISend(std::string a_msg) override;
 
+
+
 private:
     std::mutex mutexLog;
     int m_sock; ///< socket descriptor

@@ -18,7 +18,6 @@
 #include <string.h>
 #include <iostream>
 #include <fstream>
-#include <algorithm>
 #include <vector>
 #include <list>
 #include <netinet/in.h>
@@ -66,7 +65,7 @@ public:
      * @param a_buffer income message
      * @param a_client socket of client who sent message
      */
-    void IHandleMessage(std::string a_buffer, int16_t a_client);
+    void IHandleMessage(std::string a_buffer, int16_t &a_client);
     /**
      * @brief ISetSocket responsible for setting port number
      * @param a_port int port number
@@ -101,6 +100,8 @@ public:
      */
     int ILoginToDescriptor(std::string a_client);
 
+    void Exit(int signum);
+
 private:
     char m_buffer[100]; ///< buffer for messages
     sockaddr_in m_serverSocket, m_clientSocket;
@@ -114,7 +115,7 @@ private:
     std::vector <IUser*> m_setUsers; ///< vector of logins and password //////<
     std::fstream m_dataFile;
     Priv m_private; ///< object responsible for keeping groups vector
-    std::list <ILogin*> m_setLogins; ///< list of online clients
+    std::vector <ILogin*> m_setLogins; ///< list of online clients
     bool m_isAvailable; ///< flag
 
 };

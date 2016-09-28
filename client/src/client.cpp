@@ -110,6 +110,7 @@ void Client::ILogin()
         else{
 
             std::cout<<"\n1 - Send broadcast\n2 - Create group\n3 - Add client to group\n4 - Send MSG to group\n5 - Get online clients\n6 - Logout\n";
+
             std::cin>>state;
             IMainMenu(state);
         }
@@ -179,9 +180,10 @@ void Client::IReceive()
             }
         }
         if(v_msg[0] == "7"){
-            if(v_msg[1].compare("accept")){
+            if(v_msg[1].compare("accept") == 0){
                 std::cout<<"Good bye";
                 close(m_sock);
+                exit(1);
             }
             else
             std::cout<<"Incorrect password";
@@ -198,11 +200,14 @@ void Client::IMainMenu(int a_state){
     std::string menu="";
     std::string data="";
 
+    std::cin.ignore();
     ///handle menu input
     switch(a_state){
     case 1:
         std::cout<<"Type message to send:";
-        std::cin>>menu; data = "2~"+menu+"~";
+        std::getline(std::cin,menu);
+        data = "2~"+menu+"~";
+
         ISend(data);
         break;
 
@@ -235,14 +240,20 @@ void Client::IMainMenu(int a_state){
         break;
 
     case 6:
-        std::cout<<"Confirm password to logout";
-        std::cin>>menu; data = "7~"+menu+"~";
+        data = "7~";
         ISend(data);
+        std::cout<<"Good bye";
+        exit(1);
+
         break;
     case 8:
         std::cout<<"EXIT";
         ISend("8~");
         break;
+    default:
+        std::cout<<"Wrong choose"<<std::endl;
+
+     std::cin.ignore();
     }
 }
 
