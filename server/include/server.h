@@ -36,7 +36,7 @@ public:
      * @param a_port define port number
      */
     Server();
-    ~Server();
+    virtual ~Server();
     /**
      * @brief IInitConnection
      * @param a_port
@@ -100,12 +100,34 @@ public:
      */
     int ILoginToDescriptor(std::string a_client);
 
+    /**
+     * @brief LoginToServer handling request for login
+     * @param a_login login as string
+     * @param a_password password as string
+     * @param a_client socket from connection comming
+     * @return message to client as string - accept/refuse
+     */
     std::string LoginToServer(std::string a_login, std::string a_password, int a_client);
 
+    /**
+     * @brief CreateAccount handling request for create account
+     * @param a_login login as string
+     * @param a_password password as string
+     * @param a_client socket from connection comming
+     * @return message to client as string - accept/refuse
+     */
     std::string CreateAccount(std::string a_login, std::string a_password, int a_client);
 
+    /**
+     * @brief Logout handling logout signal (disconnec or request from client)
+     * @param a_client socket descriptor number
+     */
     void Logout(int16_t &a_client);
 
+    /**
+     * @brief Exit exit signal handle
+     * @param signum number of interuption
+     */
     void Exit(int signum);
 
 private:

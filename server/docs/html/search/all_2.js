@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['priv',['Priv',['../classPriv.html',1,'Priv'],['../classPriv.html#aadda11dccbb01f14e40797a4a3f62169',1,'Priv::Priv()']]]
+  ['group',['Group',['../classGroup.html',1,'Group'],['../classGroup.html#ad554b7c0286fbbb1c9253af51af145d9',1,'Group::Group()']]]
 ];

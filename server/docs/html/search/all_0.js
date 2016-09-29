@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['group',['Group',['../classGroup.html',1,'Group'],['../classGroup.html#ad554b7c0286fbbb1c9253af51af145d9',1,'Group::Group()']]]
+  ['createaccount',['CreateAccount',['../classServer.html#a46726966334ec6be8d6eebc8e6ac19f0',1,'Server']]]
 ];

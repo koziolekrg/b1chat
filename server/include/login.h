@@ -27,7 +27,7 @@ public:
      * @param a_login login of client as string
      */
     Login(int16_t a_fd, std::string a_login);
-    ~Login();
+    virtual ~Login();
     /**
      * @brief IGetLogin return login of client
      * @return login as string

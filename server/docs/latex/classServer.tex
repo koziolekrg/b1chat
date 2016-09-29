@@ -15,25 +15,39 @@ Collaboration diagram for Server\+:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classServer_aa8e412812671a005a6c530f8510db931}{Server} (int16\+\_\+t a\+\_\+port)
+\hyperlink{classServer_ad5ec9462b520e59f7ea831e157ee5e59}{Server} ()
 \begin{DoxyCompactList}\small\item\em \hyperlink{classServer}{Server} create an \hyperlink{classServer}{Server} with selected port number. \end{DoxyCompactList}\item 
-bool \hyperlink{classServer_a15eef69cccd5dba122a76f63b13e1733}{I\+Start\+Listening} (int16\+\_\+t a\+\_\+port) override
+bool \hyperlink{classServer_aaec9faaa11db546a4ccc75a05c2678b6}{I\+Init\+Connection} (int16\+\_\+t a\+\_\+port)
+\begin{DoxyCompactList}\small\item\em I\+Init\+Connection. \end{DoxyCompactList}\item 
+void \hyperlink{classServer_a6cf5e9e8ae0d4c818f989d7ec4739c99}{I\+Start\+Listening} (int16\+\_\+t a\+\_\+port) override
 \begin{DoxyCompactList}\small\item\em I\+Start\+Listening starting listetning on port for clients messages. \end{DoxyCompactList}\item 
 bool \hyperlink{classServer_a7f43c5c286c0a64624a803fcf2f3c85a}{I\+Send\+Message} (std\+::string a\+\_\+message, int16\+\_\+t a\+\_\+client) override
 \begin{DoxyCompactList}\small\item\em I\+Send\+Message allows to sending messages. \end{DoxyCompactList}\item 
 void \hyperlink{classServer_a404070676bda1e2582cd6b467e73b6a2}{I\+Incomming\+Connection} () override\hypertarget{classServer_a404070676bda1e2582cd6b467e73b6a2}{}\label{classServer_a404070676bda1e2582cd6b467e73b6a2}
 
-\begin{DoxyCompactList}\small\item\em I\+Incomming\+Connection loop handling incomming events from socket. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em I\+Incomming\+Connection get incomming connection. \end{DoxyCompactList}\item 
+void \hyperlink{classServer_a3fc09fa8b4132eacacef7e3473473845}{I\+Handle\+Message} (std\+::string a\+\_\+buffer, int16\+\_\+t \&a\+\_\+client)
+\begin{DoxyCompactList}\small\item\em I\+Handle\+Message handle received message. \end{DoxyCompactList}\item 
 bool \hyperlink{classServer_a80089a729a3664bf580c27ae5a86d691}{I\+Set\+Socket} (int16\+\_\+t a\+\_\+port)
 \begin{DoxyCompactList}\small\item\em I\+Set\+Socket responsible for setting port number. \end{DoxyCompactList}\item 
 bool \hyperlink{classServer_a4d95b9a38864072084277bb84421475e}{I\+Bind\+Port} ()
 \begin{DoxyCompactList}\small\item\em I\+Bind\+Port binding addres and port if it\textquotesingle{}s available. \end{DoxyCompactList}\item 
-bool \hyperlink{classServer_a38db28c597e4759fba3dc831462ba3f3}{I\+Read\+File} ()
+void \hyperlink{classServer_adc80cd989752eccc1fdd81edaf8be4af}{I\+Read\+File} ()
 \begin{DoxyCompactList}\small\item\em I\+Read\+File read data of existing clients from file. \end{DoxyCompactList}\item 
+bool \hyperlink{classServer_aa598d1dba8b8a0c6a4b75be14726798a}{I\+Save\+File} ()
+\begin{DoxyCompactList}\small\item\em I\+Save\+File save all data to file. \end{DoxyCompactList}\item 
 std\+::string \hyperlink{classServer_ac3697709d2f04345928e0ee2ec2b71d0}{I\+Descriptor\+To\+Login} (int a\+\_\+client)
 \begin{DoxyCompactList}\small\item\em I\+Descriptor\+To\+Login convert client descriptor to his login. \end{DoxyCompactList}\item 
 int \hyperlink{classServer_a1e9fccb595bba3c40bf11485e369eae4}{I\+Login\+To\+Descriptor} (std\+::string a\+\_\+client)
-\begin{DoxyCompactList}\small\item\em I\+Login\+To\+Descriptor covert client login to his descriptor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em I\+Login\+To\+Descriptor covert client login to his descriptor. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classServer_ac91647519f61ee81a6cee0a7fd97fa45}{Login\+To\+Server} (std\+::string a\+\_\+login, std\+::string a\+\_\+password, int a\+\_\+client)
+\begin{DoxyCompactList}\small\item\em Login\+To\+Server handling request for login. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classServer_a46726966334ec6be8d6eebc8e6ac19f0}{Create\+Account} (std\+::string a\+\_\+login, std\+::string a\+\_\+password, int a\+\_\+client)
+\begin{DoxyCompactList}\small\item\em Create\+Account handling request for create account. \end{DoxyCompactList}\item 
+void \hyperlink{classServer_a739fb2e07441e3e8d005595d004fc6e6}{Logout} (int16\+\_\+t \&a\+\_\+client)
+\begin{DoxyCompactList}\small\item\em Logout handling logout signal (disconnec or request from client) \end{DoxyCompactList}\item 
+void \hyperlink{classServer_ac7c9da91457c66572569546ba936034d}{Exit} (int signum)
+\begin{DoxyCompactList}\small\item\em Exit exit signal handle. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -42,11 +56,11 @@ This class is responsible for handling all connection events.
 \subsection{Constructor \& Destructor Documentation}
 \index{Server@{Server}!Server@{Server}}
 \index{Server@{Server}!Server@{Server}}
-\subsubsection[{\texorpdfstring{Server(int16\+\_\+t a\+\_\+port)}{Server(int16_t a_port)}}]{\setlength{\rightskip}{0pt plus 5cm}Server\+::\+Server (
+\subsubsection[{\texorpdfstring{Server()}{Server()}}]{\setlength{\rightskip}{0pt plus 5cm}Server\+::\+Server (
 \begin{DoxyParamCaption}
-\item[{int16\+\_\+t}]{a\+\_\+port}
+{}
 \end{DoxyParamCaption}
-)}\hypertarget{classServer_aa8e412812671a005a6c530f8510db931}{}\label{classServer_aa8e412812671a005a6c530f8510db931}
+)}\hypertarget{classServer_ad5ec9462b520e59f7ea831e157ee5e59}{}\label{classServer_ad5ec9462b520e59f7ea831e157ee5e59}
 
 
 \hyperlink{classServer}{Server} create an \hyperlink{classServer}{Server} with selected port number. 
@@ -59,6 +73,47 @@ This class is responsible for handling all connection events.
 
 
 \subsection{Member Function Documentation}
+\index{Server@{Server}!Create\+Account@{Create\+Account}}
+\index{Create\+Account@{Create\+Account}!Server@{Server}}
+\subsubsection[{\texorpdfstring{Create\+Account(std\+::string a\+\_\+login, std\+::string a\+\_\+password, int a\+\_\+client)}{CreateAccount(std::string a_login, std::string a_password, int a_client)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Server\+::\+Create\+Account (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{a\+\_\+login, }
+\item[{std\+::string}]{a\+\_\+password, }
+\item[{int}]{a\+\_\+client}
+\end{DoxyParamCaption}
+)}\hypertarget{classServer_a46726966334ec6be8d6eebc8e6ac19f0}{}\label{classServer_a46726966334ec6be8d6eebc8e6ac19f0}
+
+
+Create\+Account handling request for create account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+login} & login as string \\
+\hline
+{\em a\+\_\+password} & password as string \\
+\hline
+{\em a\+\_\+client} & socket from connection comming \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+message to client as string -\/ accept/refuse 
+\end{DoxyReturn}
+\index{Server@{Server}!Exit@{Exit}}
+\index{Exit@{Exit}!Server@{Server}}
+\subsubsection[{\texorpdfstring{Exit(int signum)}{Exit(int signum)}}]{\setlength{\rightskip}{0pt plus 5cm}void Server\+::\+Exit (
+\begin{DoxyParamCaption}
+\item[{int}]{signum}
+\end{DoxyParamCaption}
+)}\hypertarget{classServer_ac7c9da91457c66572569546ba936034d}{}\label{classServer_ac7c9da91457c66572569546ba936034d}
+
+
+Exit exit signal handle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em signum} & number of interuption \\
+\hline
+\end{DoxyParams}
 \index{Server@{Server}!I\+Bind\+Port@{I\+Bind\+Port}}
 \index{I\+Bind\+Port@{I\+Bind\+Port}!Server@{Server}}
 \subsubsection[{\texorpdfstring{I\+Bind\+Port()}{IBindPort()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Server\+::\+I\+Bind\+Port (
@@ -92,7 +147,59 @@ I\+Descriptor\+To\+Login convert client descriptor to his login.
 \begin{DoxyReturn}{Returns}
 client login as string 
 \end{DoxyReturn}
-\index{Server@{Server}!I\+Login\+To\+Descriptor@{I\+Login\+To\+Descriptor}}
+\index{Server@{Server}!I\+Handle\+Message@{I\+Handle\+Message}}
+\index{I\+Handle\+Message@{I\+Handle\+Message}!Server@{Server}}
+\subsubsection[{\texorpdfstring{I\+Handle\+Message(std\+::string a\+\_\+buffer, int16\+\_\+t \&a\+\_\+client)}{IHandleMessage(std::string a_buffer, int16_t &a_client)}}]{\setlength{\rightskip}{0pt plus 5cm}void Server\+::\+I\+Handle\+Message (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{a\+\_\+buffer, }
+\item[{int16\+\_\+t \&}]{a\+\_\+client}
+\end{DoxyParamCaption}
+)}\hypertarget{classServer_a3fc09fa8b4132eacacef7e3473473845}{}\label{classServer_a3fc09fa8b4132eacacef7e3473473845}
+
+
+I\+Handle\+Message handle received message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+buffer} & income message \\
+\hline
+{\em a\+\_\+client} & socket of client who sent message \\
+\hline
+\end{DoxyParams}
+log in to exist account
+
+create new account request
+
+broadcast message
+
+add new group
+
+add new client to group
+
+send message to group
+
+send client list
+
+logout \index{Server@{Server}!I\+Init\+Connection@{I\+Init\+Connection}}
+\index{I\+Init\+Connection@{I\+Init\+Connection}!Server@{Server}}
+\subsubsection[{\texorpdfstring{I\+Init\+Connection(int16\+\_\+t a\+\_\+port)}{IInitConnection(int16_t a_port)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Server\+::\+I\+Init\+Connection (
+\begin{DoxyParamCaption}
+\item[{int16\+\_\+t}]{a\+\_\+port}
+\end{DoxyParamCaption}
+)}\hypertarget{classServer_aaec9faaa11db546a4ccc75a05c2678b6}{}\label{classServer_aaec9faaa11db546a4ccc75a05c2678b6}
+
+
+I\+Init\+Connection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+port} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Socket reserving \index{Server@{Server}!I\+Login\+To\+Descriptor@{I\+Login\+To\+Descriptor}}
 \index{I\+Login\+To\+Descriptor@{I\+Login\+To\+Descriptor}!Server@{Server}}
 \subsubsection[{\texorpdfstring{I\+Login\+To\+Descriptor(std\+::string a\+\_\+client)}{ILoginToDescriptor(std::string a_client)}}]{\setlength{\rightskip}{0pt plus 5cm}int Server\+::\+I\+Login\+To\+Descriptor (
 \begin{DoxyParamCaption}
@@ -113,11 +220,11 @@ socket descriptor of client as int
 \end{DoxyReturn}
 \index{Server@{Server}!I\+Read\+File@{I\+Read\+File}}
 \index{I\+Read\+File@{I\+Read\+File}!Server@{Server}}
-\subsubsection[{\texorpdfstring{I\+Read\+File()}{IReadFile()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Server\+::\+I\+Read\+File (
+\subsubsection[{\texorpdfstring{I\+Read\+File()}{IReadFile()}}]{\setlength{\rightskip}{0pt plus 5cm}void Server\+::\+I\+Read\+File (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}\hypertarget{classServer_a38db28c597e4759fba3dc831462ba3f3}{}\label{classServer_a38db28c597e4759fba3dc831462ba3f3}
+)}\hypertarget{classServer_adc80cd989752eccc1fdd81edaf8be4af}{}\label{classServer_adc80cd989752eccc1fdd81edaf8be4af}
 
 
 I\+Read\+File read data of existing clients from file. 
@@ -125,7 +232,21 @@ I\+Read\+File read data of existing clients from file.
 \begin{DoxyReturn}{Returns}
 true of false 
 \end{DoxyReturn}
-\index{Server@{Server}!I\+Send\+Message@{I\+Send\+Message}}
+\index{Server@{Server}!I\+Save\+File@{I\+Save\+File}}
+\index{I\+Save\+File@{I\+Save\+File}!Server@{Server}}
+\subsubsection[{\texorpdfstring{I\+Save\+File()}{ISaveFile()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Server\+::\+I\+Save\+File (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classServer_aa598d1dba8b8a0c6a4b75be14726798a}{}\label{classServer_aa598d1dba8b8a0c6a4b75be14726798a}
+
+
+I\+Save\+File save all data to file. 
+
+\begin{DoxyReturn}{Returns}
+true of false 
+\end{DoxyReturn}
+close file and the end \index{Server@{Server}!I\+Send\+Message@{I\+Send\+Message}}
 \index{I\+Send\+Message@{I\+Send\+Message}!Server@{Server}}
 \subsubsection[{\texorpdfstring{I\+Send\+Message(std\+::string a\+\_\+message, int16\+\_\+t a\+\_\+client) override}{ISendMessage(std::string a_message, int16_t a_client) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Server\+::\+I\+Send\+Message (
 \begin{DoxyParamCaption}
@@ -168,11 +289,11 @@ true or false
 \end{DoxyReturn}
 \index{Server@{Server}!I\+Start\+Listening@{I\+Start\+Listening}}
 \index{I\+Start\+Listening@{I\+Start\+Listening}!Server@{Server}}
-\subsubsection[{\texorpdfstring{I\+Start\+Listening(int16\+\_\+t a\+\_\+port) override}{IStartListening(int16_t a_port) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Server\+::\+I\+Start\+Listening (
+\subsubsection[{\texorpdfstring{I\+Start\+Listening(int16\+\_\+t a\+\_\+port) override}{IStartListening(int16_t a_port) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Server\+::\+I\+Start\+Listening (
 \begin{DoxyParamCaption}
 \item[{int16\+\_\+t}]{a\+\_\+port}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [override]}}\hypertarget{classServer_a15eef69cccd5dba122a76f63b13e1733}{}\label{classServer_a15eef69cccd5dba122a76f63b13e1733}
+)\hspace{0.3cm}{\ttfamily [override]}}\hypertarget{classServer_a6cf5e9e8ae0d4c818f989d7ec4739c99}{}\label{classServer_a6cf5e9e8ae0d4c818f989d7ec4739c99}
 
 
 I\+Start\+Listening starting listetning on port for clients messages. 
@@ -185,6 +306,47 @@ I\+Start\+Listening starting listetning on port for clients messages.
 \begin{DoxyReturn}{Returns}
 true or false 
 \end{DoxyReturn}
+\index{Server@{Server}!Login\+To\+Server@{Login\+To\+Server}}
+\index{Login\+To\+Server@{Login\+To\+Server}!Server@{Server}}
+\subsubsection[{\texorpdfstring{Login\+To\+Server(std\+::string a\+\_\+login, std\+::string a\+\_\+password, int a\+\_\+client)}{LoginToServer(std::string a_login, std::string a_password, int a_client)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Server\+::\+Login\+To\+Server (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{a\+\_\+login, }
+\item[{std\+::string}]{a\+\_\+password, }
+\item[{int}]{a\+\_\+client}
+\end{DoxyParamCaption}
+)}\hypertarget{classServer_ac91647519f61ee81a6cee0a7fd97fa45}{}\label{classServer_ac91647519f61ee81a6cee0a7fd97fa45}
+
+
+Login\+To\+Server handling request for login. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+login} & login as string \\
+\hline
+{\em a\+\_\+password} & password as string \\
+\hline
+{\em a\+\_\+client} & socket from connection comming \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+message to client as string -\/ accept/refuse 
+\end{DoxyReturn}
+\index{Server@{Server}!Logout@{Logout}}
+\index{Logout@{Logout}!Server@{Server}}
+\subsubsection[{\texorpdfstring{Logout(int16\+\_\+t \&a\+\_\+client)}{Logout(int16_t &a_client)}}]{\setlength{\rightskip}{0pt plus 5cm}void Server\+::\+Logout (
+\begin{DoxyParamCaption}
+\item[{int16\+\_\+t \&}]{a\+\_\+client}
+\end{DoxyParamCaption}
+)}\hypertarget{classServer_a739fb2e07441e3e8d005595d004fc6e6}{}\label{classServer_a739fb2e07441e3e8d005595d004fc6e6}
+
+
+Logout handling logout signal (disconnec or request from client) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+client} & socket descriptor number \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

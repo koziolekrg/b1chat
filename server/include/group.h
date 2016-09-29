@@ -33,7 +33,7 @@ public:
      * @param a_client descriptor as int
      */
     Group(std::string a_title, int16_t a_client);
-    ~Group();
+    virtual ~Group();
     /**
      * @brief IGetTitle return name of group
      * @return group name as string

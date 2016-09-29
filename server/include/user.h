@@ -28,7 +28,7 @@ public:
      * @param a_password string with password
      */
     User(std::string a_login, std::string a_password);
-    ~User();
+    virtual ~User();
     /**
      * @brief ICheckLog Check if login and password are correct
      * @param a_login string with login
