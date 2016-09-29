@@ -79,7 +79,6 @@ bool Client::ISend(std::string a_msg){
         perror("Send failed : ");
         retVal = false;
     }
-    std::cout<<"[Client]"<<a_msg<<std::endl;
     return retVal;
 }
 
@@ -101,6 +100,8 @@ void Client::ILogin()
             std::cout<<"Password:";
             std::cin>>menu; data = data + menu+"~";
 
+
+            std::cout<<"LOG: "<< data;
             if( send(m_sock , data.c_str() , strlen( data.c_str() ) , 0) < 0)
             {
                 perror("Send failed : ");
@@ -207,36 +208,45 @@ void Client::IMainMenu(int a_state){
         std::cout<<"Type message to send:";
         std::getline(std::cin,menu);
         data = "2~"+menu+"~";
-
         ISend(data);
         break;
 
     case 2:
         std::cout<<"Type group name:";
-        std::cin>>menu; data = "3~"+menu+"~";
+        std::cin>>menu;
+        data = "3~"+menu+"~";
         ISend(data);
         break;
 
     case 3:
         std::cout<<"Type group name:";
-        std::cin>>menu; data = "4~"+menu+".";
+        std::cin>>menu;
+        data = "4~"+menu+".";
         std::cout<<"Type user name you want to add:";
-        std::cin>>menu; data = data + menu+"~";
+        std::cin>>menu;
+        data = data + menu+"~";
         ISend(data);
         break;
 
     case 4:
         std::cout<<"Type group name:";
-        std::cin>>menu; data = "5~"+menu+".";
+        std::cin>>menu;
+        data = "5~"+menu+".";
         std::cout<<"Type message to send:";
-        std::cin>>menu; data = data + menu+".";
+        std::cin.ignore();
+        std::getline(std::cin,menu);
+        data = data + menu+".";
         ISend(data);
         break;
 
     case 5:
+        fflush(stdin);
         std::cout<<"all - list all users\ngroup name - list of group users:";
-        std::cin>>menu; data = "6~"+menu+"~";
+        std::getline(std::cin,menu);
+        data = "6~"+menu+"~";
         ISend(data);
+
+        std::cout<<"MSG: "<<data<<std::endl;
         break;
 
     case 6:

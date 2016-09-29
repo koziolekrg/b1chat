@@ -7,6 +7,7 @@
 class IClient
 {
 public:
+    virtual ~IClient();
     virtual void IConnect(std::string a_addres, int a_port) = 0 ;
     virtual void ILogin() = 0 ;
     virtual void IReceive() = 0 ;

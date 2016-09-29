@@ -99,7 +99,6 @@ void Server::IReadFile(){  // read users from file
         if(PASSWORD == i){
             password = temp;
             m_setUsers.push_back(new User(login, password));
-            std::cout<<"Client: "<<login<<":"<<password<<std::endl;
             i=0;
         }
     }
@@ -277,8 +276,8 @@ void Server::IHandleMessage(std::string a_buffer, int16_t &a_client){
     case CREATE_ACCOUNT: /// create new account request
         boost::split(v_msg, msg, boost::is_punct());
         msg = CreateAccount(v_msg[1],v_msg[2], a_client);
+        ISendMessage(msg,a_client);
         break;
-
 
     case BROADCAST: /// broadcast message
         boost::split(v_msg, msg, boost::is_punct());
@@ -326,9 +325,13 @@ void Server::IHandleMessage(std::string a_buffer, int16_t &a_client){
     case USERS_LIST: /// send client list
         boost::split(v_msg, msg, boost::is_punct());
         msg="6~";
+
         if(v_msg[1].compare("all") == 0){
-            for(auto t_fd : m_setLogins)
+            std::cout<<"ALL";
+
+            for(auto t_fd : m_setLogins){
                 msg = msg + t_fd->IGetLogin() + "~";
+            }
             std::cout<<"Lista all: "<<msg;
             ISendMessage(msg, a_client);
         }
@@ -371,8 +374,12 @@ std::string Server::LoginToServer(std::string a_login, std::string a_password, i
         }
     }
 
-    if(msg.compare("0~accept~ ") == 0)
+    std::cout<<"MSG:"<<msg;
+
+    if(msg.compare("0~accept~ ") == 0){
         m_setLogins.push_back(new Login(a_client, a_login));
+        std::cout<<"PUSHBACK";
+    }
 
     return msg;
 }
@@ -394,3 +401,19 @@ std::string Server::CreateAccount(std::string a_login, std::string a_password, i
     }
     return msg;
 }
+
+void Server::Logout(int16_t &a_client){
+    std::string msg = "";
+    int16_t iterator = 0;
+    for(auto login : m_setLogins){
+        if(login->IGetFd() == a_client){
+            msg = "2~server~"+IDescriptorToLogin(a_client)+" disconnect ~ ";
+            m_setLogins.erase(m_setLogins.begin() + iterator);
+        }
+        iterator++;
+    }
+    ISendMessage(msg, 0);
+    a_client= 0;
+}
+
+

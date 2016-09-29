@@ -1,0 +1,9 @@
+#!/bin/bash
+# Install GTest and Boost
+
+mkdir /usr/include/gtest
+mkdir /usr/include/boost
+cp gtest_a/* /usr/lib
+cp -rf gtest_h/* /usr/include/gtest
+cp -rf boost/* /usr/include/boost
+

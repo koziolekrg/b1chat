@@ -8,7 +8,7 @@ project(b1comm)
 add_compile_options(-std=c++0x)
 
 set(sources 
-	"main.cpp"
+	"src/main.cpp"
 	"src/server.cpp"
 	"src/user.cpp"
 	"src/group.cpp"

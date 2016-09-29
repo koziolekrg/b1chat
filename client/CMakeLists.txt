@@ -6,7 +6,7 @@ project(b1comm)
 find_package(Threads)
 
 set(sources 
-	"main.cpp"
+	"src/main.cpp"
 	"src/client.cpp"
 
 
