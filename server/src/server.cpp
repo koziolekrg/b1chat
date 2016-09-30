@@ -264,22 +264,25 @@ void Server::IHandleMessage(std::string a_buffer, int16_t &a_client){
     std::vector <std::string> v_msg;
     int menu = a_buffer[0];
     int iterator =0;
-    bool retVal = false;
+
     switch(menu)
     {
     case LOG_IN: /// log in to exist account
+        std::cout<<"Socket ["<<a_client<<"] trying to login"<<std::endl;
         boost::split(v_msg, msg, boost::is_any_of("~"));
         msg = LoginToServer(v_msg[1],v_msg[2], a_client);
         ISendMessage(msg,a_client);
         break;
 
     case CREATE_ACCOUNT: /// create new account request
+        std::cout<<"Socket ["<<a_client<<"] trying to create account"<<std::endl;
         boost::split(v_msg, msg, boost::is_punct());
         msg = CreateAccount(v_msg[1],v_msg[2], a_client);
         ISendMessage(msg,a_client);
         break;
 
     case BROADCAST: /// broadcast message
+        std::cout<<"Socket ["<<a_client<<"] send broadcast"<<std::endl;
         boost::split(v_msg, msg, boost::is_punct());
         msg = "2~"+IDescriptorToLogin(a_client)+"~"+v_msg[1]+" ~ ";
         ISendMessage(msg, 0);
@@ -287,6 +290,7 @@ void Server::IHandleMessage(std::string a_buffer, int16_t &a_client){
 
     case CREATE_GROUP: /// add new group
         boost::split(v_msg, msg, boost::is_punct());
+        std::cout<<"Socket ["<<a_client<<"] trying to create group ["<<v_msg[1]<<"]"<<std::endl;
         if(m_private.IAddNewGroup(v_msg[1],a_client)){
             msg = "3~accept~ ";
             ISendMessage(msg, a_client);
@@ -299,6 +303,7 @@ void Server::IHandleMessage(std::string a_buffer, int16_t &a_client){
 
     case ADD_USER_TO_GROUP: /// add new client to group
         boost::split(v_msg, msg, boost::is_punct());
+        std::cout<<"Socket ["<<a_client<<"] trying to add client ["<<v_msg[2]<<"] to group ["<<v_msg[1]<<"]"<<std::endl;
         msg = "4~refuse~";
         for(auto t_fd: m_setClients){
             if(ILoginToDescriptor(v_msg[2]) == t_fd){
@@ -315,6 +320,7 @@ void Server::IHandleMessage(std::string a_buffer, int16_t &a_client){
 
     case MESSAGE_TO_GROUP: /// send message to group
         boost::split(v_msg, msg, boost::is_punct());
+        std::cout<<"Socket ["<<a_client<<"] send message to group ["<<v_msg[1]<<"]"<<std::endl;
         for(auto t_fd : m_private.IGetClients(v_msg[1])){ ///< get clients from correct name of group and redirect message
             msg = "5~"+IDescriptorToLogin(a_client)+"~"+v_msg[2]+'~';
             ISendMessage(msg, t_fd);
@@ -324,25 +330,23 @@ void Server::IHandleMessage(std::string a_buffer, int16_t &a_client){
     case USERS_LIST: /// send client list
         boost::split(v_msg, msg, boost::is_punct());
         msg="6~";
-
         if(v_msg[1].compare("all") == 0){
-            std::cout<<"ALL";
-
+            std::cout<<"Socket ["<<a_client<<"] request for list of all"<<std::endl;
             for(auto t_fd : m_setLogins){
                 msg = msg + t_fd->IGetLogin() + "~"; ///< increse string with another login get from online clients
             }
-            std::cout<<"Lista all: "<<msg;
             ISendMessage(msg, a_client);
         }
         else{
+            std::cout<<"Socket ["<<a_client<<"] request for list of group ["<<v_msg[1]<<"]"<<std::endl;
             for(auto t_fd : m_private.IGetClients(v_msg[1]))
                 msg = msg + IDescriptorToLogin(t_fd) + "~"; ///< increse string with another login get from group clients
-            std::cout<<"Lista group: "<<msg;
             ISendMessage(msg, a_client);
         }
         break;
 
     case LOGOUT: /// logout
+        std::cout<<"Socket ["<<a_client<<"] logout"<<std::endl;
         for(auto login : m_setLogins){
             if(login->IGetFd() == a_client){
                 msg = "2~server~"+IDescriptorToLogin(a_client)+" disconnect ~ "; ///< find in online clients set selected socket and delete it
@@ -356,7 +360,7 @@ void Server::IHandleMessage(std::string a_buffer, int16_t &a_client){
         break;
 
     case EXIT: // exit
-
+        std::cout<<"Socket ["<<a_client<<"] send close server request"<<std::endl;
         Exit(1);
         break;
     }
