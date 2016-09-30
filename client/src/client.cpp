@@ -26,7 +26,7 @@ void Client::IConnect(std::string a_address, int a_port)
     }
     else    {   /* OK , nothing */  }
 
-    if(inet_addr(a_address.c_str()) == -1)     ///<setup address structure
+    if( static_cast<uint16_t>(inet_addr(a_address.c_str())) == -1)     ///<setup address structure
 
     {
         hostent *he;
@@ -170,7 +170,7 @@ void Client::IReceive()
             std::cout<<"["<<v_msg[1]<<"]"<<v_msg[2]<<std::endl;
         }
         if(v_msg[0] == "6"){ ///< list of online clients
-            for(int i=1; i<v_msg.size()-1; i++){ ///< interate for all clients and print
+            for(int i=1; i< static_cast<int16_t>(v_msg.size()-1); i++){ ///< interate for all clients and print
                 if(v_msg[i].length() > 1)  ///< checking condition is lenght bigger than 0, becouse first element is add with constructor as empty
                     std::cout<<"- "<<v_msg[i]<<std::endl;
             }
@@ -179,6 +179,15 @@ void Client::IReceive()
             if(v_msg[1].compare("accept") == 0){
                 std::cout<<"Good bye";
                 close(m_sock);
+                exit(1);
+            }
+        }
+
+
+        if(v_msg[0] == "8"){ ///< close server
+            if(v_msg[1].compare("refuse") == 0){
+                std::cout<<"No presmission";
+	    }else if(v_msg[1].compare("accept") == 0){
                 exit(1);
             }
         }

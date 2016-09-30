@@ -6,6 +6,7 @@
 class IServer
 {
 public:
+    virtual ~IServer(){};
     virtual void IStartListening(int16_t port) = 0 ;
     virtual void IIncommingConnection() = 0 ;
     virtual bool ISendMessage(std::string message, int16_t client) = 0 ;

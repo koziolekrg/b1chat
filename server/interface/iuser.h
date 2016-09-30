@@ -7,6 +7,7 @@
 class IUser
 {
 public:
+    virtual ~IUser() {};
     virtual bool ICheckLog(std::string a_login, std::string a_password) = 0 ;
     virtual std::string IGetLogin() = 0 ;
     virtual std::string ISaveToFile() = 0 ;

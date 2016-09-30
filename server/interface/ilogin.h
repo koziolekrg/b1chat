@@ -7,6 +7,7 @@
 class ILogin
 {
 public:
+    virtual ~ILogin(){};
     virtual int16_t IGetFd() = 0 ;
     virtual std::string IGetLogin() = 0 ;
 };

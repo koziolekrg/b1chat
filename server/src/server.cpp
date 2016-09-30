@@ -64,6 +64,7 @@ bool Server::IInitConnection(int16_t a_port){
     else{
         exit(1);
     }
+return retVal;
 }
 
 std::string Server::IDescriptorToLogin(int a_client){
@@ -234,10 +235,10 @@ bool Server::ISendMessage(std::string a_message, int16_t a_client){
 
 void Server::IIncommingConnection(){
 
-    int status=0;
-    int iterator =0;
+    int16_t status=0;
+    int16_t iterator =0;
 
-    for(int i=0; i<m_setClients.size(); i++)
+    for(int16_t i=0; i< static_cast<int16_t>(m_setClients.size()); i++)
     {
         fflush (stdout);
 
@@ -361,7 +362,12 @@ void Server::IHandleMessage(std::string a_buffer, int16_t &a_client){
 
     case EXIT: // exit
         std::cout<<"Socket ["<<a_client<<"] send close server request"<<std::endl;
-        Exit(1);
+        if((IDescriptorToLogin(a_client)).compare("admin") == 0){
+	    ISendMessage("8~accept~", a_client);
+            Exit(1);
+	}else{
+	ISendMessage("8~refuse~", a_client);
+        }
         break;
     }
 }
