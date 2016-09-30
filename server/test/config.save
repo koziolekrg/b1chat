@@ -1,7 +1,0 @@
-#!/bin/bash
-# Install GTest and Boost
-
-cp gtest/libgtest* /usr/lib
-mkdir /usr/include/boost
-cp -rf boost/* /us
-r/include/boost
