@@ -194,6 +194,9 @@ void Client::IMainMenu(int a_state){
     std::string menu="";
     std::string data="";
 
+    if(a_state == 0)
+        std::cin.clear();
+
     std::cin.ignore();
     ///handle menu input
     switch(a_state){
@@ -251,6 +254,10 @@ void Client::IMainMenu(int a_state){
         break;
     default:
         std::cout<<"Wrong choose"<<std::endl;
+
+	break;
+	
+
 
      std::cin.ignore();
     }
