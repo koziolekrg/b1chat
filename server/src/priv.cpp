@@ -21,7 +21,7 @@ bool Priv::IAddNewGroup(std::string a_title, int16_t a_client){
 bool Priv::IAddNewClientToGroup(std::string a_title, int16_t a_client){
     bool retVal = false;
     for(auto group : m_groupClients){
-        if(a_title.compare(group->IGetTitle()) == 0){ /// check if user is already in group
+        if(a_title.compare(group->IGetTitle()) == 0){ /// check if group exist
             retVal = group->IAddClient(a_client);
         }
     }

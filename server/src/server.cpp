@@ -264,6 +264,7 @@ void Server::IHandleMessage(std::string a_buffer, int16_t &a_client){
     std::vector <std::string> v_msg;
     int menu = a_buffer[0];
     int iterator =0;
+    bool retVal = false;
     switch(menu)
     {
     case LOG_IN: /// log in to exist account
@@ -298,24 +299,24 @@ void Server::IHandleMessage(std::string a_buffer, int16_t &a_client){
 
     case ADD_USER_TO_GROUP: /// add new client to group
         boost::split(v_msg, msg, boost::is_punct());
+        msg = "4~refuse~";
         for(auto t_fd: m_setClients){
             if(ILoginToDescriptor(v_msg[2]) == t_fd){
                 if(m_private.IAddNewClientToGroup(v_msg[1],ILoginToDescriptor(v_msg[2]))){ ///< try add to group descriptor and login (get from descriptor)
-                    msg = "4~accept";
-                    ISendMessage(msg, a_client);
+                    msg = "4~accept~";
                 }
                 else{
-                    msg = "4~refuse";
-                    ISendMessage(msg, a_client);
+                    msg = "4~refuse~";
                 }
             }
         }
+        ISendMessage(msg, a_client);
         break;
 
     case MESSAGE_TO_GROUP: /// send message to group
         boost::split(v_msg, msg, boost::is_punct());
         for(auto t_fd : m_private.IGetClients(v_msg[1])){ ///< get clients from correct name of group and redirect message
-            msg = "5~"+IDescriptorToLogin(a_client)+"."+v_msg[2]+'~';
+            msg = "5~"+IDescriptorToLogin(a_client)+"~"+v_msg[2]+'~';
             ISendMessage(msg, t_fd);
         }
         break;
@@ -349,11 +350,13 @@ void Server::IHandleMessage(std::string a_buffer, int16_t &a_client){
             }
             iterator++;
         }
-        ISendMessage(msg, 0);
+        ISendMessage("7~accept~", a_client); ///< send confirm to client
+        ISendMessage(msg, 0); ///< send broadcast
         a_client= 0;
         break;
 
     case EXIT: // exit
+
         Exit(1);
         break;
     }
