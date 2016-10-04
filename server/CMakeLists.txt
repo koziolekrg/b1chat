@@ -15,9 +15,10 @@ set(sources
 	"src/group.cpp"
 	"src/priv.cpp"
         "src/login.cpp"
+	"src/socket.cpp"
 )
 
 include_directories("../include/" "./include/" "./interface/")
 
-add_executable(${PROJECT_NAME} "include/server.h" "include/user.h" "include/group.h" "include/priv.h" "include/login.h" ${sources})
+add_executable(${PROJECT_NAME} "include/server.h" "include/user.h" "include/group.h" "include/priv.h" "include/login.h" "include/socket.h" ${sources})
 

@@ -15,6 +15,7 @@
 #include "priv.h"
 #include "user.h"
 #include "login.h"
+#include "socket.h"
 #include <string.h>
 #include <iostream>
 #include <fstream>
@@ -87,7 +88,8 @@ public:
      * @return true of false
      */
     bool ISaveFile();
-    /**
+    /**    //EXPECT_CALL(mocksocket, SetSocket(_,_,_,_)).WillOnce(Return(true));
+
      * @brief IDescriptorToLogin convert client descriptor to his login
      * @param a_client socket descriptor of client as int
      * @return client login as string
@@ -128,6 +130,9 @@ public:
      * @brief Exit exit signal handle
      * @param signum number of interuption
      */
+
+    void testMock(ISocket * aSocket);
+
     void Exit(int signum);
 
 private:
@@ -145,6 +150,7 @@ private:
     Priv m_private; ///< object responsible for keeping groups vector
     std::vector <ILogin*> m_setLogins; ///< list of online clients
     bool m_isAvailable; ///< flag
+    ISocket *m_socket;
 
 };
 // end of class Server

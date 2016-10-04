@@ -23,9 +23,13 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-
+    bool retVal;
     Server server;
-    server.IInitConnection(atoi(argv[1]));
+    retVal = server.IInitConnection(atoi(argv[1]));
+
+    if(retVal)
+        server.IStartListening(atoi(argv[1]));
+
 
 
     return 0;

@@ -12,14 +12,17 @@ set(sources
 	"../src/group.cpp"
 	"../src/priv.cpp"
 	"../src/login.cpp"
+        "../src/socket.cpp"
+
 )
 include_directories(BEFORE ${GTEST_INCLUDE_DIRS})
+include_directories(BEFORE ${GMOCK_INCLUDE_DIRS})
 
 find_package(GTest REQUIRED)
 
 include_directories("../include/" "./include/" "../interface")
 
-add_executable(${PROJECT_NAME} "../include/server.h" "../include/user.h" "../include/group.h" "../include/priv.h" "../include/login.h" ${sources})
+add_executable(${PROJECT_NAME} "../include/server.h" "../include/socket.h" "../include/user.h" "../include/group.h" "../include/priv.h" "../include/login.h" "./mocksocket.h"${sources})
 
-target_link_libraries(b1comm ${GTEST_BOTH_LIBRARIES} pthread gtest)
+target_link_libraries(b1comm ${GTEST_BOTH_LIBRARIES} pthread gtest gmock)
 

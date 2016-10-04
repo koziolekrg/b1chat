@@ -16,11 +16,15 @@ Server::Server(){
     m_tv.tv_sec = 5;
     m_tv.tv_usec = 0;
     m_isAvailable = false;
+    m_socket = new Socket();
 }
 
 Server::~Server(){
+    //Exit(1);
+}
 
-    Exit(1);
+void Server::testMock(ISocket *aSocket){
+    m_socket = aSocket;
 }
 
 void Server::Exit(int signum){
@@ -33,6 +37,7 @@ void Server::Exit(int signum){
     for(auto object : m_setLogins)
         delete object;
 
+    delete m_socket;
     exit(signum);
 }
 
@@ -52,19 +57,29 @@ bool Server::IInitConnection(int16_t a_port){
 
     retVal = ISetSocket(a_port); /// Socket reserving
 
-    if(!retVal){
-        exit(1);
+    if(retVal){
+        retVal = IBindPort(); // binding port
     }
 
-    retVal = IBindPort(); // binding port
+    return retVal;
+}
+
+bool Server::ISetSocket(int16_t a_port){
+    bool retVal = false;
+
+    retVal = m_socket->Connect(m_sd);
 
     if(retVal){
-        IStartListening(a_port);
+        m_socket->SetSocket(m_sd,m_tv,m_serverSocket, a_port);
     }
-    else{
-        exit(1);
+    return retVal;
+}
+
+bool Server::IBindPort(){
+    bool retVal = m_socket->Bind(m_sd,m_serverSocket);
+    if(!retVal){
     }
-return retVal;
+    return retVal;
 }
 
 std::string Server::IDescriptorToLogin(int a_client){
@@ -121,47 +136,9 @@ bool Server::ISaveFile(){
     return retVal;
 }
 
-bool Server::ISetSocket(int16_t a_port){
-    bool retVal = false;
-    if ((m_sd = socket (AF_INET, SOCK_STREAM, 0)) == -1)
-    {
-        perror ("[server] socket() Error.\n");
-        retVal = false;
-    }
-    else
-    {
-        setsockopt(m_sd, SOL_SOCKET, SO_REUSEADDR,&m_tv,sizeof(timeval));
-
-        bzero (&m_serverSocket, sizeof (m_serverSocket));
-
-        m_serverSocket.sin_family = AF_INET;
-        m_serverSocket.sin_addr.s_addr = htonl (INADDR_ANY);
-        m_serverSocket.sin_port = htons (a_port);
-        retVal =  true;
-    }
-    return retVal;
-}
-
-bool Server::IBindPort(){
-    bool retVal = false;
-    if (bind (m_sd, (sockaddr *) &m_serverSocket, sizeof (sockaddr)) == -1)
-    {
-        perror ("[server] bind() Error.\n");
-        retVal = false;
-    }
-    else{
-        retVal = true;
-    }
-    return retVal;
-}
-
 void Server::IStartListening(int16_t a_port){
 
-    if (listen (m_sd, 5) == -1)
-    {
-        perror ("[server] listen() Error.\n");
-        exit(1);
-    }
+    m_socket->Listen(m_sd);
 
     FD_ZERO (&m_actfds); ///< fill set with zeros
     FD_SET (m_sd, &m_actfds); ///< set begin of set with selected socket
@@ -210,29 +187,6 @@ void Server::IStartListening(int16_t a_port){
     }
 }
 
-bool Server::ISendMessage(std::string a_message, int16_t a_client){
-   bool retVal = false;
-    if(0 == a_client){
-        for(auto fd: m_setClients){ ///< if variable 0, do send to all online clients
-            if(write(fd, a_message.c_str(), strlen(a_message.c_str()))<0){
-                retVal = false;
-            }
-            else{
-               retVal = true;
-            }
-
-        }
-    } else {
-         if(write (a_client, a_message.c_str(), strlen(a_message.c_str()))<0){
-             retVal = false;
-         }
-         else{
-            retVal = true;
-         }
-    }
-    return retVal;
-}
-
 void Server::IIncommingConnection(){
 
     int16_t status=0;
@@ -244,7 +198,8 @@ void Server::IIncommingConnection(){
 
         if (FD_ISSET (m_setClients[i], &m_readfds)) ///< check all socket if something to read
         {
-            status = read(m_setClients[i], m_buffer, sizeof (m_buffer));
+            status = m_socket->Receive(m_setClients[i], m_buffer);
+
             if(status  == 0){ /// < if read return less than 0, that means client disconnect
                 for(auto login : m_setLogins){
                     if(login->IGetFd() == m_setClients[i]){
@@ -259,12 +214,24 @@ void Server::IIncommingConnection(){
     }
 }
 
+bool Server::ISendMessage(std::string a_message, int16_t a_client){
+   bool retVal = false;
+    if(0 == a_client){
+        for(auto fd: m_setClients){ ///< if variable 0, do send to all online clients
+            m_socket->Send(fd, a_message);
+        }
+    } else {
+         m_socket->Send(a_client, a_message);
+    }
+    return retVal;
+}
+
 void Server::IHandleMessage(std::string a_buffer, int16_t &a_client){
 
     std::string msg = a_buffer;
     std::vector <std::string> v_msg;
     int menu = a_buffer[0];
-    int iterator =0;
+    int iterator = 0;
 
     switch(menu)
     {
@@ -363,10 +330,10 @@ void Server::IHandleMessage(std::string a_buffer, int16_t &a_client){
     case EXIT: // exit
         std::cout<<"Socket ["<<a_client<<"] send close server request"<<std::endl;
         if((IDescriptorToLogin(a_client)).compare("admin") == 0){
-	    ISendMessage("8~accept~", a_client);
+        ISendMessage("8~accept~", a_client);
             Exit(1);
-	}else{
-	ISendMessage("8~refuse~", a_client);
+    }else{
+    ISendMessage("8~refuse~", a_client);
         }
         break;
     }

@@ -1,26 +1,35 @@
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
 #include <iostream>
-#include "server.h"
 #include <gtest/gtest.h>
+#include <gmock/gmock.h>
+#define private public
+#include "server.h"
+#include "mocksocket.h"
+
 #define PORT 8888
+using namespace testing;
 
 TEST(group, groupTitle){
     Group *group = new Group("Test", 1);
     ASSERT_EQ("Test", group->IGetTitle());
+    delete group;
 }
 
 TEST(group, correctAddClient){
     Group *group = new Group("Test", 1);
     ASSERT_EQ(true, group->IAddClient(2));
+    delete group;
 }
 
 TEST(group, incorrectAddClient){
     Group *group = new Group("Test", 1);
     ASSERT_EQ(false, group->IAddClient(1));
+    delete group;
 }
 
 TEST(group, listClient){
@@ -28,6 +37,7 @@ TEST(group, listClient){
     group->IAddClient(2);
     int temp = (group->IGetClientsList())[1];
     ASSERT_EQ(2, temp);
+    delete group;
 }
 
 TEST(privGroup, correctAddNewGroup){
@@ -69,12 +79,14 @@ TEST(privGroup, incorrectAddNewClientGroup){
 TEST(account, succesfulCreate){
     Server *server = new Server();
     ASSERT_EQ("1~accept~ ",server->CreateAccount("pawel","haslo",1));
+    delete server;
 }
 
 TEST(account, failureCreate){
     Server *server = new Server();
     server->CreateAccount("pawel","haslo",1);
     ASSERT_EQ("1~refuse~ ",server->CreateAccount("pawel","haslo",1));
+    delete server;
 }
 
 TEST(account, logoutAndSuccesfulLogin){
@@ -83,30 +95,90 @@ TEST(account, logoutAndSuccesfulLogin){
     server->CreateAccount("pawel","haslo",1);
     server->Logout(temp);
     ASSERT_EQ("0~accept~ ", server->LoginToServer("pawel","haslo",1));
+    delete server;
 }
 
 TEST(account, failureLogin){
     Server *server = new Server();
     ASSERT_EQ("0~refuse~ ", server->LoginToServer("pawel","haslo",1));
+    delete server;
 }
 
 TEST(file, savefile){
     Server *server = new Server();
     server->CreateAccount("pawel","haslo",1);
     ASSERT_EQ(true,server->ISaveFile());
+    delete server;
 }
 
 TEST(file, readfile){
     Server *server = new Server();
     server->IReadFile();
     ASSERT_EQ("0~accept~ ", server->LoginToServer("pawel","haslo",1));
+    delete server;
 }
 
+
+TEST(socket, availableSocket){
+    MockSocket mocksocket;
+    EXPECT_CALL(mocksocket, Connect(_)).WillOnce(Return(true));
+
+    Server *server = new Server();
+    server->testMock(&mocksocket);
+
+    ASSERT_TRUE(server->ISetSocket(88));
+    delete server;
+}
+
+TEST(socket, unavailableSocket){
+    MockSocket mocksocket;
+    EXPECT_CALL(mocksocket, Connect(_)).WillOnce(Return(false));
+
+    Server *server = new Server();
+    server->testMock(&mocksocket);
+
+    ASSERT_FALSE(server->ISetSocket(88));
+    delete server;
+}
+
+TEST(socket, availablePort){
+    MockSocket mocksocket;
+    EXPECT_CALL(mocksocket, Bind(_,_)).WillOnce(Return(true));
+
+    Server *server = new Server();
+    server->testMock(&mocksocket);
+
+    ASSERT_TRUE(server->IBindPort());
+    delete server;
+}
+
+TEST(socket, unavailablePort){
+    MockSocket mocksocket;
+    EXPECT_CALL(mocksocket, Bind(_,_)).WillOnce(Return(false));
+
+    Server *server = new Server();
+    server->testMock(&mocksocket);
+
+    ASSERT_FALSE(server->IBindPort());
+    delete server;
+}
+
+TEST(connection, incorrectInit){
+    MockSocket mocksocket;
+    EXPECT_CALL(mocksocket, Connect(_)).WillOnce(Return(false));
+
+    Server *server = new Server();
+    server->testMock(&mocksocket);
+
+    ASSERT_FALSE(server->IInitConnection(88));
+    delete server;
+}
 
 int main(int argc, char *argv[])
 {
 
     testing::InitGoogleTest(&argc, argv);
+    testing::InitGoogleMock(&argc, argv);
     return RUN_ALL_TESTS();
 
 }

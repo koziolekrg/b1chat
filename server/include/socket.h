@@ -1,0 +1,28 @@
+#ifndef SOCKET_H
+#define SOCKET_H
+
+#include "isocket.h"
+#include <string.h>
+#include <iostream>
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <unistd.h>
+
+using namespace std;
+
+class Socket : public ISocket
+{
+public:
+
+    Socket();
+    virtual ~Socket();
+    bool Bind(int16_t &a_sd, sockaddr_in &a_serverSocket);
+    bool Connect(int16_t &a_sd);
+    void SetSocket(int16_t &a_sd, timeval &a_tv,sockaddr_in &a_serverSocket, int16_t a_port);
+    void Listen(int16_t a_sd);
+    bool Send(int16_t fd, string a_message);
+    bool Receive(int16_t a_setClient,char *a_buffer);
+};
+
+// end of class Socket
+#endif // SOCKET_H
