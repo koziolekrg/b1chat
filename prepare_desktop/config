@@ -2,8 +2,10 @@
 # Install GTest and Boost
 
 mkdir /usr/include/gtest
+mkdir /usr/include/gmock
 mkdir /usr/include/boost
 cp gtest_a/* /usr/lib
 cp -rf gtest_h/* /usr/include/gtest
+cp -rf gmock_h/* /usr/include/gmock
 cp -rf boost/* /usr/include/boost
 

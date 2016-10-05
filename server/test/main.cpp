@@ -154,7 +154,7 @@ TEST(socket, availablePort){
 
 TEST(socket, unavailablePort){
     MockSocket mocksocket;
-    EXPECT_CALL(mocksocket, Bind(_,_)).WillOnce(Return(false));
+    ON_CALL(mocksocket, Bind(_,_)).WillByDefault(Return(false));
 
     Server *server = new Server();
     server->testMock(&mocksocket);
@@ -163,9 +163,48 @@ TEST(socket, unavailablePort){
     delete server;
 }
 
-TEST(connection, incorrectInit){
+TEST(connection, correctInit){
     MockSocket mocksocket;
-    EXPECT_CALL(mocksocket, Connect(_)).WillOnce(Return(false));
+    ON_CALL(mocksocket, Connect(_)).WillByDefault(Return(true));
+    ON_CALL(mocksocket, Bind(_,_)).WillByDefault(Return(true));
+
+    Server *server = new Server();
+    server->testMock(&mocksocket);
+
+    ASSERT_TRUE(server->IInitConnection(88));
+    delete server;
+}
+
+TEST(connection, incorrectInitBindFalse){
+    MockSocket mocksocket;
+    ON_CALL(mocksocket, Connect(_)).WillByDefault(Return(true));
+    ON_CALL(mocksocket, Bind(_,_)).WillByDefault(Return(false));
+
+    Server *server = new Server();
+    server->testMock(&mocksocket);
+
+    ASSERT_FALSE(server->IInitConnection(88));
+    delete server;
+}
+
+TEST(connection, incorrectInitSetSocketFalse){
+    MockSocket mocksocket;
+    ON_CALL(mocksocket, Connect(_)).WillByDefault(Return(false));
+    ON_CALL(mocksocket, Bind(_,_)).WillByDefault(Return(true));
+
+
+    Server *server = new Server();
+    server->testMock(&mocksocket);
+
+    ASSERT_FALSE(server->IInitConnection(88));
+    delete server;
+}
+
+TEST(connection, incorrectInitSetBothFalse){
+    MockSocket mocksocket;
+    ON_CALL(mocksocket, Connect(_)).WillByDefault(Return(false));
+    ON_CALL(mocksocket, Bind(_,_)).WillByDefault(Return(false));
+
 
     Server *server = new Server();
     server->testMock(&mocksocket);

@@ -1,3 +1,0 @@
-/home/pako/b1chat/server/test/bin/CMakeFiles/edit_cache.dir
-/home/pako/b1chat/server/test/bin/CMakeFiles/rebuild_cache.dir
-/home/pako/b1chat/server/test/bin/CMakeFiles/b1comm.dir

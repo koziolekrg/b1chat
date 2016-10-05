@@ -20,7 +20,7 @@ Server::Server(){
 }
 
 Server::~Server(){
-    //Exit(1);
+
 }
 
 void Server::testMock(ISocket *aSocket){
