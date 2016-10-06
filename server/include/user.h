@@ -35,17 +35,17 @@ public:
      * @param a_password string with password
      * @return true or false
      */
-    bool ICheckLog(std::string a_login, std::string a_password);
+    bool checkLog(std::string a_login, std::string a_password);
     /**
      * @brief IGetLogin return login
      * @return login as string
      */
-    std::string IGetLogin();
+    std::string getLogin();
     /**
      * @brief ISaveToFile returning string with login and password for saving file
      * @return lagin and password as string
      */
-    std::string ISaveToFile();
+    std::string saveToFile();
 private:
     std::string m_login; ///< login
     std::string m_password; ///< password

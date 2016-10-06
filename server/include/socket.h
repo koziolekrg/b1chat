@@ -1,12 +1,12 @@
 #ifndef SOCKET_H
 #define SOCKET_H
 
-#include "isocket.h"
 #include <string.h>
 #include <iostream>
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include "isocket.h"
 
 using namespace std;
 

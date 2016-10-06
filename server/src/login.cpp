@@ -10,11 +10,11 @@ Login::~Login(){
 
 }
 
-std::string Login::IGetLogin(){
+std::string Login::getLogin(){
     return login;
 }
 
-int16_t Login::IGetFd(){
+int16_t Login::getFd(){
     return fd;
 }
 

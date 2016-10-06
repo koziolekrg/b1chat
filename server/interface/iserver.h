@@ -7,12 +7,12 @@ class IServer
 {
 public:
     virtual ~IServer(){};
-    virtual void IStartListening(int16_t port) = 0 ;
-    virtual void IIncommingConnection() = 0 ;
-    virtual bool ISendMessage(std::string message, int16_t client) = 0 ;
-    virtual void IReadFile() = 0 ;
-    virtual std::string IDescriptorToLogin(int a_client) = 0 ;
-    virtual int ILoginToDescriptor(std::string a_client) = 0 ;
+    virtual void startListening(int16_t port) = 0 ;
+    virtual void incommingConnection() = 0 ;
+    virtual bool sendMessage(std::string message, int16_t client) = 0 ;
+    virtual void readFile() = 0 ;
+    virtual std::string descriptorToLogin(int a_client) = 0 ;
+    virtual int loginToDescriptor(std::string a_client) = 0 ;
 };
 
 #endif // SERVER_H

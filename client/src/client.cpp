@@ -2,10 +2,9 @@
 
 enum menuState {LOGIN, CREATE_ACCOUNT, BROADCAST, CREATE_GROUP, ADD_TO_GROUP, LIST_USERS, LOGOUT};
 
-Client::Client()
+Client::Client(ISocket &aSocket)
+    :m_isLoggedIn(false), m_sock(-1), m_socket(aSocket)
 {
-    m_isLoggedIn = false;
-    m_sock = -1;
 
 }
 
@@ -13,21 +12,23 @@ Client::~Client(){
 
 }
 
-void Client::IConnect(std::string a_address, int a_port)
+bool Client::connectToServer(std::string a_address, int a_port)
 {
+    bool retVal = true;
     if(m_sock == -1)
     {
-        m_sock = socket(AF_INET , SOCK_STREAM , 0);
+        m_sock = m_socket.SetSocket();
         if (m_sock == -1)
         {
             perror("Could not create socket");
+            retVal = false;
         }
         std::cout<<"Socket created\n";
     }
-    else    {   /* OK , nothing */  }
 
-    if( static_cast<uint16_t>(inet_addr(a_address.c_str())) == -1)     ///<setup address structure
 
+
+    if(static_cast<uint16_t>(inet_addr(a_address.c_str())) == -1)     ///<setup address structure
     {
         hostent *he;
         in_addr **addr_list;
@@ -37,8 +38,8 @@ void Client::IConnect(std::string a_address, int a_port)
         {
             herror("gethostbyname");
             std::cout<<"Failed to resolve hostname\n";
+            retVal = false;
         }
-
 
         addr_list = (in_addr **) he->h_addr_list; ///< Cast the h_addr_list to in_addr , since h_addr_list also has the ip address in long format only
 
@@ -51,7 +52,6 @@ void Client::IConnect(std::string a_address, int a_port)
             break;
         }
     }
-
     else
     {
         m_server.sin_addr.s_addr = inet_addr( a_address.c_str() );
@@ -60,19 +60,20 @@ void Client::IConnect(std::string a_address, int a_port)
     m_server.sin_family = AF_INET;
     m_server.sin_port = htons(a_port);
 
-
-    if (connect(m_sock , (sockaddr *)&m_server , sizeof(m_server)) < 0) ///< Connect to remote server
+    if (retVal && 0 > m_socket.Connect(m_sock, m_server))  ///< Connect to remote server
     {
         perror("connect failed. Error");
+        retVal = false;
     }
 
     std::cout<<"Connected\n";
+    return retVal;
 
 }
 
-bool Client::ISend(std::string a_msg){
+bool Client::sendMessage(std::string a_msg){
     bool retVal = true;
-    if( send(m_sock , a_msg.c_str() , strlen( a_msg.c_str() ) , 0) < 0) ///< try to send message
+    if(0 > m_socket.Send(m_sock, a_msg)) ///< try to send message
     {
         perror("Send failed : ");
         retVal = false;
@@ -80,7 +81,16 @@ bool Client::ISend(std::string a_msg){
     return retVal;
 }
 
-void Client::ILogin()
+bool Client::receiveMessage(std::string & a_msg){
+    bool retVal = true;
+    if(0>m_socket.Receive(m_sock, a_msg)){
+        perror("Receive failed : ");
+        retVal = false;
+    }
+    return retVal;
+}
+
+void Client::loginToServer()
 {
     std::string data;
     std::string menu;
@@ -98,9 +108,9 @@ void Client::ILogin()
             std::cout<<"Password:";
             std::cin>>menu; data = data + menu+"~";
 
-            if( send(m_sock , data.c_str() , strlen( data.c_str() ) , 0) < 0)
+            if(!sendMessage(data))
             {
-                perror("Send failed : ");
+                perror("Send failed: ");
             }
             sleep(1);
         }
@@ -109,97 +119,88 @@ void Client::ILogin()
             std::cout<<"\n1 - Send broadcast\n2 - Create group\n3 - Add client to group\n4 - Send MSG to group\n5 - Get online clients\n6 - Logout\n";
 
             std::cin>>state;
-            IMainMenu(state);
+            mainMenu(state);
         }
     }
 }
 
-void Client::IReceive()
+
+void Client::receiveFromServer()
 {
-    int size=512;
-    char buffer[size];
     std::string reply;
     std::vector <std::string> v_msg;
-
 
     while(1){
 
         fflush (stdout);
 
-        if( recv(m_sock , buffer , sizeof(buffer) , 0) < 0) /// < Receive a reply from the server
-        {
-            puts("recv failed");
-        }
+        if(receiveMessage(reply)){; /// < Receive a reply from the server
 
-        reply = buffer;
+            boost::split(v_msg, reply, boost::is_any_of("~")); ///< split message with ~
 
-        boost::split(v_msg, reply, boost::is_any_of("~")); ///< split message with ~
+            if(v_msg[0] == "0" || v_msg[0] == "1"){ ///< Login or Create handle
+                if(v_msg[1].compare("accept") == 0){
+                    mutexLog.lock(); m_isLoggedIn = true; mutexLog.unlock();
+                    std::cout<<"[Server] Connected to the server success"<<std::endl;
+                }
+                if(v_msg[1].compare("refuse") == 0){
+                    mutexLog.lock(); m_isLoggedIn = false; mutexLog.unlock();
+                    std::cout<<"[Server] Connection refused"<<std::endl;
+                }
+            }
+            if(v_msg[0] == "2"){ ///< broadcast message
+                std::cout<<"["<<v_msg[1]<<"]"<<v_msg[2]<<std::endl;
+            }
 
-        if(v_msg[0] == "0" || v_msg[0] == "1"){ ///< Login or Create handle
-            if(v_msg[1].compare("accept") == 0){
-                mutexLog.lock(); m_isLoggedIn = true; mutexLog.unlock();
-                std::cout<<"[Server] Connected to the server success"<<std::endl;
+            if(v_msg[0] == "3"){ ///< create group
+                if(v_msg[1].compare("accept") == 0){
+                    std::cout<<"[Server] Group created"<<std::endl;
+                }
+                if(v_msg[1].compare("refuse") == 0){
+                    std::cout<<"[Server] Group didn't' create"<<std::endl;
+                }
             }
-            if(v_msg[1].compare("refuse") == 0){
-                mutexLog.lock(); m_isLoggedIn = false; mutexLog.unlock();
-                std::cout<<"[Server] Connection refused"<<std::endl;
+            if(v_msg[0] == "4"){ ///< add client to group
+                std::cout<<"? "<<v_msg[1]<<" ?";
+                if(v_msg[1].compare("accept") == 0){
+                    std::cout<<"[Server] Client added"<<std::endl;
+                }
+                if(v_msg[1].compare("refuse") == 0){
+                    std::cout<<"[Server] Client didn't add"<<std::endl;
+                }
             }
-        }
-        if(v_msg[0] == "2"){ ///< broadcast message
-            std::cout<<"["<<v_msg[1]<<"]"<<v_msg[2]<<std::endl;
-        }
+            if(v_msg[0] == "5"){ ///< group message
+                std::cout<<"["<<v_msg[1]<<"]"<<v_msg[2]<<std::endl;
+            }
+            if(v_msg[0] == "6"){ ///< list of online clients
+                for(int i=1; i< static_cast<int16_t>(v_msg.size()-1); i++){ ///< interate for all clients and print
+                    if(v_msg[i].length() > 1)  ///< checking condition is lenght bigger than 0, becouse first element is add with constructor as empty
+                        std::cout<<"- "<<v_msg[i]<<std::endl;
+                }
+            }
+            if(v_msg[0] == "7"){ ///< logout and exit
+                if(v_msg[1].compare("accept") == 0){
+                    std::cout<<"Good bye";
+                    close(m_sock);
+                    exit(1);
+                }
+            }
 
-        if(v_msg[0] == "3"){ ///< create group
-            if(v_msg[1].compare("accept") == 0){
-                std::cout<<"[Server] Group created"<<std::endl;
+            if(v_msg[0] == "8"){ ///< close server
+                if(v_msg[1].compare("refuse") == 0){
+                    std::cout<<"No presmission";
+                }else if(v_msg[1].compare("accept") == 0){
+                    exit(1);
+                }
             }
-            if(v_msg[1].compare("refuse") == 0){
-                std::cout<<"[Server] Group didn't' create"<<std::endl;
-            }
-        }
-        if(v_msg[0] == "4"){ ///< add client to group
-            std::cout<<"? "<<v_msg[1]<<" ?";
-            if(v_msg[1].compare("accept") == 0){
-                std::cout<<"[Server] Client added"<<std::endl;
-            }
-            if(v_msg[1].compare("refuse") == 0){
-                std::cout<<"[Server] Client didn't add"<<std::endl;
-            }
-        }
-        if(v_msg[0] == "5"){ ///< group message
-            std::cout<<"["<<v_msg[1]<<"]"<<v_msg[2]<<std::endl;
-        }
-        if(v_msg[0] == "6"){ ///< list of online clients
-            for(int i=1; i< static_cast<int16_t>(v_msg.size()-1); i++){ ///< interate for all clients and print
-                if(v_msg[i].length() > 1)  ///< checking condition is lenght bigger than 0, becouse first element is add with constructor as empty
-                    std::cout<<"- "<<v_msg[i]<<std::endl;
-            }
-        }
-        if(v_msg[0] == "7"){ ///< logout and exit
-            if(v_msg[1].compare("accept") == 0){
-                std::cout<<"Good bye";
-                close(m_sock);
-                exit(1);
-            }
-        }
 
-
-        if(v_msg[0] == "8"){ ///< close server
-            if(v_msg[1].compare("refuse") == 0){
-                std::cout<<"No presmission";
-	    }else if(v_msg[1].compare("accept") == 0){
-                exit(1);
-            }
+            v_msg.clear();
+            reply = "";
         }
-
-        v_msg.clear();
-        reply = "";
-        memset(buffer, 0, sizeof(buffer));
-
     }
 }
 
-void Client::IMainMenu(int a_state){
+void Client::mainMenu(int a_state){
     std::string menu="";
     std::string data="";
 
@@ -213,14 +214,14 @@ void Client::IMainMenu(int a_state){
         std::cout<<"Type message to send:";
         std::getline(std::cin,menu);
         data = "2~"+menu+"~";
-        ISend(data);
+        sendMessage(data);
         break;
 
     case 2:
         std::cout<<"Type group name:";
         std::cin>>menu;
         data = "3~"+menu+"~";
-        ISend(data);
+        sendMessage(data);
         break;
 
     case 3:
@@ -230,7 +231,7 @@ void Client::IMainMenu(int a_state){
         std::cout<<"Type user name you want to add:";
         std::cin>>menu;
         data = data + menu+"~";
-        ISend(data);
+        sendMessage(data);
         break;
 
     case 4:
@@ -241,7 +242,7 @@ void Client::IMainMenu(int a_state){
         std::cin.ignore();
         std::getline(std::cin,menu);
         data = data + menu+"~";
-        ISend(data);
+        sendMessage(data);
         break;
 
     case 5:
@@ -249,26 +250,28 @@ void Client::IMainMenu(int a_state){
         std::cout<<"all - list all users\ngroup name - list of group users:";
         std::getline(std::cin,menu);
         data = "6~"+menu+"~";
-        ISend(data);
+        sendMessage(data);
         break;
 
     case 6:
         data = "7~";
-        ISend(data);
+        sendMessage(data);
         std::cout<<"Good bye";
         break;
+
     case 8:
         std::cout<<"EXIT";
-        ISend("8~");
+        sendMessage("8~");
         break;
+
     default:
         std::cout<<"Wrong choose"<<std::endl;
 
-	break;
-	
+        break;
 
 
-     std::cin.ignore();
+
+        std::cin.ignore();
     }
 }
 

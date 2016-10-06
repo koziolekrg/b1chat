@@ -11,11 +11,6 @@
 
 #define MAX_CLIENTS 10
 
-#include "iserver.h"
-#include "priv.h"
-#include "user.h"
-#include "login.h"
-#include "socket.h"
 #include <string.h>
 #include <iostream>
 #include <fstream>
@@ -29,6 +24,12 @@
 #include <sys/time.h>
 #include <boost/algorithm/string.hpp>
 
+#include "iserver.h"
+#include "priv.h"
+#include "user.h"
+#include "login.h"
+#include "socket.h"
+
 class Server : public IServer
 {
 public:
@@ -36,71 +37,71 @@ public:
      * @brief Server create an Server with selected port number
      * @param a_port define port number
      */
-    Server();
+    Server(ISocket &aSocket);
     virtual ~Server();
     /**
      * @brief IInitConnection
      * @param a_port
      * @return
      */
-    bool IInitConnection(int16_t a_port);
+    bool initConnection(int16_t a_port);
     /**
      * @brief IStartListening starting listetning on port for clients messages
      * @param a_port int port number
      * @return true or false
      */
-    void IStartListening(int16_t a_port) override;
+    void startListening(int16_t a_port) override;
     /**
     * @brief ISendMessage allows to sending messages
     * @param a_message message to send as string
     * @param a_client socket descriptor as int
     * @return true or false
     */
-    bool ISendMessage(std::string a_message, int16_t a_client) override;
+    bool sendMessage(std::string a_message, int16_t a_client) override;
     /**
      * @brief IIncommingConnection get incomming connection
      */
-    void IIncommingConnection() override;
+    void incommingConnection() override;
     /**
      * @brief IHandleMessage handle received message
      * @param a_buffer income message
      * @param a_client socket of client who sent message
      */
-    void IHandleMessage(std::string a_buffer, int16_t &a_client);
+    void handleMessage(std::string a_buffer, int16_t &a_client);
     /**
      * @brief ISetSocket responsible for setting port number
      * @param a_port int port number
      * @return true or false
      */
-    bool ISetSocket(int16_t a_port);
+    bool setSocket(int16_t a_port);
     /**
      * @brief IBindPort binding addres and port if it's available
      * @return true or false
      */
-    bool IBindPort();
+    bool bindPort();
     /**
      * @brief IReadFile read data of existing clients from file
      * @return true of false
      */
-    void IReadFile();
+    void readFile();
     /**
      * @brief ISaveFile save all data to file
      * @return true of false
      */
-    bool ISaveFile();
+    bool saveFile();
     /**    //EXPECT_CALL(mocksocket, SetSocket(_,_,_,_)).WillOnce(Return(true));
 
      * @brief IDescriptorToLogin convert client descriptor to his login
      * @param a_client socket descriptor of client as int
      * @return client login as string
      */
-    std::string IDescriptorToLogin(int a_client);
+    std::string descriptorToLogin(int a_client);
     /**
      * @brief ILoginToDescriptor covert client login to his descriptor
      * @param a_client client login as string
      * @return socket descriptor of client as int
      */
-    int ILoginToDescriptor(std::string a_client);
+    int loginToDescriptor(std::string a_client);
 
     /**
      * @brief LoginToServer handling request for login
@@ -109,7 +110,7 @@ public:
      * @param a_client socket from connection comming
      * @return message to client as string - accept/refuse
      */
-    std::string LoginToServer(std::string a_login, std::string a_password, int a_client);
+    std::string loginToServer(std::string a_login, std::string a_password, int a_client);
 
     /**
      * @brief CreateAccount handling request for create account
@@ -118,20 +119,18 @@ public:
      * @param a_client socket from connection comming
      * @return message to client as string - accept/refuse
      */
-    std::string CreateAccount(std::string a_login, std::string a_password, int a_client);
+    std::string createAccount(std::string a_login, std::string a_password, int a_client);
 
     /**
      * @brief Logout handling logout signal (disconnec or request from client)
      * @param a_client socket descriptor number
      */
-    void Logout(int16_t &a_client);
+    void logout(int16_t &a_client);
 
     /**
      * @brief Exit exit signal handle
      * @param signum number of interuption
      */
-
-    void testMock(ISocket * aSocket);
 
     void Exit(int signum);
 
@@ -150,7 +149,7 @@ private:
     Priv m_private; ///< object responsible for keeping groups vector
     std::vector <ILogin*> m_setLogins; ///< list of online clients
     bool m_isAvailable; ///< flag
-    ISocket *m_socket;
+    ISocket &m_socket;
 
 };
 // end of class Server

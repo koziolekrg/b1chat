@@ -24,13 +24,12 @@ int main(int argc, char *argv[])
     }
 
     bool retVal;
-    Server server;
-    retVal = server.IInitConnection(atoi(argv[1]));
+    Socket socket;
+    Server server(socket);
+    retVal = server.initConnection(atoi(argv[1]));
 
     if(retVal)
-        server.IStartListening(atoi(argv[1]));
-
-
+        server.startListening(atoi(argv[1]));
 
     return 0;
 }

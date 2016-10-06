@@ -10,20 +10,24 @@ Group::~Group(){
 
 }
 
-std::string Group::IGetTitle(){
+std::string Group::getTitle(){
     return m_title;
 }
 
-bool Group::IAddClient(int16_t a_client){
+bool Group::addClient(int16_t a_client){
     bool retVal = true;
     for(auto client : m_clients){  ///< check if client is already in group
-        if(client == a_client)
+        if(client == a_client){
             retVal = false;
+        }
     }
-    m_clients.push_back(a_client); ///< if dont , push
+    if(retVal){
+        m_clients.push_back(a_client); ///< if dont , push
+
+    }
     return retVal;
 }
 
-std::vector <int16_t> Group::IGetClientsList(){
+std::vector <int16_t> Group::getClientsList(){
     return m_clients;
 }

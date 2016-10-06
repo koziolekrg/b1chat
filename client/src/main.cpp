@@ -8,6 +8,7 @@
 #include <thread>
 #include <unistd.h>
 #include "client.h"
+using namespace std;
 
 int main(int argc , char *argv[])
 {
@@ -15,21 +16,20 @@ int main(int argc , char *argv[])
         std::cout<<"Type [IP address] and [port number]  as parameters";
         exit(1);
     }
-
-    //Client client;
-    //client.IConnect(argv[1], atoi(argv[2]));
-
-    Client *client = new Client();
-    client->IConnect(argv[1], atoi(argv[2]));
-
-    std::thread s(&Client::ILogin, client);
-    std::thread r(&Client::IReceive, client);
-
-    s.join();
-    r.join();
+    Socket socket;
 
 
+    Client *client = new Client(socket);
 
+    bool retVal = client->connectToServer(argv[1], atoi(argv[2]));
+
+    if(retVal){
+        std::thread s(&Client::loginToServer, client);
+        std::thread r(&Client::receiveFromServer, client);
+
+        r.join();
+        s.join();
+    }
 
     return 0;
 }

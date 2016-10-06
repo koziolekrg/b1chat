@@ -16,106 +16,106 @@ using namespace testing;
 
 TEST(group, groupTitle){
     Group *group = new Group("Test", 1);
-    ASSERT_EQ("Test", group->IGetTitle());
+    ASSERT_EQ("Test", group->getTitle());
     delete group;
 }
 
 TEST(group, correctAddClient){
     Group *group = new Group("Test", 1);
-    ASSERT_EQ(true, group->IAddClient(2));
+    ASSERT_EQ(true, group->addClient(2));
     delete group;
 }
 
 TEST(group, incorrectAddClient){
     Group *group = new Group("Test", 1);
-    ASSERT_EQ(false, group->IAddClient(1));
+    ASSERT_EQ(false, group->addClient(1));
     delete group;
 }
 
 TEST(group, listClient){
     Group *group = new Group("Test", 1);
-    group->IAddClient(2);
-    int temp = (group->IGetClientsList())[1];
+    group->addClient(2);
+    int temp = (group->getClientsList())[1];
     ASSERT_EQ(2, temp);
     delete group;
 }
 
 TEST(privGroup, correctAddNewGroup){
     Priv priv;
-    ASSERT_EQ(true, priv.IAddNewGroup("G1",4));
+    ASSERT_EQ(true, priv.addNewGroup("G1",4));
 }
 
 TEST(privGroup, correctAddNewGroup_1){
     Priv priv;
-    priv.IAddNewGroup("G1",2);
-    ASSERT_EQ(true, priv.IAddNewGroup("G2",4));
+    priv.addNewGroup("G1",2);
+    ASSERT_EQ(true, priv.addNewGroup("G2",4));
 }
 
 TEST(privGroup, incorrectAddNewGroup){
     Priv priv;
-    priv.IAddNewGroup("G1",2);
-    ASSERT_EQ(false, priv.IAddNewGroup("G1",4));
+    priv.addNewGroup("G1",2);
+    ASSERT_EQ(false, priv.addNewGroup("G1",4));
 }
 
 TEST(privGroup, correctAddNewClientGroup_1){
     Priv priv;
-    priv.IAddNewGroup("G1",2);
-    ASSERT_EQ(true, priv.IAddNewClientToGroup("G1", 3));
+    priv.addNewGroup("G1",2);
+    ASSERT_EQ(true, priv.addNewClientToGroup("G1", 3));
 }
 
 TEST(privGroup, correctAddNewClientGroup_2){
     Priv priv;
-    priv.IAddNewGroup("G1",2);
-    priv.IAddNewClientToGroup("G1", 4);
-    ASSERT_EQ(true, priv.IAddNewClientToGroup("G1", 3));
+    priv.addNewGroup("G1",2);
+    priv.addNewClientToGroup("G1", 4);
+    ASSERT_EQ(true, priv.addNewClientToGroup("G1", 3));
 }
 
 TEST(privGroup, incorrectAddNewClientGroup){
     Priv priv;
-    priv.IAddNewGroup("G1",2);
-    ASSERT_EQ(false, priv.IAddNewClientToGroup("G2", 3));
+    priv.addNewGroup("G1",2);
+    ASSERT_EQ(false, priv.addNewClientToGroup("G2", 3));
 }
 
 TEST(account, succesfulCreate){
-    Server *server = new Server();
-    ASSERT_EQ("1~accept~ ",server->CreateAccount("pawel","haslo",1));
-    delete server;
+    MockSocket mocksocket;
+    Server server(mocksocket);
+    ASSERT_EQ("1~accept~ ",server.createAccount("pawel","haslo",1));
 }
 
 TEST(account, failureCreate){
-    Server *server = new Server();
-    server->CreateAccount("pawel","haslo",1);
-    ASSERT_EQ("1~refuse~ ",server->CreateAccount("pawel","haslo",1));
-    delete server;
+    MockSocket mocksocket;
+    Server server(mocksocket);
+    server.createAccount("pawel","haslo",1);
+    ASSERT_EQ("1~refuse~ ",server.createAccount("pawel","haslo",1));
 }
 
 TEST(account, logoutAndSuccesfulLogin){
     int16_t temp =1;
-    Server *server = new Server();
-    server->CreateAccount("pawel","haslo",1);
-    server->Logout(temp);
-    ASSERT_EQ("0~accept~ ", server->LoginToServer("pawel","haslo",1));
-    delete server;
+    MockSocket mocksocket;
+    Server server(mocksocket);
+    server.createAccount("pawel","haslo",1);
+    server.logout(temp);
+    ASSERT_EQ("0~accept~ ", server.loginToServer("pawel","haslo",1));
 }
 
 TEST(account, failureLogin){
-    Server *server = new Server();
-    ASSERT_EQ("0~refuse~ ", server->LoginToServer("pawel","haslo",1));
-    delete server;
+    MockSocket mocksocket;
+    Server server(mocksocket);
+    ASSERT_EQ("0~refuse~ ", server.loginToServer("pawel","haslo",1));
 }
 
 TEST(file, savefile){
-    Server *server = new Server();
-    server->CreateAccount("pawel","haslo",1);
-    ASSERT_EQ(true,server->ISaveFile());
-    delete server;
+    MockSocket mocksocket;
+    Server server(mocksocket);
+    server.createAccount("pawel","haslo",1);
+    ASSERT_EQ(true,server.saveFile());
 }
 
 TEST(file, readfile){
-    Server *server = new Server();
-    server->IReadFile();
-    ASSERT_EQ("0~accept~ ", server->LoginToServer("pawel","haslo",1));
-    delete server;
+    MockSocket mocksocket;
+    Server server(mocksocket);
+    server.readFile();
+    ASSERT_EQ("0~accept~ ", server.loginToServer("pawel","haslo",1));
 }
 
 
@@ -123,44 +123,32 @@ TEST(socket, availableSocket){
     MockSocket mocksocket;
     EXPECT_CALL(mocksocket, Connect(_)).WillOnce(Return(true));
 
-    Server *server = new Server();
-    server->testMock(&mocksocket);
-
-    ASSERT_TRUE(server->ISetSocket(88));
-    delete server;
+    Server server(mocksocket);
+    ASSERT_TRUE(server.setSocket(88));
 }
 
 TEST(socket, unavailableSocket){
     MockSocket mocksocket;
     EXPECT_CALL(mocksocket, Connect(_)).WillOnce(Return(false));
 
-    Server *server = new Server();
-    server->testMock(&mocksocket);
-
-    ASSERT_FALSE(server->ISetSocket(88));
-    delete server;
+    Server server(mocksocket);
+    ASSERT_FALSE(server.setSocket(88));
 }
 
 TEST(socket, availablePort){
     MockSocket mocksocket;
     EXPECT_CALL(mocksocket, Bind(_,_)).WillOnce(Return(true));
 
-    Server *server = new Server();
-    server->testMock(&mocksocket);
-
-    ASSERT_TRUE(server->IBindPort());
-    delete server;
+    Server server(mocksocket);
+    ASSERT_TRUE(server.bindPort());
 }
 
 TEST(socket, unavailablePort){
     MockSocket mocksocket;
     ON_CALL(mocksocket, Bind(_,_)).WillByDefault(Return(false));
 
-    Server *server = new Server();
-    server->testMock(&mocksocket);
-
-    ASSERT_FALSE(server->IBindPort());
-    delete server;
+    Server server(mocksocket);
+    ASSERT_FALSE(server.bindPort());
 }
 
 TEST(connection, correctInit){
@@ -168,11 +156,8 @@ TEST(connection, correctInit){
     ON_CALL(mocksocket, Connect(_)).WillByDefault(Return(true));
     ON_CALL(mocksocket, Bind(_,_)).WillByDefault(Return(true));
 
-    Server *server = new Server();
-    server->testMock(&mocksocket);
-
-    ASSERT_TRUE(server->IInitConnection(88));
-    delete server;
+    Server server(mocksocket);
+    ASSERT_TRUE(server.initConnection(88));
 }
 
 TEST(connection, incorrectInitBindFalse){
@@ -180,11 +165,8 @@ TEST(connection, incorrectInitBindFalse){
     ON_CALL(mocksocket, Connect(_)).WillByDefault(Return(true));
     ON_CALL(mocksocket, Bind(_,_)).WillByDefault(Return(false));
 
-    Server *server = new Server();
-    server->testMock(&mocksocket);
-
-    ASSERT_FALSE(server->IInitConnection(88));
-    delete server;
+    Server server(mocksocket);
+    ASSERT_FALSE(server.initConnection(88));
 }
 
 TEST(connection, incorrectInitSetSocketFalse){
@@ -192,12 +174,8 @@ TEST(connection, incorrectInitSetSocketFalse){
     ON_CALL(mocksocket, Connect(_)).WillByDefault(Return(false));
     ON_CALL(mocksocket, Bind(_,_)).WillByDefault(Return(true));
 
-
-    Server *server = new Server();
-    server->testMock(&mocksocket);
-
-    ASSERT_FALSE(server->IInitConnection(88));
-    delete server;
+    Server server(mocksocket);
+    ASSERT_FALSE(server.initConnection(88));
 }
 
 TEST(connection, incorrectInitSetBothFalse){
@@ -205,12 +183,8 @@ TEST(connection, incorrectInitSetBothFalse){
     ON_CALL(mocksocket, Connect(_)).WillByDefault(Return(false));
     ON_CALL(mocksocket, Bind(_,_)).WillByDefault(Return(false));
 
-
-    Server *server = new Server();
-    server->testMock(&mocksocket);
-
-    ASSERT_FALSE(server->IInitConnection(88));
-    delete server;
+    Server server(mocksocket);
+    ASSERT_FALSE(server.initConnection(88));
 }
 
 int main(int argc, char *argv[])

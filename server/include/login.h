@@ -32,12 +32,12 @@ public:
      * @brief IGetLogin return login of client
      * @return login as string
      */
-    std::string IGetLogin() override;
+    std::string getLogin() override;
     /**
      * @brief IGetFd return socket descriptor of client
      * @return descriptor as int
      */
-    int16_t IGetFd()override;
+    int16_t getFd()override;
 
 private:
     int16_t fd; ///< socket descriptor

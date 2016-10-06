@@ -38,18 +38,18 @@ public:
      * @brief IGetTitle return name of group
      * @return group name as string
      */
-    std::string IGetTitle() override;
+    std::string getTitle() override;
     /**
      * @brief IAddClient allows to add new client to vector
      * @param a_client client socket as int
      * @return true or false
      */
-    bool IAddClient(int16_t a_client) override;
+    bool addClient(int16_t a_client) override;
     /**
      * @brief IGetClientsList return vector with descriptors
      * @return vector of ints
      */
-    std::vector <int16_t> IGetClientsList() override;
+    std::vector <int16_t> getClientsList() override;
 
 private:
     std::string m_title; ///< group title
