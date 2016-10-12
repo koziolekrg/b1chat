@@ -17,6 +17,7 @@
 #include <vector>
 #include <list>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 #include <sys/socket.h>
 #include <error.h>
 #include <stdio.h>

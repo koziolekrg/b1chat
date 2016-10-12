@@ -41,6 +41,7 @@ void Socket::SetSocket(int16_t &a_sd, timeval &a_tv,sockaddr_in &a_serverSocket,
     a_serverSocket.sin_family = AF_INET;
     a_serverSocket.sin_addr.s_addr = htonl (INADDR_ANY);
     a_serverSocket.sin_port = htons (a_port);
+
 }
 
 void Socket::Listen(int16_t a_sd){
@@ -66,6 +67,14 @@ bool Socket::Receive(int16_t a_setClient,char *a_buffer){
     status = read(a_setClient, a_buffer, BUFF_SIZE);
 
     return status;
+}
+
+std::string Socket::getAddress(int16_t a_sd){
+    struct ifreq ifr;
+    strncpy(ifr.ifr_name, "enp0s3", IFNAMSIZ-1);
+    ioctl(a_sd, SIOCGIFADDR, &ifr);
+    std::string retVal = inet_ntoa(((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr);
+    return retVal;
 }
 
 

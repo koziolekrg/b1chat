@@ -137,6 +137,9 @@ void Server::startListening(int16_t a_port){
     m_nfds = m_sd;
 
     std::cout<<"[server] Wait at port["<<a_port<<"]"<<std::endl;
+
+
+    std::cout<<"[server] Address ["<<m_socket.getAddress(m_sd)<<"]"<<std::endl;
     fflush (stdout);
 
     while (1)
@@ -392,5 +395,4 @@ void Server::logout(int16_t &a_client){
     sendMessage(msg, 0);
     a_client= 0;
 }
-
 
