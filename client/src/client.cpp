@@ -161,7 +161,6 @@ void Client::receiveFromServer()
                 }
             }
             if(v_msg[0] == "4"){ ///< add client to group
-                std::cout<<"? "<<v_msg[1]<<" ?";
                 if(v_msg[1].compare("accept") == 0){
                     std::cout<<"[Server] Client added"<<std::endl;
                 }
