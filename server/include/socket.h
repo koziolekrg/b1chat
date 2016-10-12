@@ -4,7 +4,11 @@
 #include <string.h>
 #include <iostream>
 #include <netinet/in.h>
+#include <sys/types.h>
 #include <sys/socket.h>
+#include <sys/ioctl.h>
+#include <arpa/inet.h>
+#include <net/if.h>
 #include <unistd.h>
 #include "isocket.h"
 
@@ -22,6 +26,7 @@ public:
     void Listen(int16_t a_sd);
     bool Send(int16_t fd, string a_message);
     bool Receive(int16_t a_setClient,char *a_buffer);
+    std::string getAddress(int16_t a_sd);
 };
 
 // end of class Socket
