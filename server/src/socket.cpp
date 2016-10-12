@@ -63,7 +63,6 @@ bool Socket::Send(int16_t fd, string a_message){
 }
 bool Socket::Receive(int16_t a_setClient,char *a_buffer){
     bool status = 0;
-    cout<<"MSG SIZE: "<<sizeof (a_buffer);
     status = read(a_setClient, a_buffer, BUFF_SIZE);
 
     return status;
