@@ -1,0 +1,174 @@
+\hypertarget{classSocket}{}\section{Socket Class Reference}
+\label{classSocket}\index{Socket@{Socket}}
+
+
+Inheritance diagram for Socket\+:
+% FIG 0
+
+
+Collaboration diagram for Socket\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classSocket_a0d98a4408b7b7b76957a1617f490bd64}{Bind} (int16\+\_\+t \&a\+\_\+sd, sockaddr\+\_\+in \&a\+\_\+server\+Socket)
+\begin{DoxyCompactList}\small\item\em Bind binding addres and port if it\textquotesingle{}s available. \end{DoxyCompactList}\item 
+bool \hyperlink{classSocket_a4786650bf1e156334c9cd40b83bdfeca}{Connect} (int16\+\_\+t \&a\+\_\+sd)
+\begin{DoxyCompactList}\small\item\em Connect init all variables. \end{DoxyCompactList}\item 
+void \hyperlink{classSocket_a4d90cf071742bfa7183c2dee55bfbade}{Set\+Socket} (int16\+\_\+t \&a\+\_\+sd, timeval \&a\+\_\+tv, sockaddr\+\_\+in \&a\+\_\+server\+Socket, int16\+\_\+t a\+\_\+port)
+\begin{DoxyCompactList}\small\item\em Set\+Socket responsible for setting port number. \end{DoxyCompactList}\item 
+void \hyperlink{classSocket_ac7d1ada7822958bc98fb70bd9cc75f0c}{Listen} (int16\+\_\+t a\+\_\+sd)
+\begin{DoxyCompactList}\small\item\em Listen starting listetning on port for clients messages. \end{DoxyCompactList}\item 
+bool \hyperlink{classSocket_ad41fd961210164e62d0613131ccceb51}{Send} (int16\+\_\+t fd, string a\+\_\+message)
+\begin{DoxyCompactList}\small\item\em Send allows to sending messages. \end{DoxyCompactList}\item 
+bool \hyperlink{classSocket_aa4bfe726a656887b06ff82fd9cc7444f}{Receive} (int16\+\_\+t a\+\_\+set\+Client, char $\ast$a\+\_\+buffer)
+\begin{DoxyCompactList}\small\item\em Receive allows to receive messages. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classSocket_a0a1c08e52a4e7c6acb32b72545f0645d}{get\+Address} (int16\+\_\+t a\+\_\+sd)
+\begin{DoxyCompactList}\small\item\em get\+Address \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{Socket@{Socket}!Bind@{Bind}}
+\index{Bind@{Bind}!Socket@{Socket}}
+\subsubsection[{\texorpdfstring{Bind(int16\+\_\+t \&a\+\_\+sd, sockaddr\+\_\+in \&a\+\_\+server\+Socket)}{Bind(int16_t &a_sd, sockaddr_in &a_serverSocket)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Socket\+::\+Bind (
+\begin{DoxyParamCaption}
+\item[{int16\+\_\+t \&}]{a\+\_\+sd, }
+\item[{sockaddr\+\_\+in \&}]{a\+\_\+server\+Socket}
+\end{DoxyParamCaption}
+)}\hypertarget{classSocket_a0d98a4408b7b7b76957a1617f490bd64}{}\label{classSocket_a0d98a4408b7b7b76957a1617f490bd64}
+
+
+Bind binding addres and port if it\textquotesingle{}s available. 
+
+\begin{DoxyReturn}{Returns}
+true or false 
+\end{DoxyReturn}
+\index{Socket@{Socket}!Connect@{Connect}}
+\index{Connect@{Connect}!Socket@{Socket}}
+\subsubsection[{\texorpdfstring{Connect(int16\+\_\+t \&a\+\_\+sd)}{Connect(int16_t &a_sd)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Socket\+::\+Connect (
+\begin{DoxyParamCaption}
+\item[{int16\+\_\+t \&}]{a\+\_\+sd}
+\end{DoxyParamCaption}
+)}\hypertarget{classSocket_a4786650bf1e156334c9cd40b83bdfeca}{}\label{classSocket_a4786650bf1e156334c9cd40b83bdfeca}
+
+
+Connect init all variables. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+port} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Socket@{Socket}!get\+Address@{get\+Address}}
+\index{get\+Address@{get\+Address}!Socket@{Socket}}
+\subsubsection[{\texorpdfstring{get\+Address(int16\+\_\+t a\+\_\+sd)}{getAddress(int16_t a_sd)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Socket\+::get\+Address (
+\begin{DoxyParamCaption}
+\item[{int16\+\_\+t}]{a\+\_\+sd}
+\end{DoxyParamCaption}
+)}\hypertarget{classSocket_a0a1c08e52a4e7c6acb32b72545f0645d}{}\label{classSocket_a0a1c08e52a4e7c6acb32b72545f0645d}
+
+
+get\+Address 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+sd} & get socket of server \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+sstring with address 
+\end{DoxyReturn}
+\index{Socket@{Socket}!Listen@{Listen}}
+\index{Listen@{Listen}!Socket@{Socket}}
+\subsubsection[{\texorpdfstring{Listen(int16\+\_\+t a\+\_\+sd)}{Listen(int16_t a_sd)}}]{\setlength{\rightskip}{0pt plus 5cm}void Socket\+::\+Listen (
+\begin{DoxyParamCaption}
+\item[{int16\+\_\+t}]{a\+\_\+sd}
+\end{DoxyParamCaption}
+)}\hypertarget{classSocket_ac7d1ada7822958bc98fb70bd9cc75f0c}{}\label{classSocket_ac7d1ada7822958bc98fb70bd9cc75f0c}
+
+
+Listen starting listetning on port for clients messages. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+port} & int port number \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true or false 
+\end{DoxyReturn}
+\index{Socket@{Socket}!Receive@{Receive}}
+\index{Receive@{Receive}!Socket@{Socket}}
+\subsubsection[{\texorpdfstring{Receive(int16\+\_\+t a\+\_\+set\+Client, char $\ast$a\+\_\+buffer)}{Receive(int16_t a_setClient, char *a_buffer)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Socket\+::\+Receive (
+\begin{DoxyParamCaption}
+\item[{int16\+\_\+t}]{a\+\_\+set\+Client, }
+\item[{char $\ast$}]{a\+\_\+buffer}
+\end{DoxyParamCaption}
+)}\hypertarget{classSocket_aa4bfe726a656887b06ff82fd9cc7444f}{}\label{classSocket_aa4bfe726a656887b06ff82fd9cc7444f}
+
+
+Receive allows to receive messages. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+set\+Client} & set of clients \\
+\hline
+{\em a\+\_\+buffer} & variable with message \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true or false 
+\end{DoxyReturn}
+\index{Socket@{Socket}!Send@{Send}}
+\index{Send@{Send}!Socket@{Socket}}
+\subsubsection[{\texorpdfstring{Send(int16\+\_\+t fd, string a\+\_\+message)}{Send(int16_t fd, string a_message)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Socket\+::\+Send (
+\begin{DoxyParamCaption}
+\item[{int16\+\_\+t}]{fd, }
+\item[{string}]{a\+\_\+message}
+\end{DoxyParamCaption}
+)}\hypertarget{classSocket_ad41fd961210164e62d0613131ccceb51}{}\label{classSocket_ad41fd961210164e62d0613131ccceb51}
+
+
+Send allows to sending messages. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+message} & message to send as string \\
+\hline
+{\em a\+\_\+client} & socket descriptor as int \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true or false 
+\end{DoxyReturn}
+\index{Socket@{Socket}!Set\+Socket@{Set\+Socket}}
+\index{Set\+Socket@{Set\+Socket}!Socket@{Socket}}
+\subsubsection[{\texorpdfstring{Set\+Socket(int16\+\_\+t \&a\+\_\+sd, timeval \&a\+\_\+tv, sockaddr\+\_\+in \&a\+\_\+server\+Socket, int16\+\_\+t a\+\_\+port)}{SetSocket(int16_t &a_sd, timeval &a_tv, sockaddr_in &a_serverSocket, int16_t a_port)}}]{\setlength{\rightskip}{0pt plus 5cm}void Socket\+::\+Set\+Socket (
+\begin{DoxyParamCaption}
+\item[{int16\+\_\+t \&}]{a\+\_\+sd, }
+\item[{timeval \&}]{a\+\_\+tv, }
+\item[{sockaddr\+\_\+in \&}]{a\+\_\+server\+Socket, }
+\item[{int16\+\_\+t}]{a\+\_\+port}
+\end{DoxyParamCaption}
+)}\hypertarget{classSocket_a4d90cf071742bfa7183c2dee55bfbade}{}\label{classSocket_a4d90cf071742bfa7183c2dee55bfbade}
+
+
+Set\+Socket responsible for setting port number. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+port} & int port number \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true or false 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/socket.\+h\item 
+src/socket.\+cpp\end{DoxyCompactItemize}

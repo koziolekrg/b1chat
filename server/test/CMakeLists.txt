@@ -24,5 +24,5 @@ include_directories("../include/" "./include/" "../interface")
 
 add_executable(${PROJECT_NAME} "../include/server.h" "../include/socket.h" "../include/user.h" "../include/group.h" "../include/priv.h" "../include/login.h" "./mocksocket.h"${sources})
 
-target_link_libraries(b1comm ${GTEST_BOTH_LIBRARIES} pthread gtest gmock)
+target_link_libraries(server_unittest ${GTEST_BOTH_LIBRARIES} pthread gtest gmock)
 

@@ -108,52 +108,51 @@ Collaboration diagram for Server:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad5ec9462b520e59f7ea831e157ee5e59"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#ad5ec9462b520e59f7ea831e157ee5e59">Server</a> ()</td></tr>
-<tr class="memdesc:ad5ec9462b520e59f7ea831e157ee5e59"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classServer.html">Server</a> create an <a class="el" href="classServer.html">Server</a> with selected port number.  <a href="#ad5ec9462b520e59f7ea831e157ee5e59">More...</a><br /></td></tr>
-<tr class="separator:ad5ec9462b520e59f7ea831e157ee5e59"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaec9faaa11db546a4ccc75a05c2678b6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#aaec9faaa11db546a4ccc75a05c2678b6">IInitConnection</a> (int16_t a_port)</td></tr>
-<tr class="memdesc:aaec9faaa11db546a4ccc75a05c2678b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">IInitConnection.  <a href="#aaec9faaa11db546a4ccc75a05c2678b6">More...</a><br /></td></tr>
-<tr class="separator:aaec9faaa11db546a4ccc75a05c2678b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cf5e9e8ae0d4c818f989d7ec4739c99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#a6cf5e9e8ae0d4c818f989d7ec4739c99">IStartListening</a> (int16_t a_port) override</td></tr>
-<tr class="memdesc:a6cf5e9e8ae0d4c818f989d7ec4739c99"><td class="mdescLeft">&#160;</td><td class="mdescRight">IStartListening starting listetning on port for clients messages.  <a href="#a6cf5e9e8ae0d4c818f989d7ec4739c99">More...</a><br /></td></tr>
-<tr class="separator:a6cf5e9e8ae0d4c818f989d7ec4739c99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f43c5c286c0a64624a803fcf2f3c85a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#a7f43c5c286c0a64624a803fcf2f3c85a">ISendMessage</a> (std::string a_message, int16_t a_client) override</td></tr>
-<tr class="memdesc:a7f43c5c286c0a64624a803fcf2f3c85a"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISendMessage allows to sending messages.  <a href="#a7f43c5c286c0a64624a803fcf2f3c85a">More...</a><br /></td></tr>
-<tr class="separator:a7f43c5c286c0a64624a803fcf2f3c85a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a404070676bda1e2582cd6b467e73b6a2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a404070676bda1e2582cd6b467e73b6a2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#a404070676bda1e2582cd6b467e73b6a2">IIncommingConnection</a> () override</td></tr>
-<tr class="memdesc:a404070676bda1e2582cd6b467e73b6a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">IIncommingConnection get incomming connection. <br /></td></tr>
-<tr class="separator:a404070676bda1e2582cd6b467e73b6a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fc09fa8b4132eacacef7e3473473845"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#a3fc09fa8b4132eacacef7e3473473845">IHandleMessage</a> (std::string a_buffer, int16_t &amp;a_client)</td></tr>
-<tr class="memdesc:a3fc09fa8b4132eacacef7e3473473845"><td class="mdescLeft">&#160;</td><td class="mdescRight">IHandleMessage handle received message.  <a href="#a3fc09fa8b4132eacacef7e3473473845">More...</a><br /></td></tr>
-<tr class="separator:a3fc09fa8b4132eacacef7e3473473845"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80089a729a3664bf580c27ae5a86d691"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#a80089a729a3664bf580c27ae5a86d691">ISetSocket</a> (int16_t a_port)</td></tr>
-<tr class="memdesc:a80089a729a3664bf580c27ae5a86d691"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISetSocket responsible for setting port number.  <a href="#a80089a729a3664bf580c27ae5a86d691">More...</a><br /></td></tr>
-<tr class="separator:a80089a729a3664bf580c27ae5a86d691"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d95b9a38864072084277bb84421475e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#a4d95b9a38864072084277bb84421475e">IBindPort</a> ()</td></tr>
-<tr class="memdesc:a4d95b9a38864072084277bb84421475e"><td class="mdescLeft">&#160;</td><td class="mdescRight">IBindPort binding addres and port if it's available.  <a href="#a4d95b9a38864072084277bb84421475e">More...</a><br /></td></tr>
-<tr class="separator:a4d95b9a38864072084277bb84421475e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc80cd989752eccc1fdd81edaf8be4af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#adc80cd989752eccc1fdd81edaf8be4af">IReadFile</a> ()</td></tr>
-<tr class="memdesc:adc80cd989752eccc1fdd81edaf8be4af"><td class="mdescLeft">&#160;</td><td class="mdescRight">IReadFile read data of existing clients from file.  <a href="#adc80cd989752eccc1fdd81edaf8be4af">More...</a><br /></td></tr>
-<tr class="separator:adc80cd989752eccc1fdd81edaf8be4af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa598d1dba8b8a0c6a4b75be14726798a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#aa598d1dba8b8a0c6a4b75be14726798a">ISaveFile</a> ()</td></tr>
-<tr class="memdesc:aa598d1dba8b8a0c6a4b75be14726798a"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISaveFile save all data to file.  <a href="#aa598d1dba8b8a0c6a4b75be14726798a">More...</a><br /></td></tr>
-<tr class="separator:aa598d1dba8b8a0c6a4b75be14726798a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3697709d2f04345928e0ee2ec2b71d0"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#ac3697709d2f04345928e0ee2ec2b71d0">IDescriptorToLogin</a> (int a_client)</td></tr>
-<tr class="memdesc:ac3697709d2f04345928e0ee2ec2b71d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">IDescriptorToLogin convert client descriptor to his login.  <a href="#ac3697709d2f04345928e0ee2ec2b71d0">More...</a><br /></td></tr>
-<tr class="separator:ac3697709d2f04345928e0ee2ec2b71d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e9fccb595bba3c40bf11485e369eae4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#a1e9fccb595bba3c40bf11485e369eae4">ILoginToDescriptor</a> (std::string a_client)</td></tr>
-<tr class="memdesc:a1e9fccb595bba3c40bf11485e369eae4"><td class="mdescLeft">&#160;</td><td class="mdescRight">ILoginToDescriptor covert client login to his descriptor.  <a href="#a1e9fccb595bba3c40bf11485e369eae4">More...</a><br /></td></tr>
-<tr class="separator:a1e9fccb595bba3c40bf11485e369eae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac91647519f61ee81a6cee0a7fd97fa45"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#ac91647519f61ee81a6cee0a7fd97fa45">LoginToServer</a> (std::string a_login, std::string a_password, int a_client)</td></tr>
-<tr class="memdesc:ac91647519f61ee81a6cee0a7fd97fa45"><td class="mdescLeft">&#160;</td><td class="mdescRight">LoginToServer handling request for login.  <a href="#ac91647519f61ee81a6cee0a7fd97fa45">More...</a><br /></td></tr>
-<tr class="separator:ac91647519f61ee81a6cee0a7fd97fa45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46726966334ec6be8d6eebc8e6ac19f0"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#a46726966334ec6be8d6eebc8e6ac19f0">CreateAccount</a> (std::string a_login, std::string a_password, int a_client)</td></tr>
-<tr class="memdesc:a46726966334ec6be8d6eebc8e6ac19f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">CreateAccount handling request for create account.  <a href="#a46726966334ec6be8d6eebc8e6ac19f0">More...</a><br /></td></tr>
-<tr class="separator:a46726966334ec6be8d6eebc8e6ac19f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a739fb2e07441e3e8d005595d004fc6e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#a739fb2e07441e3e8d005595d004fc6e6">Logout</a> (int16_t &amp;a_client)</td></tr>
-<tr class="memdesc:a739fb2e07441e3e8d005595d004fc6e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logout handling logout signal (disconnec or request from client)  <a href="#a739fb2e07441e3e8d005595d004fc6e6">More...</a><br /></td></tr>
-<tr class="separator:a739fb2e07441e3e8d005595d004fc6e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aded96e969ba0101d4edd6ec60636714e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#aded96e969ba0101d4edd6ec60636714e">Server</a> (ISocket &amp;aSocket)</td></tr>
+<tr class="memdesc:aded96e969ba0101d4edd6ec60636714e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classServer.html">Server</a> create an <a class="el" href="classServer.html">Server</a> with selected port number.  <a href="#aded96e969ba0101d4edd6ec60636714e">More...</a><br /></td></tr>
+<tr class="separator:aded96e969ba0101d4edd6ec60636714e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3a42e12720f9f0ad9a380c294aec712"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#ad3a42e12720f9f0ad9a380c294aec712">initConnection</a> (int16_t a_port)</td></tr>
+<tr class="memdesc:ad3a42e12720f9f0ad9a380c294aec712"><td class="mdescLeft">&#160;</td><td class="mdescRight">IInitConnection.  <a href="#ad3a42e12720f9f0ad9a380c294aec712">More...</a><br /></td></tr>
+<tr class="separator:ad3a42e12720f9f0ad9a380c294aec712"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac25c7d3ab23c188bd7db94bd5743315"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#aac25c7d3ab23c188bd7db94bd5743315">startListening</a> (int16_t a_port) override</td></tr>
+<tr class="memdesc:aac25c7d3ab23c188bd7db94bd5743315"><td class="mdescLeft">&#160;</td><td class="mdescRight">IStartListening starting listetning on port for clients messages.  <a href="#aac25c7d3ab23c188bd7db94bd5743315">More...</a><br /></td></tr>
+<tr class="separator:aac25c7d3ab23c188bd7db94bd5743315"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a663a746787de8b7857562f9de7d0b165"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#a663a746787de8b7857562f9de7d0b165">sendMessage</a> (std::string a_message, int16_t a_client) override</td></tr>
+<tr class="memdesc:a663a746787de8b7857562f9de7d0b165"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISendMessage allows to sending messages.  <a href="#a663a746787de8b7857562f9de7d0b165">More...</a><br /></td></tr>
+<tr class="separator:a663a746787de8b7857562f9de7d0b165"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2348adb4c3a2935b164f7352c3631dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#ae2348adb4c3a2935b164f7352c3631dc">incommingConnection</a> () override</td></tr>
+<tr class="memdesc:ae2348adb4c3a2935b164f7352c3631dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">IIncommingConnection get incomming connection.  <a href="#ae2348adb4c3a2935b164f7352c3631dc">More...</a><br /></td></tr>
+<tr class="separator:ae2348adb4c3a2935b164f7352c3631dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69162b266362feca45186e7b7ba324d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#a69162b266362feca45186e7b7ba324d8">handleMessage</a> (std::string a_buffer, int16_t &amp;a_client)</td></tr>
+<tr class="memdesc:a69162b266362feca45186e7b7ba324d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">IHandleMessage handle received message.  <a href="#a69162b266362feca45186e7b7ba324d8">More...</a><br /></td></tr>
+<tr class="separator:a69162b266362feca45186e7b7ba324d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba3fbe9eacc09c66dbf27a7a51cd4428"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#aba3fbe9eacc09c66dbf27a7a51cd4428">setSocket</a> (int16_t a_port)</td></tr>
+<tr class="memdesc:aba3fbe9eacc09c66dbf27a7a51cd4428"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISetSocket responsible for setting port number.  <a href="#aba3fbe9eacc09c66dbf27a7a51cd4428">More...</a><br /></td></tr>
+<tr class="separator:aba3fbe9eacc09c66dbf27a7a51cd4428"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77c1c337fa5560fbb7da00db0e37535c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#a77c1c337fa5560fbb7da00db0e37535c">bindPort</a> ()</td></tr>
+<tr class="memdesc:a77c1c337fa5560fbb7da00db0e37535c"><td class="mdescLeft">&#160;</td><td class="mdescRight">IBindPort binding addres and port if it's available.  <a href="#a77c1c337fa5560fbb7da00db0e37535c">More...</a><br /></td></tr>
+<tr class="separator:a77c1c337fa5560fbb7da00db0e37535c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a400b5472132b98a93a3927c61b2fc3a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#a400b5472132b98a93a3927c61b2fc3a5">readFile</a> ()</td></tr>
+<tr class="memdesc:a400b5472132b98a93a3927c61b2fc3a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">IReadFile read data of existing clients from file.  <a href="#a400b5472132b98a93a3927c61b2fc3a5">More...</a><br /></td></tr>
+<tr class="separator:a400b5472132b98a93a3927c61b2fc3a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74f4d214e9e7ac4585f64ca3edd9f6cb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#a74f4d214e9e7ac4585f64ca3edd9f6cb">saveFile</a> ()</td></tr>
+<tr class="memdesc:a74f4d214e9e7ac4585f64ca3edd9f6cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISaveFile save all data to file.  <a href="#a74f4d214e9e7ac4585f64ca3edd9f6cb">More...</a><br /></td></tr>
+<tr class="separator:a74f4d214e9e7ac4585f64ca3edd9f6cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89ae87897e4230129c4e72f3cfe7d59a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#a89ae87897e4230129c4e72f3cfe7d59a">descriptorToLogin</a> (int a_client)</td></tr>
+<tr class="memdesc:a89ae87897e4230129c4e72f3cfe7d59a"><td class="mdescLeft">&#160;</td><td class="mdescRight">IDescriptorToLogin convert client descriptor to his login.  <a href="#a89ae87897e4230129c4e72f3cfe7d59a">More...</a><br /></td></tr>
+<tr class="separator:a89ae87897e4230129c4e72f3cfe7d59a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1c90c5a69cf69f05876d82dc4cd59ea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#ab1c90c5a69cf69f05876d82dc4cd59ea">loginToDescriptor</a> (std::string a_client)</td></tr>
+<tr class="memdesc:ab1c90c5a69cf69f05876d82dc4cd59ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">ILoginToDescriptor covert client login to his descriptor.  <a href="#ab1c90c5a69cf69f05876d82dc4cd59ea">More...</a><br /></td></tr>
+<tr class="separator:ab1c90c5a69cf69f05876d82dc4cd59ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a390355cb20ce7eebc24a9cb73a5c0e93"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#a390355cb20ce7eebc24a9cb73a5c0e93">loginToServer</a> (std::string a_login, std::string a_password, int a_client)</td></tr>
+<tr class="memdesc:a390355cb20ce7eebc24a9cb73a5c0e93"><td class="mdescLeft">&#160;</td><td class="mdescRight">LoginToServer handling request for login.  <a href="#a390355cb20ce7eebc24a9cb73a5c0e93">More...</a><br /></td></tr>
+<tr class="separator:a390355cb20ce7eebc24a9cb73a5c0e93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabf912d2c50b1e4b5a2d0f76c7838fa2"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#aabf912d2c50b1e4b5a2d0f76c7838fa2">createAccount</a> (std::string a_login, std::string a_password, int a_client)</td></tr>
+<tr class="memdesc:aabf912d2c50b1e4b5a2d0f76c7838fa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">CreateAccount handling request for create account.  <a href="#aabf912d2c50b1e4b5a2d0f76c7838fa2">More...</a><br /></td></tr>
+<tr class="separator:aabf912d2c50b1e4b5a2d0f76c7838fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf6c7e85e5f8a06e57b5dbe938b84932"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#abf6c7e85e5f8a06e57b5dbe938b84932">logout</a> (int16_t &amp;a_client)</td></tr>
+<tr class="memdesc:abf6c7e85e5f8a06e57b5dbe938b84932"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logout handling logout signal (disconnec or request from client)  <a href="#abf6c7e85e5f8a06e57b5dbe938b84932">More...</a><br /></td></tr>
+<tr class="separator:abf6c7e85e5f8a06e57b5dbe938b84932"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7c9da91457c66572569546ba936034d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classServer.html#ac7c9da91457c66572569546ba936034d">Exit</a> (int signum)</td></tr>
 <tr class="memdesc:ac7c9da91457c66572569546ba936034d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exit exit signal handle.  <a href="#ac7c9da91457c66572569546ba936034d">More...</a><br /></td></tr>
 <tr class="separator:ac7c9da91457c66572569546ba936034d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -161,14 +160,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class is responsible for handling all connection events. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ad5ec9462b520e59f7ea831e157ee5e59"></a>
+<a class="anchor" id="aded96e969ba0101d4edd6ec60636714e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">Server::Server </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">ISocket &amp;&#160;</td>
+          <td class="paramname"><em>aSocket</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -185,12 +185,30 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a46726966334ec6be8d6eebc8e6ac19f0"></a>
+<a class="anchor" id="a77c1c337fa5560fbb7da00db0e37535c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Server::CreateAccount </td>
+          <td class="memname">bool Server::bindPort </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>IBindPort binding addres and port if it's available. </p>
+<dl class="section return"><dt>Returns</dt><dd>true or false </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aabf912d2c50b1e4b5a2d0f76c7838fa2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Server::createAccount </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>a_login</em>, </td>
@@ -225,6 +243,35 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>message to client as string - accept/refuse </dd></dl>
+<p>&lt; is login already exist</p>
+<p>&lt; create account and add to online clients </p>
+
+</div>
+</div>
+<a class="anchor" id="a89ae87897e4230129c4e72f3cfe7d59a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Server::descriptorToLogin </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>a_client</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>IDescriptorToLogin convert client descriptor to his login. </p>
+<p>//EXPECT_CALL(mocksocket, SetSocket(_,_,_,_)).WillOnce(Return(true));</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_client</td><td>socket descriptor of client as int </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>client login as string </dd></dl>
+<p>&lt; if descriptor is the same </p>
 
 </div>
 </div>
@@ -249,58 +296,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </table>
   </dd>
 </dl>
+<p>&lt; delete all dynamic alocated objects </p>
 
 </div>
 </div>
-<a class="anchor" id="a4d95b9a38864072084277bb84421475e"></a>
+<a class="anchor" id="a69162b266362feca45186e7b7ba324d8"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Server::IBindPort </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>IBindPort binding addres and port if it's available. </p>
-<dl class="section return"><dt>Returns</dt><dd>true or false </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ac3697709d2f04345928e0ee2ec2b71d0"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string Server::IDescriptorToLogin </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>a_client</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>IDescriptorToLogin convert client descriptor to his login. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">a_client</td><td>socket descriptor of client as int </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>client login as string </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a3fc09fa8b4132eacacef7e3473473845"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Server::IHandleMessage </td>
+          <td class="memname">void Server::handleMessage </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>a_buffer</em>, </td>
@@ -332,18 +337,55 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>broadcast message</p>
 <p>add new group</p>
 <p>add new client to group</p>
+<p>&lt; try add to group descriptor and login (get from descriptor)</p>
 <p>send message to group</p>
+<p>&lt; get clients from correct name of group and redirect message</p>
 <p>send client list</p>
-<p>logout </p>
+<p>&lt; increse string with another login get from online clients</p>
+<p>&lt; increse string with another login get from group clients</p>
+<p>logout</p>
+<p>&lt; find in online clients set selected socket and delete it</p>
+<p>&lt; send confirm to client</p>
+<p>&lt; send broadcast </p>
 
 </div>
 </div>
-<a class="anchor" id="aaec9faaa11db546a4ccc75a05c2678b6"></a>
+<a class="anchor" id="ae2348adb4c3a2935b164f7352c3631dc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Server::incommingConnection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>IIncommingConnection get incomming connection. </p>
+<p>&lt; check all socket if something to read</p>
+<p>&lt; if read return less than 0, that means client disconnect</p>
+<p>&lt; delete clients from online clients list</p>
+<p>&lt; write to descriptor 0</p>
+<p>&lt; if read return more than 0 lets try handle message </p>
+
+</div>
+</div>
+<a class="anchor" id="ad3a42e12720f9f0ad9a380c294aec712"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Server::IInitConnection </td>
+          <td class="memname">bool Server::initConnection </td>
           <td>(</td>
           <td class="paramtype">int16_t&#160;</td>
           <td class="paramname"><em>a_port</em></td><td>)</td>
@@ -360,16 +402,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
-<p>Socket reserving </p>
+<p><a class="el" href="classSocket.html">Socket</a> reserving </p>
 
 </div>
 </div>
-<a class="anchor" id="a1e9fccb595bba3c40bf11485e369eae4"></a>
+<a class="anchor" id="ab1c90c5a69cf69f05876d82dc4cd59ea"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int Server::ILoginToDescriptor </td>
+          <td class="memname">int Server::loginToDescriptor </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>a_client</em></td><td>)</td>
@@ -386,154 +428,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>socket descriptor of client as int </dd></dl>
+<p>&lt; if login is the same </p>
 
 </div>
 </div>
-<a class="anchor" id="adc80cd989752eccc1fdd81edaf8be4af"></a>
+<a class="anchor" id="a390355cb20ce7eebc24a9cb73a5c0e93"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Server::IReadFile </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>IReadFile read data of existing clients from file. </p>
-<dl class="section return"><dt>Returns</dt><dd>true of false </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="aa598d1dba8b8a0c6a4b75be14726798a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Server::ISaveFile </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>ISaveFile save all data to file. </p>
-<dl class="section return"><dt>Returns</dt><dd>true of false </dd></dl>
-<p>close file and the end </p>
-
-</div>
-</div>
-<a class="anchor" id="a7f43c5c286c0a64624a803fcf2f3c85a"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Server::ISendMessage </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>a_message</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int16_t&#160;</td>
-          <td class="paramname"><em>a_client</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>ISendMessage allows to sending messages. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">a_message</td><td>message to send as string </td></tr>
-    <tr><td class="paramname">a_client</td><td>socket descriptor as int </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true or false </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a80089a729a3664bf580c27ae5a86d691"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Server::ISetSocket </td>
-          <td>(</td>
-          <td class="paramtype">int16_t&#160;</td>
-          <td class="paramname"><em>a_port</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>ISetSocket responsible for setting port number. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">a_port</td><td>int port number </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true or false </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a6cf5e9e8ae0d4c818f989d7ec4739c99"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Server::IStartListening </td>
-          <td>(</td>
-          <td class="paramtype">int16_t&#160;</td>
-          <td class="paramname"><em>a_port</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>IStartListening starting listetning on port for clients messages. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">a_port</td><td>int port number </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true or false </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ac91647519f61ee81a6cee0a7fd97fa45"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string Server::LoginToServer </td>
+          <td class="memname">std::string Server::loginToServer </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>a_login</em>, </td>
@@ -568,15 +472,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>message to client as string - accept/refuse </dd></dl>
+<p>&lt; is login and password correct</p>
+<p>&lt; is already logged in</p>
+<p>&lt; if all correct push login to online clients </p>
 
 </div>
 </div>
-<a class="anchor" id="a739fb2e07441e3e8d005595d004fc6e6"></a>
+<a class="anchor" id="abf6c7e85e5f8a06e57b5dbe938b84932"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Server::Logout </td>
+          <td class="memname">void Server::logout </td>
           <td>(</td>
           <td class="paramtype">int16_t &amp;&#160;</td>
           <td class="paramname"><em>a_client</em></td><td>)</td>
@@ -592,6 +499,153 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </table>
   </dd>
 </dl>
+<p>&lt;&lt; find login for descriptor</p>
+<p>&lt;send broadcast to all with disconnect info</p>
+<p>&lt; delete from online clients </p>
+
+</div>
+</div>
+<a class="anchor" id="a400b5472132b98a93a3927c61b2fc3a5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Server::readFile </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>IReadFile read data of existing clients from file. </p>
+<dl class="section return"><dt>Returns</dt><dd>true of false </dd></dl>
+<p>&lt; parsing, every 2 step push new user </p>
+
+</div>
+</div>
+<a class="anchor" id="a74f4d214e9e7ac4585f64ca3edd9f6cb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Server::saveFile </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ISaveFile save all data to file. </p>
+<dl class="section return"><dt>Returns</dt><dd>true of false </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a663a746787de8b7857562f9de7d0b165"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Server::sendMessage </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>a_message</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>a_client</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ISendMessage allows to sending messages. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_message</td><td>message to send as string </td></tr>
+    <tr><td class="paramname">a_client</td><td>socket descriptor as int </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true or false </dd></dl>
+<p>&lt; if variable 0, do send to all online clients </p>
+
+</div>
+</div>
+<a class="anchor" id="aba3fbe9eacc09c66dbf27a7a51cd4428"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Server::setSocket </td>
+          <td>(</td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>a_port</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ISetSocket responsible for setting port number. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_port</td><td>int port number </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true or false </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aac25c7d3ab23c188bd7db94bd5743315"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Server::startListening </td>
+          <td>(</td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>a_port</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>IStartListening starting listetning on port for clients messages. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_port</td><td>int port number </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true or false </dd></dl>
+<p>&lt; fill set with zeros</p>
+<p>&lt; set begin of set with selected socket</p>
+<p>&lt; if socket from set id is readable</p>
+<p>&lt; if new client connected add descriptor to vector </p>
 
 </div>
 </div>

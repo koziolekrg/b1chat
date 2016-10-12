@@ -111,15 +111,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adf70eef5e6d21f9a84290dc4aa1d5f21"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUser.html#adf70eef5e6d21f9a84290dc4aa1d5f21">User</a> (std::string a_login, std::string a_password)</td></tr>
 <tr class="memdesc:adf70eef5e6d21f9a84290dc4aa1d5f21"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classUser.html">User</a>.  <a href="#adf70eef5e6d21f9a84290dc4aa1d5f21">More...</a><br /></td></tr>
 <tr class="separator:adf70eef5e6d21f9a84290dc4aa1d5f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1949b221d5b9142fc6b873ab1f5feed6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUser.html#a1949b221d5b9142fc6b873ab1f5feed6">ICheckLog</a> (std::string a_login, std::string a_password)</td></tr>
-<tr class="memdesc:a1949b221d5b9142fc6b873ab1f5feed6"><td class="mdescLeft">&#160;</td><td class="mdescRight">ICheckLog Check if login and password are correct.  <a href="#a1949b221d5b9142fc6b873ab1f5feed6">More...</a><br /></td></tr>
-<tr class="separator:a1949b221d5b9142fc6b873ab1f5feed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac12b18720e84b74d18f34c9c1981f6f6"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUser.html#ac12b18720e84b74d18f34c9c1981f6f6">IGetLogin</a> ()</td></tr>
-<tr class="memdesc:ac12b18720e84b74d18f34c9c1981f6f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">IGetLogin return login.  <a href="#ac12b18720e84b74d18f34c9c1981f6f6">More...</a><br /></td></tr>
-<tr class="separator:ac12b18720e84b74d18f34c9c1981f6f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6265ead11a9f3beabe52f94691eb20a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUser.html#ab6265ead11a9f3beabe52f94691eb20a">ISaveToFile</a> ()</td></tr>
-<tr class="memdesc:ab6265ead11a9f3beabe52f94691eb20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISaveToFile returning string with login and password for saving file.  <a href="#ab6265ead11a9f3beabe52f94691eb20a">More...</a><br /></td></tr>
-<tr class="separator:ab6265ead11a9f3beabe52f94691eb20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c05d709c1c8799ce275b4b7527b032c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUser.html#a4c05d709c1c8799ce275b4b7527b032c">checkLog</a> (std::string a_login, std::string a_password)</td></tr>
+<tr class="memdesc:a4c05d709c1c8799ce275b4b7527b032c"><td class="mdescLeft">&#160;</td><td class="mdescRight">ICheckLog Check if login and password are correct.  <a href="#a4c05d709c1c8799ce275b4b7527b032c">More...</a><br /></td></tr>
+<tr class="separator:a4c05d709c1c8799ce275b4b7527b032c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac133b423690d15796ae0b17966adee76"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUser.html#ac133b423690d15796ae0b17966adee76">getLogin</a> ()</td></tr>
+<tr class="memdesc:ac133b423690d15796ae0b17966adee76"><td class="mdescLeft">&#160;</td><td class="mdescRight">IGetLogin return login.  <a href="#ac133b423690d15796ae0b17966adee76">More...</a><br /></td></tr>
+<tr class="separator:ac133b423690d15796ae0b17966adee76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeccbfa5150f36307e5b23a87ff6fcd4"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUser.html#aaeccbfa5150f36307e5b23a87ff6fcd4">saveToFile</a> ()</td></tr>
+<tr class="memdesc:aaeccbfa5150f36307e5b23a87ff6fcd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISaveToFile returning string with login and password for saving file.  <a href="#aaeccbfa5150f36307e5b23a87ff6fcd4">More...</a><br /></td></tr>
+<tr class="separator:aaeccbfa5150f36307e5b23a87ff6fcd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class keeps client login and password and handling request for login (checking is login and password correct). </p>
@@ -160,12 +160,12 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a1949b221d5b9142fc6b873ab1f5feed6"></a>
+<a class="anchor" id="a4c05d709c1c8799ce275b4b7527b032c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool User::ICheckLog </td>
+          <td class="memname">bool User::checkLog </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>a_login</em>, </td>
@@ -193,15 +193,16 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true or false </dd></dl>
+<p>&lt; compare login and password with input </p>
 
 </div>
 </div>
-<a class="anchor" id="ac12b18720e84b74d18f34c9c1981f6f6"></a>
+<a class="anchor" id="ac133b423690d15796ae0b17966adee76"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string User::IGetLogin </td>
+          <td class="memname">std::string User::getLogin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -214,12 +215,12 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab6265ead11a9f3beabe52f94691eb20a"></a>
+<a class="anchor" id="aaeccbfa5150f36307e5b23a87ff6fcd4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string User::ISaveToFile </td>
+          <td class="memname">std::string User::saveToFile </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>

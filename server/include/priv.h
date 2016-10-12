@@ -41,7 +41,6 @@ public:
      * @return true or false
      */
     bool addNewClientToGroup(std::string a_title, int16_t a_client) override;
-    /// Method return
     /**
      * @brief IGetClients return all clients in this group
      * @param a_title title group as string

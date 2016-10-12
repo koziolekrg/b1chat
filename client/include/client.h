@@ -44,34 +44,38 @@ public:
     Client(ISocket &aSocket);
     virtual ~Client();
     /**
-     * @brief IConnect method connecting to server via TCP/IP
+     * @brief Connect method connecting to server via TCP/IP
      * @param a_hostAddr server IP address convert from string to address
      * @param a_port server port number as int
      */
     bool connectToServer(std::string a_hostAddr, int a_port) override;
     /**
-     * @brief ILogin method responsible for authenticate user. This method is called
+     * @brief Login method responsible for authenticate user. This method is called
      * as separate thread. While server wont answer with true loop is closed for login.
      * When server return true method will be calling IMainMenu.
      */
     void loginToServer() override;
     /**
-     * @brief IReceive method called in separate thread, called recv in endless
+     * @brief Receive method called in separate thread, called recv in endless
      * loop and handling printing communicates
      */
     void receiveFromServer() override;
     /**
-     * @brief IMainMenu switch for handling inputs from user and calling ISend
+     * @brief MainMenu switch for handling inputs from user and calling ISend
      * @param a_state string with menu status get from user input
      */
     void mainMenu(int a_state) override;
     /**
-     * @brief ISend method allows to send message to server
+     * @brief Send method allows to send message to server
      * @param a_msg message to send as string
      * @return true or false
      */
     bool sendMessage(std::string a_msg) override;
-
+    /**
+     * @brief receiveMessage method allows to receive message
+     * @param a_msg message to send as string
+     * @return true or false
+     */
     bool receiveMessage(std::string &a_msg) override;
 
 

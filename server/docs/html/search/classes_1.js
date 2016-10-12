@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['priv',['Priv',['../classPriv.html',1,'']]]
+  ['login',['Login',['../classLogin.html',1,'']]]
 ];

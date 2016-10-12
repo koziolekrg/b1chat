@@ -1,0 +1,85 @@
+\hypertarget{classLogin}{}\section{Login Class Reference}
+\label{classLogin}\index{Login@{Login}}
+
+
+{\ttfamily \#include $<$login.\+h$>$}
+
+
+
+Inheritance diagram for Login\+:
+% FIG 0
+
+
+Collaboration diagram for Login\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLogin_af3d70a69c019ad5d053e660e47858d76}{Login} (int16\+\_\+t a\+\_\+fd, std\+::string a\+\_\+login)
+\begin{DoxyCompactList}\small\item\em \hyperlink{classLogin}{Login} create \hyperlink{classLogin}{Login} with descriptor and login. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classLogin_a1135567abbbc69a13b1ee618066e7fa0}{get\+Login} () override
+\begin{DoxyCompactList}\small\item\em I\+Get\+Login return login of client. \end{DoxyCompactList}\item 
+int16\+\_\+t \hyperlink{classLogin_a0fc2d614cd55e0ae0e084e92b3a1908e}{get\+Fd} () override
+\begin{DoxyCompactList}\small\item\em I\+Get\+Fd return socket descriptor of client. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class keeps in one object login and socket descriptor 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Login@{Login}!Login@{Login}}
+\index{Login@{Login}!Login@{Login}}
+\subsubsection[{\texorpdfstring{Login(int16\+\_\+t a\+\_\+fd, std\+::string a\+\_\+login)}{Login(int16_t a_fd, std::string a_login)}}]{\setlength{\rightskip}{0pt plus 5cm}Login\+::\+Login (
+\begin{DoxyParamCaption}
+\item[{int16\+\_\+t}]{a\+\_\+fd, }
+\item[{std\+::string}]{a\+\_\+login}
+\end{DoxyParamCaption}
+)}\hypertarget{classLogin_af3d70a69c019ad5d053e660e47858d76}{}\label{classLogin_af3d70a69c019ad5d053e660e47858d76}
+
+
+\hyperlink{classLogin}{Login} create \hyperlink{classLogin}{Login} with descriptor and login. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+fd} & socket descriptor as int \\
+\hline
+{\em a\+\_\+login} & login of client as string \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Login@{Login}!get\+Fd@{get\+Fd}}
+\index{get\+Fd@{get\+Fd}!Login@{Login}}
+\subsubsection[{\texorpdfstring{get\+Fd() override}{getFd() override}}]{\setlength{\rightskip}{0pt plus 5cm}int16\+\_\+t Login\+::get\+Fd (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\hypertarget{classLogin_a0fc2d614cd55e0ae0e084e92b3a1908e}{}\label{classLogin_a0fc2d614cd55e0ae0e084e92b3a1908e}
+
+
+I\+Get\+Fd return socket descriptor of client. 
+
+\begin{DoxyReturn}{Returns}
+descriptor as int 
+\end{DoxyReturn}
+\index{Login@{Login}!get\+Login@{get\+Login}}
+\index{get\+Login@{get\+Login}!Login@{Login}}
+\subsubsection[{\texorpdfstring{get\+Login() override}{getLogin() override}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Login\+::get\+Login (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\hypertarget{classLogin_a1135567abbbc69a13b1ee618066e7fa0}{}\label{classLogin_a1135567abbbc69a13b1ee618066e7fa0}
+
+
+I\+Get\+Login return login of client. 
+
+\begin{DoxyReturn}{Returns}
+login as string 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/login.\+h\item 
+src/login.\+cpp\end{DoxyCompactItemize}

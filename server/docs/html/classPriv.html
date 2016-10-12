@@ -112,20 +112,20 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPriv.html#aadda11dccbb01f14e40797a4a3f62169">Priv</a> ()</td></tr>
 <tr class="memdesc:aadda11dccbb01f14e40797a4a3f62169"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classPriv.html">Priv</a>. <br /></td></tr>
 <tr class="separator:aadda11dccbb01f14e40797a4a3f62169"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4da67fa23671355729814f4d374a008"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPriv.html#ae4da67fa23671355729814f4d374a008">IAddNewGroup</a> (std::string a_title, int16_t a_client) override</td></tr>
-<tr class="memdesc:ae4da67fa23671355729814f4d374a008"><td class="mdescLeft">&#160;</td><td class="mdescRight">IAddNewGroup create new group with title and fecriptor and add it to the vector.  <a href="#ae4da67fa23671355729814f4d374a008">More...</a><br /></td></tr>
-<tr class="separator:ae4da67fa23671355729814f4d374a008"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55467461c3e0607df0607e7a8cb0f028"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPriv.html#a55467461c3e0607df0607e7a8cb0f028">IAddNewClientToGroup</a> (std::string a_title, int16_t a_client) override</td></tr>
-<tr class="memdesc:a55467461c3e0607df0607e7a8cb0f028"><td class="mdescLeft">&#160;</td><td class="mdescRight">IAddNewClientToGroup allows to add new client to group.  <a href="#a55467461c3e0607df0607e7a8cb0f028">More...</a><br /></td></tr>
-<tr class="separator:a55467461c3e0607df0607e7a8cb0f028"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8830a49028aeb8162f3c1c4d7692edf5"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPriv.html#a8830a49028aeb8162f3c1c4d7692edf5">IGetClients</a> (std::string a_title) override</td></tr>
-<tr class="memdesc:a8830a49028aeb8162f3c1c4d7692edf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method return.  <a href="#a8830a49028aeb8162f3c1c4d7692edf5">More...</a><br /></td></tr>
-<tr class="separator:a8830a49028aeb8162f3c1c4d7692edf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f78f6d91c15f1a94b92dd02b9864bc8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPriv.html#a2f78f6d91c15f1a94b92dd02b9864bc8">addNewGroup</a> (std::string a_title, int16_t a_client) override</td></tr>
+<tr class="memdesc:a2f78f6d91c15f1a94b92dd02b9864bc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">IAddNewGroup create new group with title and fecriptor and add it to the vector.  <a href="#a2f78f6d91c15f1a94b92dd02b9864bc8">More...</a><br /></td></tr>
+<tr class="separator:a2f78f6d91c15f1a94b92dd02b9864bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5705b5ca03a54985811290807d92e8ef"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPriv.html#a5705b5ca03a54985811290807d92e8ef">addNewClientToGroup</a> (std::string a_title, int16_t a_client) override</td></tr>
+<tr class="memdesc:a5705b5ca03a54985811290807d92e8ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">IAddNewClientToGroup allows to add new client to group.  <a href="#a5705b5ca03a54985811290807d92e8ef">More...</a><br /></td></tr>
+<tr class="separator:a5705b5ca03a54985811290807d92e8ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a600d715c89acae9fa329ef46c60b055e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPriv.html#a600d715c89acae9fa329ef46c60b055e">getClients</a> (std::string a_title) override</td></tr>
+<tr class="memdesc:a600d715c89acae9fa329ef46c60b055e"><td class="mdescLeft">&#160;</td><td class="mdescRight">IGetClients return all clients in this group.  <a href="#a600d715c89acae9fa329ef46c60b055e">More...</a><br /></td></tr>
+<tr class="separator:a600d715c89acae9fa329ef46c60b055e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class keeps the vector with all groups </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a55467461c3e0607df0607e7a8cb0f028"></a>
+<a class="anchor" id="a5705b5ca03a54985811290807d92e8ef"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -133,7 +133,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Priv::IAddNewClientToGroup </td>
+          <td class="memname">bool Priv::addNewClientToGroup </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>a_title</em>, </td>
@@ -166,10 +166,11 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true or false </dd></dl>
+<p>check if group exist </p>
 
 </div>
 </div>
-<a class="anchor" id="ae4da67fa23671355729814f4d374a008"></a>
+<a class="anchor" id="a2f78f6d91c15f1a94b92dd02b9864bc8"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -177,7 +178,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Priv::IAddNewGroup </td>
+          <td class="memname">bool Priv::addNewGroup </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>a_title</em>, </td>
@@ -210,10 +211,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true or false </dd></dl>
+<p>&lt; check if group already exist</p>
+<p>, if not, create </p>
 
 </div>
 </div>
-<a class="anchor" id="a8830a49028aeb8162f3c1c4d7692edf5"></a>
+<a class="anchor" id="a600d715c89acae9fa329ef46c60b055e"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -221,7 +224,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; int16_t &gt; Priv::IGetClients </td>
+          <td class="memname">std::vector&lt; int16_t &gt; Priv::getClients </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>a_title</em></td><td>)</td>
@@ -235,14 +238,15 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Method return. </p>
-<p>IGetClients return all clients in this group </p><dl class="params"><dt>Parameters</dt><dd>
+<p>IGetClients return all clients in this group. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">a_title</td><td>title group as string </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>vector with descriptors of clients in group </dd></dl>
+<p>if title is correct, return vector of clients </p>
 
 </div>
 </div>

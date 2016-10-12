@@ -20,5 +20,5 @@ include_directories("../include/" "./include/" "../interface")
 
 add_executable(${PROJECT_NAME} "../include/client.h" "../include/socket.h" "./mocksocket.h"${sources})
 
-target_link_libraries(b1comm ${GTEST_BOTH_LIBRARIES} pthread gtest gmock)
+target_link_libraries(client_unittest ${GTEST_BOTH_LIBRARIES} pthread gtest gmock)
 

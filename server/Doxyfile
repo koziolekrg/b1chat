@@ -771,7 +771,7 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  =/home/pako/b1chat/server/main.cpp /home/pako/b1chat/server/src/user.cpp /home/pako/b1chat/server/include/user.h /home/pako/b1chat/server/src/group.cpp /home/pako/b1chat/server/include/group.h /home/pako/b1chat/server/src/priv.cpp /home/pako/b1chat/server/include/priv.h /home/pako/b1chat/server/src/server.cpp /home/pako/b1chat/server/include/server.h /home/pako/b1chat/server/src/login.cpp /home/pako/b1chat/server/src/login.h
+INPUT                  =/home/pako/b1chat/server/src/main.cpp /home/pako/b1chat/server/src/user.cpp /home/pako/b1chat/server/include/user.h /home/pako/b1chat/server/src/group.cpp /home/pako/b1chat/server/include/group.h /home/pako/b1chat/server/src/priv.cpp /home/pako/b1chat/server/include/priv.h /home/pako/b1chat/server/src/server.cpp /home/pako/b1chat/server/include/server.h /home/pako/b1chat/server/src/login.cpp /home/pako/b1chat/server/include/login.h /home/pako/b1chat/server/src/socket.cpp /home/pako/b1chat/server/include/socket.h
  
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses

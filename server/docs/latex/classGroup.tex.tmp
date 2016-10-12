@@ -17,11 +17,11 @@ Collaboration diagram for Group\+:
 \item 
 \hyperlink{classGroup_ad554b7c0286fbbb1c9253af51af145d9}{Group} (std\+::string a\+\_\+title, int16\+\_\+t a\+\_\+client)
 \begin{DoxyCompactList}\small\item\em \hyperlink{classGroup}{Group} create an \hyperlink{classGroup}{Group} with title and client descriptor. \end{DoxyCompactList}\item 
-std\+::string \hyperlink{classGroup_adc53f6f17b195b93510be6d200d3ab26}{I\+Get\+Title} () override
+std\+::string \hyperlink{classGroup_a544b43e0131227b90d8ace1777ea44a8}{get\+Title} () override
 \begin{DoxyCompactList}\small\item\em I\+Get\+Title return name of group. \end{DoxyCompactList}\item 
-bool \hyperlink{classGroup_a8805bd2c7e33bb16cd452f0f3f9e1295}{I\+Add\+Client} (int16\+\_\+t a\+\_\+client) override
+bool \hyperlink{classGroup_a22bed574e128f12fbb5eb0b831db97df}{add\+Client} (int16\+\_\+t a\+\_\+client) override
 \begin{DoxyCompactList}\small\item\em I\+Add\+Client allows to add new client to vector. \end{DoxyCompactList}\item 
-std\+::vector$<$ int16\+\_\+t $>$ \hyperlink{classGroup_a5c4108d78f9eceb5583d24de756f4cc7}{I\+Get\+Clients\+List} () override
+std\+::vector$<$ int16\+\_\+t $>$ \hyperlink{classGroup_a140c8f127a1613e5fa917ee554b58be9}{get\+Clients\+List} () override
 \begin{DoxyCompactList}\small\item\em I\+Get\+Clients\+List return vector with descriptors. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -48,16 +48,16 @@ This class keeps name of group as string and vector of socket descriptors as int
 {\em a\+\_\+client} & descriptor as int \\
 \hline
 \end{DoxyParams}
-
+$<$ push first client(who create) to group 
 
 \subsection{Member Function Documentation}
-\index{Group@{Group}!I\+Add\+Client@{I\+Add\+Client}}
-\index{I\+Add\+Client@{I\+Add\+Client}!Group@{Group}}
-\subsubsection[{\texorpdfstring{I\+Add\+Client(int16\+\_\+t a\+\_\+client) override}{IAddClient(int16_t a_client) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Group\+::\+I\+Add\+Client (
+\index{Group@{Group}!add\+Client@{add\+Client}}
+\index{add\+Client@{add\+Client}!Group@{Group}}
+\subsubsection[{\texorpdfstring{add\+Client(int16\+\_\+t a\+\_\+client) override}{addClient(int16_t a_client) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Group\+::add\+Client (
 \begin{DoxyParamCaption}
 \item[{int16\+\_\+t}]{a\+\_\+client}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [override]}}\hypertarget{classGroup_a8805bd2c7e33bb16cd452f0f3f9e1295}{}\label{classGroup_a8805bd2c7e33bb16cd452f0f3f9e1295}
+)\hspace{0.3cm}{\ttfamily [override]}}\hypertarget{classGroup_a22bed574e128f12fbb5eb0b831db97df}{}\label{classGroup_a22bed574e128f12fbb5eb0b831db97df}
 
 
 I\+Add\+Client allows to add new client to vector. 
@@ -70,13 +70,15 @@ I\+Add\+Client allows to add new client to vector.
 \begin{DoxyReturn}{Returns}
 true or false 
 \end{DoxyReturn}
-\index{Group@{Group}!I\+Get\+Clients\+List@{I\+Get\+Clients\+List}}
-\index{I\+Get\+Clients\+List@{I\+Get\+Clients\+List}!Group@{Group}}
-\subsubsection[{\texorpdfstring{I\+Get\+Clients\+List() override}{IGetClientsList() override}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ int16\+\_\+t $>$ Group\+::\+I\+Get\+Clients\+List (
+$<$ check if client is already in group
+
+$<$ if dont , push \index{Group@{Group}!get\+Clients\+List@{get\+Clients\+List}}
+\index{get\+Clients\+List@{get\+Clients\+List}!Group@{Group}}
+\subsubsection[{\texorpdfstring{get\+Clients\+List() override}{getClientsList() override}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ int16\+\_\+t $>$ Group\+::get\+Clients\+List (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [override]}}\hypertarget{classGroup_a5c4108d78f9eceb5583d24de756f4cc7}{}\label{classGroup_a5c4108d78f9eceb5583d24de756f4cc7}
+)\hspace{0.3cm}{\ttfamily [override]}}\hypertarget{classGroup_a140c8f127a1613e5fa917ee554b58be9}{}\label{classGroup_a140c8f127a1613e5fa917ee554b58be9}
 
 
 I\+Get\+Clients\+List return vector with descriptors. 
@@ -84,13 +86,13 @@ I\+Get\+Clients\+List return vector with descriptors.
 \begin{DoxyReturn}{Returns}
 vector of ints 
 \end{DoxyReturn}
-\index{Group@{Group}!I\+Get\+Title@{I\+Get\+Title}}
-\index{I\+Get\+Title@{I\+Get\+Title}!Group@{Group}}
-\subsubsection[{\texorpdfstring{I\+Get\+Title() override}{IGetTitle() override}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Group\+::\+I\+Get\+Title (
+\index{Group@{Group}!get\+Title@{get\+Title}}
+\index{get\+Title@{get\+Title}!Group@{Group}}
+\subsubsection[{\texorpdfstring{get\+Title() override}{getTitle() override}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Group\+::get\+Title (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [override]}}\hypertarget{classGroup_adc53f6f17b195b93510be6d200d3ab26}{}\label{classGroup_adc53f6f17b195b93510be6d200d3ab26}
+)\hspace{0.3cm}{\ttfamily [override]}}\hypertarget{classGroup_a544b43e0131227b90d8ace1777ea44a8}{}\label{classGroup_a544b43e0131227b90d8ace1777ea44a8}
 
 
 I\+Get\+Title return name of group. 

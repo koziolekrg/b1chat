@@ -1,0 +1,113 @@
+\hypertarget{classSocket}{}\section{Socket Class Reference}
+\label{classSocket}\index{Socket@{Socket}}
+
+
+Inheritance diagram for Socket\+:
+% FIG 0
+
+
+Collaboration diagram for Socket\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int16\+\_\+t \hyperlink{classSocket_a9e5bd54a401be6e857d04747b5a56e3b}{Connect} (int16\+\_\+t a\+\_\+sock, sockaddr\+\_\+in \&a\+\_\+server)
+\begin{DoxyCompactList}\small\item\em Connect init all variables. \end{DoxyCompactList}\item 
+int16\+\_\+t \hyperlink{classSocket_a2d21d68d80773af4249688a6558d6af2}{Set\+Socket} ()
+\begin{DoxyCompactList}\small\item\em Set\+Socket responsible for setting port number. \end{DoxyCompactList}\item 
+int16\+\_\+t \hyperlink{classSocket_ae463772857e203f2db5772e7f2d4d090}{Send} (int16\+\_\+t m\+\_\+sock, string a\+\_\+message)
+\begin{DoxyCompactList}\small\item\em Send allows to sending messages. \end{DoxyCompactList}\item 
+int16\+\_\+t \hyperlink{classSocket_a83148e173881a801cd0b978807a33a17}{Receive} (int16\+\_\+t a\+\_\+sock, std\+::string \&a\+\_\+buff)
+\begin{DoxyCompactList}\small\item\em Receive allows to receive messages. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{Socket@{Socket}!Connect@{Connect}}
+\index{Connect@{Connect}!Socket@{Socket}}
+\subsubsection[{\texorpdfstring{Connect(int16\+\_\+t a\+\_\+sock, sockaddr\+\_\+in \&a\+\_\+server)}{Connect(int16_t a_sock, sockaddr_in &a_server)}}]{\setlength{\rightskip}{0pt plus 5cm}int16\+\_\+t Socket\+::\+Connect (
+\begin{DoxyParamCaption}
+\item[{int16\+\_\+t}]{a\+\_\+sock, }
+\item[{sockaddr\+\_\+in \&}]{a\+\_\+server}
+\end{DoxyParamCaption}
+)}\hypertarget{classSocket_a9e5bd54a401be6e857d04747b5a56e3b}{}\label{classSocket_a9e5bd54a401be6e857d04747b5a56e3b}
+
+
+Connect init all variables. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+port} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Socket@{Socket}!Receive@{Receive}}
+\index{Receive@{Receive}!Socket@{Socket}}
+\subsubsection[{\texorpdfstring{Receive(int16\+\_\+t a\+\_\+sock, std\+::string \&a\+\_\+buff)}{Receive(int16_t a_sock, std::string &a_buff)}}]{\setlength{\rightskip}{0pt plus 5cm}int16\+\_\+t Socket\+::\+Receive (
+\begin{DoxyParamCaption}
+\item[{int16\+\_\+t}]{a\+\_\+sock, }
+\item[{std\+::string \&}]{a\+\_\+buff}
+\end{DoxyParamCaption}
+)}\hypertarget{classSocket_a83148e173881a801cd0b978807a33a17}{}\label{classSocket_a83148e173881a801cd0b978807a33a17}
+
+
+Receive allows to receive messages. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+set\+Client} & set of clients \\
+\hline
+{\em a\+\_\+buffer} & variable with message \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true or false 
+\end{DoxyReturn}
+\index{Socket@{Socket}!Send@{Send}}
+\index{Send@{Send}!Socket@{Socket}}
+\subsubsection[{\texorpdfstring{Send(int16\+\_\+t m\+\_\+sock, string a\+\_\+message)}{Send(int16_t m_sock, string a_message)}}]{\setlength{\rightskip}{0pt plus 5cm}int16\+\_\+t Socket\+::\+Send (
+\begin{DoxyParamCaption}
+\item[{int16\+\_\+t}]{m\+\_\+sock, }
+\item[{string}]{a\+\_\+message}
+\end{DoxyParamCaption}
+)}\hypertarget{classSocket_ae463772857e203f2db5772e7f2d4d090}{}\label{classSocket_ae463772857e203f2db5772e7f2d4d090}
+
+
+Send allows to sending messages. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+message} & message to send as string \\
+\hline
+{\em a\+\_\+client} & socket descriptor as int \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true or false 
+\end{DoxyReturn}
+\index{Socket@{Socket}!Set\+Socket@{Set\+Socket}}
+\index{Set\+Socket@{Set\+Socket}!Socket@{Socket}}
+\subsubsection[{\texorpdfstring{Set\+Socket()}{SetSocket()}}]{\setlength{\rightskip}{0pt plus 5cm}int16\+\_\+t Socket\+::\+Set\+Socket (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSocket_a2d21d68d80773af4249688a6558d6af2}{}\label{classSocket_a2d21d68d80773af4249688a6558d6af2}
+
+
+Set\+Socket responsible for setting port number. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+port} & int port number \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true or false 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/socket.\+h\item 
+src/socket.\+cpp\end{DoxyCompactItemize}

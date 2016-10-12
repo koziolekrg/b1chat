@@ -1,0 +1,157 @@
+\hypertarget{classClient}{}\section{Client Class Reference}
+\label{classClient}\index{Client@{Client}}
+
+
+{\ttfamily \#include $<$client.\+h$>$}
+
+
+
+Inheritance diagram for Client\+:
+% FIG 0
+
+
+Collaboration diagram for Client\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classClient_a38c2382cf331eebc4427df9b8d4ee740}{Client} (I\+Socket \&a\+Socket)\hypertarget{classClient_a38c2382cf331eebc4427df9b8d4ee740}{}\label{classClient_a38c2382cf331eebc4427df9b8d4ee740}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{classClient}{Client} create \hyperlink{classClient}{Client} object. \end{DoxyCompactList}\item 
+bool \hyperlink{classClient_ae298af6d2f14be9468cc70464adc24c1}{connect\+To\+Server} (std\+::string a\+\_\+host\+Addr, int a\+\_\+port) override
+\begin{DoxyCompactList}\small\item\em Connect method connecting to server via T\+C\+P/\+IP. \end{DoxyCompactList}\item 
+void \hyperlink{classClient_acc7aaff891c080492b32c590663684a4}{login\+To\+Server} () override\hypertarget{classClient_acc7aaff891c080492b32c590663684a4}{}\label{classClient_acc7aaff891c080492b32c590663684a4}
+
+\begin{DoxyCompactList}\small\item\em Login method responsible for authenticate user. This method is called as separate thread. While server wont answer with true loop is closed for login. When server return true method will be calling I\+Main\+Menu. \end{DoxyCompactList}\item 
+void \hyperlink{classClient_a8f75e6db6943233f505cc8775fb788b8}{receive\+From\+Server} () override
+\begin{DoxyCompactList}\small\item\em Receive method called in separate thread, called recv in endless loop and handling printing communicates. \end{DoxyCompactList}\item 
+void \hyperlink{classClient_a2c7c5bf576d65944724c0f9c72f16612}{main\+Menu} (int a\+\_\+state) override
+\begin{DoxyCompactList}\small\item\em Main\+Menu switch for handling inputs from user and calling I\+Send. \end{DoxyCompactList}\item 
+bool \hyperlink{classClient_aada3f9fe93960c8c3bb480c503f05657}{send\+Message} (std\+::string a\+\_\+msg) override
+\begin{DoxyCompactList}\small\item\em Send method allows to send message to server. \end{DoxyCompactList}\item 
+bool \hyperlink{classClient_a1be1da889375ea3b277621457bf22860}{receive\+Message} (std\+::string \&a\+\_\+msg) override
+\begin{DoxyCompactList}\small\item\em receive\+Message method allows to receive message \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class is responsible for keeping and handling all connection events. In first thread is loop with receiving messages and printing on screen. Second thread is getting input from user and sending it to the server. 
+
+\subsection{Member Function Documentation}
+\index{Client@{Client}!connect\+To\+Server@{connect\+To\+Server}}
+\index{connect\+To\+Server@{connect\+To\+Server}!Client@{Client}}
+\subsubsection[{\texorpdfstring{connect\+To\+Server(std\+::string a\+\_\+host\+Addr, int a\+\_\+port) override}{connectToServer(std::string a_hostAddr, int a_port) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Client\+::connect\+To\+Server (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{a\+\_\+host\+Addr, }
+\item[{int}]{a\+\_\+port}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\hypertarget{classClient_ae298af6d2f14be9468cc70464adc24c1}{}\label{classClient_ae298af6d2f14be9468cc70464adc24c1}
+
+
+Connect method connecting to server via T\+C\+P/\+IP. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+host\+Addr} & server IP address convert from string to address \\
+\hline
+{\em a\+\_\+port} & server port number as int \\
+\hline
+\end{DoxyParams}
+$<$setup address structure
+
+$<$ resolve the hostname
+
+$<$ Cast the h\+\_\+addr\+\_\+list to in\+\_\+addr , since h\+\_\+addr\+\_\+list also has the ip address in long format only
+
+$<$ Connect to remote server \index{Client@{Client}!main\+Menu@{main\+Menu}}
+\index{main\+Menu@{main\+Menu}!Client@{Client}}
+\subsubsection[{\texorpdfstring{main\+Menu(int a\+\_\+state) override}{mainMenu(int a_state) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Client\+::main\+Menu (
+\begin{DoxyParamCaption}
+\item[{int}]{a\+\_\+state}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\hypertarget{classClient_a2c7c5bf576d65944724c0f9c72f16612}{}\label{classClient_a2c7c5bf576d65944724c0f9c72f16612}
+
+
+Main\+Menu switch for handling inputs from user and calling I\+Send. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+state} & string with menu status get from user input \\
+\hline
+\end{DoxyParams}
+handle menu input \index{Client@{Client}!receive\+From\+Server@{receive\+From\+Server}}
+\index{receive\+From\+Server@{receive\+From\+Server}!Client@{Client}}
+\subsubsection[{\texorpdfstring{receive\+From\+Server() override}{receiveFromServer() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Client\+::receive\+From\+Server (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\hypertarget{classClient_a8f75e6db6943233f505cc8775fb788b8}{}\label{classClient_a8f75e6db6943233f505cc8775fb788b8}
+
+
+Receive method called in separate thread, called recv in endless loop and handling printing communicates. 
+
+$<$ Receive a reply from the server
+
+$<$ split message with $\sim$
+
+$<$ Login or Create handle
+
+$<$ broadcast message
+
+$<$ create group
+
+$<$ add client to group
+
+$<$ group message
+
+$<$ list of online clients
+
+$<$ interate for all clients and print
+
+$<$ checking condition is lenght bigger than 0, becouse first element is add with constructor as empty
+
+$<$ logout and exit
+
+$<$ close server \index{Client@{Client}!receive\+Message@{receive\+Message}}
+\index{receive\+Message@{receive\+Message}!Client@{Client}}
+\subsubsection[{\texorpdfstring{receive\+Message(std\+::string \&a\+\_\+msg) override}{receiveMessage(std::string &a_msg) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Client\+::receive\+Message (
+\begin{DoxyParamCaption}
+\item[{std\+::string \&}]{a\+\_\+msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\hypertarget{classClient_a1be1da889375ea3b277621457bf22860}{}\label{classClient_a1be1da889375ea3b277621457bf22860}
+
+
+receive\+Message method allows to receive message 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+msg} & message to send as string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true or false 
+\end{DoxyReturn}
+\index{Client@{Client}!send\+Message@{send\+Message}}
+\index{send\+Message@{send\+Message}!Client@{Client}}
+\subsubsection[{\texorpdfstring{send\+Message(std\+::string a\+\_\+msg) override}{sendMessage(std::string a_msg) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Client\+::send\+Message (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{a\+\_\+msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\hypertarget{classClient_aada3f9fe93960c8c3bb480c503f05657}{}\label{classClient_aada3f9fe93960c8c3bb480c503f05657}
+
+
+Send method allows to send message to server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+msg} & message to send as string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true or false 
+\end{DoxyReturn}
+$<$ try to send message 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/client.\+h\item 
+src/client.\+cpp\end{DoxyCompactItemize}

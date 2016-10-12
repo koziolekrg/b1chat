@@ -11,4 +11,5 @@ MockSocket(){}
     MOCK_METHOD1(Listen, void(int16_t a_sd));
     MOCK_METHOD2(Send, bool(int16_t fd, string a_message));
     MOCK_METHOD2(Receive, bool(int16_t a_setClient,char *a_buffer));
+    MOCK_METHOD1(getAddress, std::string(int16_t a_fd));
 };
